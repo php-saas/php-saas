@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+@import './base.css';
+
+@plugin 'tailwindcss-animate';
+@plugin "@tailwindcss/typography";
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+[data-slot='scroll-area-viewport'] div:first-child {
+  @apply h-full;
+}
+
+@layer utilities {
+  @keyframes indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(200%);
+    }
+  }
+
+  .animate-loading-bar {
+    animation: indeterminate 1s linear infinite;
+  }
+}
+
+[x-cloak] {
+  @apply hidden;
+}

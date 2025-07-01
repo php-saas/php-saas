@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Actions\User;
+
+use App\Events\UserDeleted;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+class DeleteUser
+{
+    /**
+     * @param  array<mixed, mixed>  $input
+     */
+    public function delete(User $user, array $input): void
+    {
+        Validator::make($input, [
+            'password' => ['required', 'current_password'],
+        ])->validate();
+
+        Auth::logout();
+        $user->delete();
+
+        event(new UserDeleted($user));
+    }
+}
