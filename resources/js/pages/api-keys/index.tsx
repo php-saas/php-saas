@@ -1,4 +1,4 @@
-import SettingsLayout from '@/layouts/settings/layout';
+import SettingsLayout from '@/layouts/settings';
 import { Head, usePage } from '@inertiajs/react';
 import Container from '@/components/container';
 import Heading from '@/components/heading';
