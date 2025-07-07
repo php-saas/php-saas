@@ -32,7 +32,7 @@ return [
                 '5 Projects',
                 'API Access',
                 'Projects',
-                'Email Support'
+                'Email Support',
             ])
             ->options([
                 'projects' => true,
@@ -51,7 +51,7 @@ return [
                 '5 Projects',
                 'API Access',
                 'Projects',
-                'Email Support'
+                'Email Support',
             ])
             ->options([
                 'projects' => true,
@@ -96,5 +96,5 @@ return [
                 'api' => true,
             ])
             ->toArray(),
-    ]
+    ],
 ];

@@ -7,8 +7,8 @@ use Laravel\Paddle\Checkout;
 class BillingPlanDTO
 {
     /**
-     * @param array<int, string> $features
-     * @param array<string, mixed> $options
+     * @param  array<int, string>  $features
+     * @param  array<string, mixed>  $options
      */
     public function __construct(
         private string $name,
@@ -17,13 +17,11 @@ class BillingPlanDTO
         private float $price = 0.0,
         private string $priceId = '',
         private string $motivationText = '',
-        private array  $features = [],
-        private array  $options = [],
+        private array $features = [],
+        private array $options = [],
         private ?Checkout $checkout = null,
         private bool $active = true,
-    )
-    {
-    }
+    ) {}
 
     public static function make(): self
     {
@@ -42,7 +40,7 @@ class BillingPlanDTO
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): self
     {
@@ -56,7 +54,7 @@ class BillingPlanDTO
             name: $data['name'] && is_string($data['name']) ? $data['name'] : '',
             description: $data['description'] && is_string($data['description']) ? $data['description'] : '',
             billing: $data['billing'] && is_string($data['billing']) ? $data['billing'] : 'monthly',
-            price: $data['price'] && is_numeric($data['price']) ? (float)$data['price'] : 0.0,
+            price: $data['price'] && is_numeric($data['price']) ? (float) $data['price'] : 0.0,
             priceId: $data['price_id'] && is_string($data['price_id']) ? $data['price_id'] : '',
             motivationText: $data['motivation_text'] && is_string($data['motivation_text']) ? $data['motivation_text'] : '',
             features: $features,
@@ -69,66 +67,76 @@ class BillingPlanDTO
     public function name(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
     public function description(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
     public function billing(string $billing): self
     {
         $this->billing = $billing;
+
         return $this;
     }
 
     public function price(float $price): self
     {
         $this->price = $price;
+
         return $this;
     }
 
     public function priceId(string $priceId): self
     {
         $this->priceId = $priceId;
+
         return $this;
     }
 
     public function motivationText(string $motivationText): self
     {
         $this->motivationText = $motivationText;
+
         return $this;
     }
 
     /**
-     * @param array<int, string> $features
+     * @param  array<int, string>  $features
      */
     public function features(array $features): self
     {
         $this->features = $features;
+
         return $this;
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param  array<string, mixed>  $options
      */
     public function options(array $options): self
     {
         $this->options = $options;
+
         return $this;
     }
 
     public function checkout(?Checkout $checkout): self
     {
         $this->checkout = $checkout;
+
         return $this;
     }
 
     public function active(bool $active): self
     {
         $this->active = $active;
+
         return $this;
     }
 

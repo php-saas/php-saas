@@ -20,7 +20,7 @@ class BillingController
         /** @var User $user */
         $user = auth()->user();
 
-        if (!$user->subscription()) {
+        if (! $user->subscription()) {
             abort(404);
         }
 
@@ -38,7 +38,7 @@ class BillingController
             return back()->with('warning', __('Your subscription ends at :date', ['date' => $subscription->ends_at->format('Y-m-d')]));
         }
 
-        if (!$subscription?->active()) {
+        if (! $subscription?->active()) {
             session()->flash('success', __('You don\'t have an active subscription.'));
         }
 
@@ -54,7 +54,7 @@ class BillingController
         /** @var ?Subscription $subscription */
         $subscription = user()->subscription();
 
-        if (!$subscription || !$subscription->active() || !$subscription->ends_at) {
+        if (! $subscription || ! $subscription->active() || ! $subscription->ends_at) {
             session()->flash('success', 'You don\'t have an active subscription.');
         }
 

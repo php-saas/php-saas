@@ -32,11 +32,12 @@ use Laravel\Paddle\Billable;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use Billable;
+
     /** @use HasFactory<UserFactory> */
     use HasFactory;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -84,11 +85,11 @@ class User extends Authenticatable implements MustVerifyEmail
         /** @var ?Project $project */
         $project = Project::query()->find($this->current_project_id);
 
-        if (!$project || (!$this->isOwnerOfProject($project) && !$this->isUserOfProject($project))) {
+        if (! $project || (! $this->isOwnerOfProject($project) && ! $this->isUserOfProject($project))) {
             $project = $this->ownedProjects()->first();
         }
 
-        if (!$project) {
+        if (! $project) {
             $project = new Project([
                 'name' => 'Default Project',
                 'owner_id' => $this->id,
@@ -120,7 +121,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Project::query()
             ->where('owner_id', $this->id)
-            ->orWhereHas('users', fn(Builder $q) => $q->where('user_id', $this->id));
+            ->orWhereHas('users', fn (Builder $q) => $q->where('user_id', $this->id));
     }
 
     public function isUserOfProject(?Project $project): bool
@@ -134,7 +135,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param array<int, ProjectRole> $roles
+     * @param  array<int, ProjectRole>  $roles
      */
     public function hasRolesInProject(Project $project, array $roles): bool
     {

@@ -23,4 +23,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::post('paddle/webhook', [WebhookController::class, '__invoke']);
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
