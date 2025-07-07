@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { LoaderCircleIcon } from 'lucide-react';
 import FormSuccessful from '@/components/form-successful';
 
@@ -50,10 +49,10 @@ export default function UpdatePassword() {
         <CardTitle>Update password</CardTitle>
         <CardDescription>Ensure your account is using a long, random password to stay secure.</CardDescription>
       </CardHeader>
-      <CardContent className="p-4">
-        <Form id="update-password-form" onSubmit={updatePassword}>
-          <FormFields>
-            <FormField>
+      <CardContent>
+        <form id="update-password-form" onSubmit={updatePassword}>
+          <div className="grid gap-6">
+            <div className="grid gap-2">
               <Label htmlFor="current_password">Current password</Label>
               <Input
                 id="current_password"
@@ -66,8 +65,8 @@ export default function UpdatePassword() {
                 placeholder="Current password"
               />
               <InputError message={form.errors.current_password} />
-            </FormField>
-            <FormField>
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="password">New password</Label>
               <Input
                 id="password"
@@ -80,8 +79,8 @@ export default function UpdatePassword() {
                 placeholder="New password"
               />
               <InputError message={form.errors.password} />
-            </FormField>
-            <FormField>
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="password_confirmation">Confirm password</Label>
               <Input
                 id="password_confirmation"
@@ -93,9 +92,9 @@ export default function UpdatePassword() {
                 placeholder="Confirm password"
               />
               <InputError message={form.errors.password_confirmation} />
-            </FormField>
-          </FormFields>
-        </Form>
+            </div>
+          </div>
+        </form>
       </CardContent>
       <CardFooter className="gap-2">
         <Button form="update-password-form" disabled={form.processing}>

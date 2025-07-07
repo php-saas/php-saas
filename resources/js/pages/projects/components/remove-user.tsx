@@ -39,10 +39,10 @@ export default function RemoveUser({ projectId, user, children }: { projectId: n
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Remove user</DialogTitle>
-          <DialogDescription className="sr-only">Remove user from project.</DialogDescription>
+          <DialogDescription>Remove user from project.</DialogDescription>
         </DialogHeader>
 
-        <p className="p-4">
+        <p>
           Are you sure you want to remove <b>{user.email}</b> from this project?
         </p>
 

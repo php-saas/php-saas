@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth';
-import { Form, FormField, FormFields } from '@/components/ui/form';
+import AuthLayout from '@/layouts/auth-layout';
+import { Form, FormItem } from '@/components/ui/form';
 
 export default function Login() {
   const form = useForm<{
@@ -32,9 +32,9 @@ export default function Login() {
     <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
       <Head title="Log in" />
 
-      <Form onSubmit={submit}>
-        <FormFields>
-          <FormField>
+      <form onSubmit={submit}>
+        <div className="grid gap-6">
+          <div className="grid gap-2">
             <Label htmlFor="email">Email address</Label>
             <Input
               id="email"
@@ -47,9 +47,9 @@ export default function Login() {
               placeholder="email@example.com"
             />
             <InputError message={form.errors.email} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
               <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
@@ -66,9 +66,9 @@ export default function Login() {
               placeholder="Password"
             />
             <InputError message={form.errors.password} />
-          </FormField>
+          </div>
 
-          <FormField className="flex items-center">
+          <div className="flex items-center gap-2">
             <Checkbox
               id="remember"
               name="remember"
@@ -77,21 +77,21 @@ export default function Login() {
               tabIndex={3}
             />
             <Label htmlFor="remember">Remember me</Label>
-          </FormField>
+          </div>
 
           <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={form.processing}>
             {form.processing && <LoaderCircleIcon className="animate-spin" />}
             Log in
           </Button>
-        </FormFields>
+        </div>
 
-        <div className="text-muted-foreground text-center text-sm">
+        <div className="text-muted-foreground text-center text-sm mt-4">
           Don't have an account?{' '}
           <TextLink href={route('register')} tabIndex={5}>
             Sign up
           </TextLink>
         </div>
-      </Form>
+      </form>
     </AuthLayout>
   );
 }

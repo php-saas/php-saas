@@ -47,8 +47,7 @@ export default function Refresh() {
   return (
     <div className="flex items-center">
       <Button variant="outline" size="sm" className="md:rounded-r-none" onClick={refresh} disabled={polling}>
-        {polling ? <RefreshCwIcon className="animate-spin" /> : <RefreshCwIcon className="lg:hidden" />}
-        <span className="hidden md:block">Refresh</span>
+        {polling ? <RefreshCwIcon className="animate-spin" /> : <RefreshCwIcon />}
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

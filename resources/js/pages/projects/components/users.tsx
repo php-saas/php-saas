@@ -9,7 +9,6 @@ import { ProjectUser } from '@/types/project-user';
 import { ColumnDef } from '@tanstack/react-table';
 import { TrashIcon } from 'lucide-react';
 import { ReactNode, useState } from 'react';
-import ProjectRole from '@/pages/projects/components/project-role';
 
 const columns: ColumnDef<ProjectUser>[] = [
   {
@@ -24,7 +23,7 @@ const columns: ColumnDef<ProjectUser>[] = [
     enableColumnFilter: false,
     enableSorting: false,
     cell: ({ row }) => {
-      return <ProjectRole role={row.original.role} />;
+      return <Badge variant="outline">{row.original.role}</Badge>;
     },
   },
   {
@@ -62,9 +61,11 @@ export default function Users({ project, children }: { project: Project; childre
       <SheetContent className="sm:max-w-2xl">
         <SheetHeader>
           <SheetTitle>Project users</SheetTitle>
-          <SheetDescription className="sr-only">Here you can manage project users</SheetDescription>
+          <SheetDescription>Here you can manage project users</SheetDescription>
         </SheetHeader>
-        <DataTable columns={columns} data={[...(project.owner ? [project.owner] : []), ...(project.users || [])]} modal />
+        <div className="p-4">
+          <DataTable columns={columns} data={[...(project.owner ? [project.owner] : []), ...(project.users || [])]} />
+        </div>
         <SheetFooter>
           <div className="flex items-center gap-2">
             <SheetClose asChild>

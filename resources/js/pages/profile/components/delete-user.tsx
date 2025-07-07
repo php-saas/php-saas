@@ -16,7 +16,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { LoaderCircleIcon } from 'lucide-react';
 
 export default function DeleteUser() {
@@ -45,7 +44,7 @@ export default function DeleteUser() {
         <CardTitle>Delete account</CardTitle>
         <CardDescription>Delete your account and all of its resources</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 p-4">
+      <CardContent className="space-y-2">
         <p>Please proceed with caution, this cannot be undone.</p>
         <Dialog>
           <DialogTrigger asChild>
@@ -54,21 +53,19 @@ export default function DeleteUser() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Delete account</DialogTitle>
-              <DialogDescription className="sr-only">You're in the delete account form</DialogDescription>
+              <DialogDescription>You're in the delete account form</DialogDescription>
             </DialogHeader>
-            <Form id="delete-account-form" onSubmit={deleteUser} className="p-4">
-              <FormFields>
-                <FormField>
+            <form id="delete-account-form" onSubmit={deleteUser}>
+              <div className="grid gap-6">
+                <div className="grid gap-2">
                   <p>Are you sure you want to delete your account?</p>
                   <p>
                     Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to
                     confirm you would like to permanently delete your account.
                   </p>
-                </FormField>
-                <FormField>
-                  <Label htmlFor="password" className="sr-only">
-                    Password
-                  </Label>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
@@ -80,9 +77,9 @@ export default function DeleteUser() {
                     autoComplete="current-password"
                   />
                   <InputError message={form.errors.password} />
-                </FormField>
-              </FormFields>
-            </Form>
+                </div>
+              </div>
+            </form>
             <DialogFooter className="gap-2">
               <DialogClose asChild>
                 <Button variant="outline" onClick={closeModal}>
@@ -90,7 +87,7 @@ export default function DeleteUser() {
                 </Button>
               </DialogClose>
               <Button form="delete-account-form" variant="destructive" disabled={form.processing}>
-                {form.processing && <LoaderCircleIcon className="size-4 animate-spin" />}
+                {form.processing && <LoaderCircleIcon className="animate-spin" />}
                 Delete account
               </Button>
             </DialogFooter>

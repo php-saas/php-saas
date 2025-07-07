@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { ColumnDef } from '@tanstack/react-table';
 import { LoaderCircleIcon, MoreVerticalIcon } from 'lucide-react';
-import ProjectRole from '@/pages/projects/components/project-role';
 import { ProjectUser } from '@/types/project-user';
 import { FormEvent, ReactNode, useState } from 'react';
 import { useForm } from '@inertiajs/react';
@@ -16,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
 
 function Reject({ invitation, children }: { invitation: ProjectUser; children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -36,10 +36,10 @@ function Reject({ invitation, children }: { invitation: ProjectUser; children: R
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete {invitation.project_name}</DialogTitle>
-          <DialogDescription className="sr-only">Reject joining {invitation.project_name}</DialogDescription>
+          <DialogDescription>Reject joining {invitation.project_name}</DialogDescription>
         </DialogHeader>
 
-        <p className="p-4">Are you sure you want to reject joining this project?</p>
+        <p>Are you sure you want to reject joining this project?</p>
 
         <DialogFooter className="gap-2">
           <DialogClose asChild>
@@ -69,7 +69,7 @@ export const columns: ColumnDef<ProjectUser>[] = [
     enableColumnFilter: true,
     enableSorting: true,
     cell: ({ row }) => {
-      return <ProjectRole role={row.original.role} />;
+      return <Badge variant="outline">{row.original.role}</Badge>;
     },
   },
   {

@@ -19,7 +19,6 @@ export default function AppCommand() {
   const [open, setOpen] = useState(false);
   const [openProject, setOpenProject] = useState(false);
   const [queryText, setQueryText] = useState('');
-  const [selected, setSelected] = useState<string>('create-server');
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -53,11 +52,7 @@ export default function AppCommand() {
   });
 
   useEffect(() => {
-    if (query.data && query.data.length > 0) {
-      setSelected(`result-0`);
-    } else {
-      setSelected('create-server');
-    }
+    //
   }, [query.data]);
 
   useEffect(() => {
@@ -76,14 +71,14 @@ export default function AppCommand() {
         <span className="sr-only">Open command menu</span>
         <SearchIcon className="ml-1 size-3" />
         Search...
-        <span className="bg-accent flex h-6 items-center justify-center rounded-sm border px-2 text-xs">
+        <span className="bg-accent flex h-6 items-center justify-center rounded-sm px-2 text-xs">
           <CommandIcon className="mr-1 size-3" /> K
         </span>
       </Button>
       <Button className="lg:hidden" variant="outline" size="sm" onClick={() => setOpen(true)}>
         <CommandIcon className="mr-1 size-3" /> K
       </Button>
-      <CommandDialog open={open} onOpenChange={handleOpenChange} shouldFilter={false} value={selected}>
+      <CommandDialog open={open} onOpenChange={handleOpenChange}>
         <CommandInput placeholder="Type a command or search..." onValueChange={setQueryText} />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>

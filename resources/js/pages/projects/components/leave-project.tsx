@@ -33,10 +33,10 @@ export default function LeaveProject({ project, children }: { project: Project; 
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Leave {project.name}</DialogTitle>
-          <DialogDescription className="sr-only">Leave project {project.name}</DialogDescription>
+          <DialogDescription>Leave project {project.name}</DialogDescription>
         </DialogHeader>
 
-        <p className="p-4">Are you sure you want to leave this project?</p>
+        <p>Are you sure you want to leave this project?</p>
 
         <DialogFooter className="gap-2">
           <DialogClose asChild>

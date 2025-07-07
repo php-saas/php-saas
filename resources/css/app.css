@@ -1,13 +1,11 @@
 @import 'tailwindcss';
-@import './base.css';
+@import "./globals.css";
 
 @plugin 'tailwindcss-animate';
 @plugin "@tailwindcss/typography";
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-
-@custom-variant dark (&:is(.dark *));
 
 [data-slot='scroll-area-viewport'] div:first-child {
   @apply h-full;

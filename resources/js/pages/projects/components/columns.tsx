@@ -10,7 +10,6 @@ import type { Project } from '@/types/project';
 import { usePage } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreVerticalIcon } from 'lucide-react';
-import ProjectRole from '@/pages/projects/components/project-role';
 import LeaveProject from '@/pages/projects/components/leave-project';
 
 const CurrentProject = ({ project }: { project: Project }) => {
@@ -38,7 +37,7 @@ export const columns: ColumnDef<Project>[] = [
     enableColumnFilter: true,
     enableSorting: true,
     cell: ({ row }) => {
-      return <ProjectRole role={row.original.role} />;
+      return <Badge variant="outline">{row.original.role}</Badge>;
     },
   },
   {

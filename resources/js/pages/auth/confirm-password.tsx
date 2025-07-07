@@ -5,8 +5,7 @@ import InputError from '@/components/ui/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth';
-import { Form, FormField, FormFields } from '@/components/ui/form';
+import AuthLayout from '@/layouts/auth-layout';
 
 export default function ConfirmPassword() {
   const form = useForm<{ password: string }>({
@@ -25,9 +24,9 @@ export default function ConfirmPassword() {
     <AuthLayout title="Confirm your password" description="This is a secure area of the application. Please confirm your password before continuing.">
       <Head title="Confirm password" />
 
-      <Form onSubmit={submit}>
-        <FormFields>
-          <FormField>
+      <form id="confirm-password-form" onSubmit={submit}>
+        <div className="grid gap-6">
+          <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
@@ -40,7 +39,7 @@ export default function ConfirmPassword() {
               onChange={(e) => form.setData('password', e.target.value)}
             />
             <InputError message={form.errors.password} />
-          </FormField>
+          </div>
 
           <div className="flex items-center">
             <Button className="w-full" disabled={form.processing}>
@@ -48,8 +47,8 @@ export default function ConfirmPassword() {
               Confirm password
             </Button>
           </div>
-        </FormFields>
-      </Form>
+        </div>
+      </form>
     </AuthLayout>
   );
 }

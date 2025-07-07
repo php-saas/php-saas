@@ -59,7 +59,7 @@ export default function CreateApiKey({ children }: { children: ReactNode }) {
       <DialogContent className="max-h-screen overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Create an API key</DialogTitle>
-          <DialogDescription className="sr-only">Create a new api key</DialogDescription>
+          <DialogDescription>Create a new api key</DialogDescription>
         </DialogHeader>
         <Form id="create-tag-form" onSubmit={submit} className="p-4">
           {token ? (

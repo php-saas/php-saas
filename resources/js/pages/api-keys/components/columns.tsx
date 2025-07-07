@@ -39,7 +39,7 @@ function Delete({ apiKey }: { apiKey: ApiKey }) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete {apiKey.name}</DialogTitle>
-          <DialogDescription className="sr-only">Delete api key</DialogDescription>
+          <DialogDescription>Delete api key</DialogDescription>
         </DialogHeader>
         <p className="p-4">
           Are you sure you want to delete <strong>{apiKey.name}</strong>?

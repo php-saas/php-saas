@@ -43,19 +43,19 @@ export default function Invite({ project, onInviteSent, children }: { project: P
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Invite users to project</DialogTitle>
-          <DialogDescription className="sr-only">Invite users to project</DialogDescription>
+          <DialogDescription>Invite a new user to project</DialogDescription>
         </DialogHeader>
-        <Form className="p-4" id="invite-form" onSubmit={submit}>
-          <FormFields>
-            <FormField>
+        <form id="invite-form" onSubmit={submit}>
+          <div className="grid gap-6">
+            <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="email" onChange={(e) => form.setData('email', e.target.value)} />
               <InputError message={form.errors.email} />
-            </FormField>
-            <FormField>
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="role">Role</Label>
               <Select defaultValue={form.data.role} onValueChange={(value) => form.setData('role', value)}>
-                <SelectTrigger id="role" name="role">
+                <SelectTrigger id="role" name="role" className="w-full">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
@@ -66,9 +66,9 @@ export default function Invite({ project, onInviteSent, children }: { project: P
                 </SelectContent>
               </Select>
               <InputError message={form.errors.role} />
-            </FormField>
-          </FormFields>
-        </Form>
+            </div>
+          </div>
+        </form>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Close</Button>

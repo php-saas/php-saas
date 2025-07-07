@@ -6,8 +6,7 @@ import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth';
-import { Form, FormField, FormFields } from '@/components/ui/form';
+import AuthLayout from '@/layouts/auth-layout';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { SharedData } from '@/types';
 
@@ -36,9 +35,9 @@ export default function ForgotPassword() {
         </Alert>
       )}
 
-      <Form onSubmit={submit}>
-        <FormFields>
-          <FormField>
+      <form id="forget-password-form" onSubmit={submit}>
+        <div className="grid gap-6">
+          <div className="grid gap-2">
             <Label htmlFor="email">Email address</Label>
             <Input
               id="email"
@@ -50,7 +49,7 @@ export default function ForgotPassword() {
               placeholder="email@example.com"
             />
             <InputError message={form.errors.email} />
-          </FormField>
+          </div>
 
           <div className="flex items-center justify-start">
             <Button className="w-full" disabled={form.processing}>
@@ -58,13 +57,13 @@ export default function ForgotPassword() {
               Email password reset link
             </Button>
           </div>
-        </FormFields>
+        </div>
 
-        <div className="text-muted-foreground space-x-1 text-center text-sm">
+        <div className="text-muted-foreground space-x-1 text-center text-sm mt-4">
           <span>Or, return to</span>
           <TextLink href={route('login')}>log in</TextLink>
         </div>
-      </Form>
+      </form>
     </AuthLayout>
   );
 }

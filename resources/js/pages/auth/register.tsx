@@ -6,9 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import AuthLayout from '@/layouts/auth';
+import AuthLayout from '@/layouts/auth-layout';
 import InputError from '@/components/ui/input-error';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 
 export default function Register() {
   const form = useForm<{
@@ -33,9 +32,9 @@ export default function Register() {
   return (
     <AuthLayout title="Create an account" description="Enter your details below to create your account">
       <Head title="Register" />
-      <Form onSubmit={submit}>
-        <FormFields>
-          <FormField>
+      <form id="register-form" onSubmit={submit}>
+        <div className="grid gap-6">
+          <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -48,9 +47,9 @@ export default function Register() {
               placeholder="Full name"
             />
             <InputError message={form.errors.name} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <Label htmlFor="email">Email address</Label>
             <Input
               id="email"
@@ -62,9 +61,9 @@ export default function Register() {
               placeholder="email@example.com"
             />
             <InputError message={form.errors.email} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
@@ -76,9 +75,9 @@ export default function Register() {
               placeholder="Password"
             />
             <InputError message={form.errors.password} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <Label htmlFor="password_confirmation">Confirm password</Label>
             <Input
               id="password_confirmation"
@@ -90,7 +89,7 @@ export default function Register() {
               placeholder="Confirm password"
             />
             <InputError message={form.errors.password_confirmation} />
-          </FormField>
+          </div>
 
           <div className="grid gap-2">
             <Alert>
@@ -114,15 +113,15 @@ export default function Register() {
             {form.processing && <LoaderCircleIcon className="animate-spin" />}
             Create account
           </Button>
-        </FormFields>
+        </div>
 
-        <div className="text-muted-foreground text-center text-sm">
+        <div className="text-muted-foreground text-center text-sm mt-4">
           Already have an account?{' '}
           <TextLink href={route('login')} tabIndex={6}>
             Log in
           </TextLink>
         </div>
-      </Form>
+      </form>
     </AuthLayout>
   );
 }

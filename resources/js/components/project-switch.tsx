@@ -1,6 +1,6 @@
 import { type SharedData } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -9,17 +9,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { ChevronsUpDownIcon, PlusIcon } from 'lucide-react';
-import { useInitials } from '@/hooks/use-initials';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { PlusIcon } from 'lucide-react';
 import ProjectForm from '@/pages/projects/components/project-form';
 
-export function ProjectSwitch() {
+export function ProjectSwitch({ children }: { children: ReactNode }) {
   const page = usePage<SharedData>();
   const { auth } = page.props;
   const [selectedProject, setSelectedProject] = useState(auth.currentProject.id.toString());
-  const initials = useInitials();
   const form = useForm();
 
   const handleProjectChange = (projectId: string) => {
@@ -33,15 +29,7 @@ export function ProjectSwitch() {
   return (
     <div className="flex items-center">
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="px-1!">
-            <Avatar className="size-6 rounded-sm">
-              <AvatarFallback className="rounded-sm">{initials(auth.currentProject.name.replaceAll(' ', '') ?? '')}</AvatarFallback>
-            </Avatar>
-            <span className="hidden lg:flex">{auth.currentProject.name}</span>
-            <ChevronsUpDownIcon size={5} />
-          </Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="start">
           {auth.projects.map((project) => (
             <DropdownMenuCheckboxItem

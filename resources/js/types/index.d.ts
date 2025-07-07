@@ -19,11 +19,11 @@ export interface NavItem {
   href: string;
   onlyActivePath?: string;
   icon?: LucideIcon | null;
-  isActive?: boolean;
   isDisabled?: boolean;
   children?: NavItem[];
   hidden?: boolean;
   external?: boolean;
+  redirect?: boolean;
 }
 
 export interface Configs {
@@ -36,6 +36,7 @@ export interface SharedData {
   configs: Configs;
   status: string;
   flash?: {
+    status: string;
     success: string;
     error: string;
     info: string;

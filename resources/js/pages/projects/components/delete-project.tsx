@@ -39,19 +39,18 @@ export default function DeleteProject({ project, children }: { project: Project;
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete {project.name}</DialogTitle>
-          <DialogDescription className="sr-only">Delete project and all its resources.</DialogDescription>
+          <DialogDescription>Delete project and all its resources.</DialogDescription>
         </DialogHeader>
 
-        <Form id="delete-project-form" onSubmit={submit} className="p-4">
-          <p>Are you sure you want to delete this project? This action cannot be undone.</p>
-          <FormFields>
-            <FormField>
+        <form id="delete-project-form" onSubmit={submit}>
+          <div className="grid gap-6">
+            <div className="grid gap-2">
               <Label htmlFor="project-name">Name</Label>
               <Input id="project-name" value={form.data.name} onChange={(e) => form.setData('name', e.target.value)} />
               <InputError message={form.errors.name} />
-            </FormField>
-          </FormFields>
-        </Form>
+            </div>
+          </div>
+        </form>
 
         <DialogFooter className="gap-2">
           <DialogClose asChild>

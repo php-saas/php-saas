@@ -6,7 +6,6 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import type { SharedData } from '@/types';
 import { FormEvent } from 'react';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { LoaderCircleIcon } from 'lucide-react';
 import FormSuccessful from '@/components/form-successful';
 
@@ -39,10 +38,10 @@ export default function UpdateProfile() {
         <CardTitle>Profile information</CardTitle>
         <CardDescription>Update your profile information and email address.</CardDescription>
       </CardHeader>
-      <CardContent className="p-4">
-        <Form id="update-profile-form" onSubmit={submit}>
-          <FormFields>
-            <FormField>
+      <CardContent>
+        <form id="update-profile-form" onSubmit={submit}>
+          <div className="grid gap-6">
+            <div className="grid gap-2">
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
@@ -52,8 +51,8 @@ export default function UpdateProfile() {
                 placeholder="Full name"
               />
               <InputError message={form.errors.name} />
-            </FormField>
-            <FormField>
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="email">Email address</Label>
               <Input
                 id="email"
@@ -64,7 +63,7 @@ export default function UpdateProfile() {
                 placeholder="Email address"
               />
               <InputError message={form.errors.email} />
-            </FormField>
+            </div>
             {page.props.must_verify_email && page.props.auth.user.email_verified_at === null && (
               <div>
                 <p className="text-muted-foreground -mt-4 text-sm">
@@ -73,14 +72,13 @@ export default function UpdateProfile() {
                     Click here to resend the verification email.
                   </Link>
                 </p>
-
                 {page.props.status === 'verification-link-sent' && (
                   <div className="text-success mt-2 text-sm font-medium">A new verification link has been sent to your email address.</div>
                 )}
               </div>
             )}
-          </FormFields>
-        </Form>
+          </div>
+        </form>
       </CardContent>
       <CardFooter className="gap-2">
         <Button form="update-profile-form" disabled={form.processing}>

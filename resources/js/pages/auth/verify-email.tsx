@@ -1,10 +1,9 @@
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { LoaderCircleIcon } from 'lucide-react';
 import { FormEvent } from 'react';
-
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
-import Layout from '@/layouts/auth';
+import AuthLayout from '@/layouts/auth-layout';
 import { SharedData } from '@/types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -19,7 +18,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <Layout title="Verify email" description="Please verify your email address by clicking on the link we just emailed to you.">
+    <AuthLayout title="Verify email" description="Please verify your email address by clicking on the link we just emailed to you.">
       <Head title="Email verification" />
 
       {page.props.flash?.status === 'verification-link-sent' && (
@@ -40,6 +39,6 @@ export default function VerifyEmail() {
           Log out
         </TextLink>
       </form>
-    </Layout>
+    </AuthLayout>
   );
 }

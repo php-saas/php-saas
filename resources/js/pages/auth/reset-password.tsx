@@ -5,8 +5,7 @@ import InputError from '@/components/ui/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth';
-import { Form, FormField, FormFields } from '@/components/ui/form';
+import AuthLayout from '@/layouts/auth-layout';
 
 export default function ResetPassword() {
   const page = usePage<{
@@ -37,9 +36,9 @@ export default function ResetPassword() {
     <AuthLayout title="Reset password" description="Please enter your new password below">
       <Head title="Reset password" />
 
-      <Form onSubmit={submit}>
-        <FormFields>
-          <FormField>
+      <form id="reset-password-form" onSubmit={submit}>
+        <div className="grid gap-6">
+          <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -52,9 +51,9 @@ export default function ResetPassword() {
               onChange={(e) => form.setData('email', e.target.value)}
             />
             <InputError message={form.errors.email} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
@@ -68,9 +67,9 @@ export default function ResetPassword() {
               placeholder="Password"
             />
             <InputError message={form.errors.password} />
-          </FormField>
+          </div>
 
-          <FormField>
+          <div className="grid gap-2">
             <Label htmlFor="password_confirmation">Confirm password</Label>
             <Input
               id="password_confirmation"
@@ -83,14 +82,14 @@ export default function ResetPassword() {
               placeholder="Confirm password"
             />
             <InputError message={form.errors.password_confirmation} />
-          </FormField>
+          </div>
 
           <Button type="submit" className="mt-4 w-full" disabled={form.processing}>
             {form.processing && <LoaderCircleIcon className="animate-spin" />}
             Reset password
           </Button>
-        </FormFields>
-      </Form>
+        </div>
+      </form>
     </AuthLayout>
   );
 }

@@ -15,7 +15,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -72,22 +71,22 @@ function Enable({ show = true }: { show?: boolean }): ReactNode {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Enable Two Factor</DialogTitle>
-            <DialogDescription className="sr-only">Enabling two factor authentication</DialogDescription>
+            <DialogDescription>Enabling two factor authentication</DialogDescription>
           </DialogHeader>
-          <Form id="confirm-form" onSubmit={confirm} className="p-4">
-            <FormFields>
-              <FormField>
+          <form id="confirm-form" onSubmit={confirm}>
+            <div className="grid gap-6">
+              <div className="grid gap-2">
                 <Label htmlFor="qr-code">Scan this QR code with your authenticator app</Label>
                 <div className="my-3 flex max-h-[400px] items-center justify-center">
                   <div dangerouslySetInnerHTML={{ __html: qrCode }}></div>
                 </div>
-              </FormField>
-              <FormField>
+              </div>
+              <div className="grid gap-2">
                 <Label htmlFor="qr-code-url">QR Code URL</Label>
                 <Input id="qr-code-url" value={qrCodeUrl} disabled />
-              </FormField>
+              </div>
               {page.props.two_factor_must_confirm && (
-                <FormField>
+                <div className="grid gap-2">
                   <Label htmlFor="code">Confirmation Code</Label>
                   <Input
                     id="code"
@@ -99,10 +98,10 @@ function Enable({ show = true }: { show?: boolean }): ReactNode {
                     onChange={(e) => confirmForm.setData('code', e.target.value)}
                   />
                   <InputError message={confirmForm.errors.code} />
-                </FormField>
+                </div>
               )}
-            </FormFields>
-          </Form>
+            </div>
+          </form>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline">Close</Button>
@@ -139,9 +138,9 @@ function Disable(): ReactNode {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Disable two factor</DialogTitle>
-          <DialogDescription className="sr-only">Disable two factor</DialogDescription>
+          <DialogDescription>Disable two factor</DialogDescription>
         </DialogHeader>
-        <p className="p-4">Are you sure you want to enable two factor authentication?</p>
+        <p>Are you sure you want to enable two factor authentication?</p>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -175,9 +174,9 @@ function Regenerate(): ReactNode {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Regenerate recovery codes</DialogTitle>
-          <DialogDescription className="sr-only">Regenerate recovery codes</DialogDescription>
+          <DialogDescription>Regenerate recovery codes</DialogDescription>
         </DialogHeader>
-        <p className="p-4">Are you sure you want to regenerate the recovery codes?</p>
+        <p>Are you sure you want to regenerate the recovery codes?</p>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -216,7 +215,7 @@ export default function TwoFactor() {
         <CardTitle>Two factor authentication</CardTitle>
         <CardDescription>Enable or Disable two factor authentication</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4 p-4">
+      <CardContent>
         {isEnabled() ? (
           <>
             <Alert>
@@ -228,12 +227,12 @@ export default function TwoFactor() {
               </AlertDescription>
             </Alert>
             {page.props.two_factor_recovery_codes.length > 0 && (
-              <FormFields>
-                <FormField>
+              <div className="grid gap-6">
+                <div className="grid gap-2">
                   <Label htmlFor="recovery-codes">Recovery Codes</Label>
                   <Textarea id="recovery-codes" value={page.props.two_factor_recovery_codes?.join('\n') || ''} disabled rows={5} />
-                </FormField>
-              </FormFields>
+                </div>
+              </div>
             )}
           </>
         ) : (

@@ -12,7 +12,6 @@ import { FormEvent, ReactNode, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { useForm } from '@inertiajs/react';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
@@ -72,17 +71,17 @@ export default function ProjectForm({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{project ? 'Edit Project' : 'Create Project'}</DialogTitle>
-          <DialogDescription className="sr-only">{project ? 'Edit the project details.' : 'Create a new project.'}</DialogDescription>
+          <DialogDescription>{project ? 'Edit the project details.' : 'Here you can create a new project.'}</DialogDescription>
         </DialogHeader>
-        <Form id="project-form" onSubmit={submit} className="p-4">
-          <FormFields>
-            <FormField>
+        <form id="project-form" onSubmit={submit}>
+          <div className="grid gap-6">
+            <div className="grid gap-2">
               <Label htmlFor="name">Name</Label>
               <Input type="text" id="name" name="name" value={form.data.name} onChange={(e) => form.setData('name', e.target.value)} />
               <InputError message={form.errors.name} />
-            </FormField>
-          </FormFields>
-        </Form>
+            </div>
+          </div>
+        </form>
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="outline">

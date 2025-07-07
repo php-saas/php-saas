@@ -37,7 +37,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const extraClasses = modal && 'border-none shadow-none';
+  const extraClasses = modal && '';
 
   const handlePageChange = (url: string) => {
     if (onPageChange) {

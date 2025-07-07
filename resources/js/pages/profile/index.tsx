@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import SettingsLayout from '@/layouts/settings';
+import SettingsLayout from '@/layouts/settings/layout';
 import Container from '@/components/container';
 import UpdatePassword from '@/pages/profile/components/update-password';
 import UpdateProfile from '@/pages/profile/components/update-profile';
@@ -8,12 +8,24 @@ import TwoFactor from '@/pages/profile/components/two-factor';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
 import DeleteUser from '@/pages/profile/components/delete-user';
+import { BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
+  {
+    title: 'Settings',
+    href: '/settings',
+  },
+  {
+    title: 'Profile',
+    href: route('profile.index'),
+  },
+];
 
 export default function Profile() {
   const [tab, setTab] = useState('info');
 
   return (
-    <SettingsLayout>
+    <SettingsLayout breadcrumbs={breadcrumbs}>
       <Head title="Profile settings" />
       <Container className="max-w-5xl">
         <Heading title="Profile settings" description="Manage your profile settings." />
