@@ -10,9 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class DeleteProject
 {
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     public function delete(User $user, Project $project, array $input): void
     {
         Validator::make($input, [

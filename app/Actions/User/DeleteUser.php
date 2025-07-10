@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class DeleteUser
 {
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     public function delete(User $user, array $input): void
     {
         Validator::make($input, [

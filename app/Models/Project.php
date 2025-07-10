@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ProjectRole;
-use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +22,6 @@ use Illuminate\Support\Carbon;
  */
 class Project extends Model
 {
-    /** @use HasFactory<ProjectFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -31,17 +29,11 @@ class Project extends Model
         'name',
     ];
 
-    /**
-     * @return BelongsTo<User, covariant $this>
-     */
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    /**
-     * @return BelongsToMany<User, covariant $this, ProjectUser>
-     */
     public function registeredUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'project_user')
@@ -50,9 +42,6 @@ class Project extends Model
             ->withTimestamps();
     }
 
-    /**
-     * @return HasMany<ProjectUser, covariant $this>
-     */
     public function users(): HasMany
     {
         return $this->hasMany(ProjectUser::class, 'project_id');
@@ -64,7 +53,6 @@ class Project extends Model
             return ProjectRole::OWNER;
         }
 
-        /** @var string $role */
         $role = $this->users()->where('user_id', $user->id)->value('role');
 
         return $role ? ProjectRole::from($role) : null;

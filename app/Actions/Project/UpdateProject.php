@@ -8,9 +8,6 @@ use Illuminate\Validation\Rule;
 
 class UpdateProject
 {
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     public function update(Project $project, array $input): Project
     {
         $this->validate($project, $input);
@@ -23,9 +20,6 @@ class UpdateProject
         return $project;
     }
 
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     private function validate(Project $project, array $input): void
     {
         Validator::make($input, [

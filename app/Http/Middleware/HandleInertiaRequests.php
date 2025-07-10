@@ -34,11 +34,8 @@ class HandleInertiaRequests extends Middleware
     {
         $user = $request->user();
 
-        /** @var array<string, mixed> $parent */
-        $parent = parent::share($request);
-
         return [
-            ...$parent,
+            ...parent::share($request),
             'auth' => [
                 'user' => $user ? new UserResource($request->user()) : null,
                 'currentProject' => $user ? ProjectResource::make($user->currentProject()) : null,

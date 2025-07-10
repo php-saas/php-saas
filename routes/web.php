@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\BillingController;
+use App\Http\Controllers\Billing\BillingController;
+use App\Http\Controllers\Billing\DownloadInvoiceController;
+use App\Http\Controllers\Billing\ResumeSubscriptionController;
+use App\Http\Controllers\Billing\SwapSubscriptionController;
+use App\Http\Controllers\Billing\UpdatePaymentMethodController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +19,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('billing', [BillingController::class, 'index'])->name('billing.index');
-    Route::get('billing/update-payment-method', [BillingController::class, 'updatePaymentMethod'])->name('billing.update-payment-method');
-    Route::delete('billing/cancel', [BillingController::class, 'cancel'])->name('billing.cancel');
-    Route::post('billing/resume', [BillingController::class, 'resume'])->name('billing.resume');
-    Route::get('billing/transactions/{transaction}/download', [BillingController::class, 'download'])->name('billing.invoices.download');
+    Route::delete('billing', [BillingController::class, 'destroy'])->name('billing.destroy');
+    Route::get('billing/update-payment-method', UpdatePaymentMethodController::class)
+        ->name('billing.update-payment-method');
+    Route::post('billing/resume', ResumeSubscriptionController::class)
+        ->name('billing.resume');
+    Route::get('billing/transactions/{transaction}/download', DownloadInvoiceController::class)
+        ->name('billing.invoices.download');
+    Route::post('billing/swap', SwapSubscriptionController::class)->name('billing.swap');
 });
 
 Route::post('paddle/webhook', [WebhookController::class, '__invoke']);

@@ -6,7 +6,7 @@
     <p>{{ __('Are you sure you want to cancel your subscription?') }}</p>
 
     <div class="mt-4 flex items-center justify-end gap-2">
-        <form id="cancel-form" action="{{ route('billing.cancel') }}" method="post">
+        <form id="cancel-form" action="{{ route('billing.destroy') }}" method="post">
             @csrf
             @method('delete')
             <x-ui.button x-data="{processing: false}" x-on:click="processing = true; document.getElementById('cancel-form').submit()" variant="destructive" x-bind:disabled="processing">

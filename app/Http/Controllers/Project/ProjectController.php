@@ -41,7 +41,7 @@ class ProjectController extends Controller
     {
         $this->authorize('create', Project::class);
 
-        app(CreateProject::class)->create(user(), $request->all());
+        app(CreateProject::class)->create(user(), $request->input());
 
         return redirect()->route('projects.index')
             ->with('success', __('Project created successfully.'));
@@ -51,7 +51,7 @@ class ProjectController extends Controller
     {
         $this->authorize('update', $project);
 
-        app(UpdateProject::class)->update($project, $request->all());
+        app(UpdateProject::class)->update($project, $request->input());
 
         return back()->with('success', __('Project updated successfully.'));
     }
@@ -60,7 +60,7 @@ class ProjectController extends Controller
     {
         $this->authorize('delete', $project);
 
-        app(DeleteProject::class)->delete(user(), $project, $request->all());
+        app(DeleteProject::class)->delete(user(), $project, $request->input());
 
         return redirect()->route('projects.index')
             ->with('success', __('Project deleted successfully.'));

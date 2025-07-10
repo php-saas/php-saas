@@ -29,17 +29,11 @@ class ProjectUser extends Pivot
         'user_id' => 'integer',
     ];
 
-    /**
-     * @return BelongsTo<User, covariant $this>
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo<Project, covariant $this>
-     */
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'project_id');

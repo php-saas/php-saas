@@ -15,7 +15,7 @@ class ProjectUserController extends Controller
     {
         $this->authorize('update', $project);
 
-        app(InviteToProject::class)->invite($project, $request->all());
+        app(InviteToProject::class)->invite($project, $request->input());
 
         return back()->with('success', __('An invitation has been sent to the email address.'));
     }

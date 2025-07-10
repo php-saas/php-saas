@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\ProjectRole;
 use Carbon\Carbon;
-use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,15 +31,11 @@ use Laravel\Paddle\Billable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Billable;
-
-    /** @use HasFactory<UserFactory> */
     use HasFactory;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var list<string>
      */
     protected $fillable = [
@@ -56,8 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
      * @var list<string>
      */
     protected $hidden = [
@@ -67,11 +59,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_recovery_codes',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -106,17 +93,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $project;
     }
 
-    /**
-     * @return HasMany<Project, covariant $this>
-     */
     public function ownedProjects(): HasMany
     {
         return $this->hasMany(Project::class, 'owner_id');
     }
 
-    /**
-     * @return Builder<Project>
-     */
     public function allProjects(): Builder
     {
         return Project::query()
@@ -134,9 +115,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $project?->owner_id === $this->id;
     }
 
-    /**
-     * @param  array<int, ProjectRole>  $roles
-     */
     public function hasRolesInProject(Project $project, array $roles): bool
     {
         if ($this->isOwnerOfProject($project)) {

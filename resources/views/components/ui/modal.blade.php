@@ -2,8 +2,8 @@
     'title' => '',
 ])
 
-<div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 h-auto w-auto">
-    <div class="inline-flex" @click="modalOpen=true">
+<div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 w-full">
+    <div class="w-full" @click="modalOpen=true">
         {{ $trigger }}
     </div>
 

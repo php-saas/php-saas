@@ -12,9 +12,6 @@ use Illuminate\Validation\Rule;
 
 class InviteToProject
 {
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     public function invite(Project $project, array $input): void
     {
         $this->validate($project, $input);
@@ -27,9 +24,6 @@ class InviteToProject
         Mail::to($input['email'])->send(new ProjectInvitation($project));
     }
 
-    /**
-     * @param  array<mixed, mixed>  $input
-     */
     protected function validate(Project $project, array $input): void
     {
         Validator::make($input, $this->rules($project), [
@@ -37,9 +31,6 @@ class InviteToProject
         ])->validate();
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     protected function rules(Project $project): array
     {
         return [
