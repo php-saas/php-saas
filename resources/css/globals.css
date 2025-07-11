@@ -107,10 +107,10 @@
 }
 
 @theme inline {
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-info: var(--info);
-  --color-danger: var(--danger);
+  --color-success: var(--color-green-500);
+  --color-warning: var(--color-amber-500);
+  --color-info: var(--color-sky-500);
+  --color-danger: var(--destructive);
   --color-slate: var(--color-slate-500);
   --color-gray: var(--color-gray-500);
   --color-red: var(--color-red-500);

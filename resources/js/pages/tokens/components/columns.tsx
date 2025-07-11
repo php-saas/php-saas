@@ -16,14 +16,14 @@ import { useForm } from '@inertiajs/react';
 import { LoaderCircleIcon, MoreVerticalIcon } from 'lucide-react';
 import FormSuccessful from '@/components/form-successful';
 import { useState } from 'react';
-import { ApiKey } from '@/types/api-key';
+import { Token } from '@/types/token';
 
-function Delete({ apiKey }: { apiKey: ApiKey }) {
+function Delete({ token }: { token: Token }) {
   const [open, setOpen] = useState(false);
   const form = useForm();
 
   const submit = () => {
-    form.delete(route('api-keys.destroy', apiKey.id), {
+    form.delete(route('tokens.destroy', token.id), {
       onSuccess: () => {
         setOpen(false);
       },
@@ -38,11 +38,11 @@ function Delete({ apiKey }: { apiKey: ApiKey }) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete {apiKey.name}</DialogTitle>
-          <DialogDescription className="sr-only">Delete api key</DialogDescription>
+          <DialogTitle>Delete {token.name}</DialogTitle>
+          <DialogDescription className="sr-only">Delete API Token</DialogDescription>
         </DialogHeader>
         <p>
-          Are you sure you want to delete <strong>{apiKey.name}</strong>?
+          Are you sure you want to delete <strong>{token.name}</strong>?
         </p>
         <DialogFooter>
           <DialogClose asChild>
@@ -59,7 +59,7 @@ function Delete({ apiKey }: { apiKey: ApiKey }) {
   );
 }
 
-export const columns: ColumnDef<ApiKey>[] = [
+export const columns: ColumnDef<Token>[] = [
   {
     accessorKey: 'name',
     header: 'Name',
@@ -99,7 +99,7 @@ export const columns: ColumnDef<ApiKey>[] = [
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <Delete apiKey={row.original} />
+              <Delete token={row.original} />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

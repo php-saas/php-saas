@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\AcceptProjectInviteController;
 use App\Http\Controllers\Project\LeaveProjectController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\ProjectSwitchController;
 use App\Http\Controllers\Project\ProjectUserController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/settings')->middleware(['auth'])->group(function () {
@@ -23,5 +23,5 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     Route::get('/projects/{project}/invitations/accept', AcceptProjectInviteController::class)
         ->name('projects.invitations.accept');
 
-    Route::resource('api-keys', ApiKeyController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('tokens', TokenController::class)->only(['index', 'store', 'destroy']);
 });

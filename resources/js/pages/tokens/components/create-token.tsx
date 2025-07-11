@@ -17,12 +17,12 @@ import InputError from '@/components/ui/input-error';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-type ApiKeyForm = {
+type TokenForm = {
   name: string;
   ability: string;
 };
 
-export default function CreateApiKey({ children }: { children: ReactNode }) {
+export default function CreateToken({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState<string | undefined>();
   const tokenInputRef = useRef<HTMLInputElement>(null);
@@ -37,14 +37,14 @@ export default function CreateApiKey({ children }: { children: ReactNode }) {
     });
   };
 
-  const form = useForm<Required<ApiKeyForm>>({
+  const form = useForm<Required<TokenForm>>({
     name: '',
     ability: '',
   });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-    form.post(route('api-keys.store'), {
+    form.post(route('tokens.store'), {
       onSuccess: (page) => {
         const flash = page.props.flash as { data?: { token?: string } };
         setToken(flash.data?.token);
@@ -57,8 +57,8 @@ export default function CreateApiKey({ children }: { children: ReactNode }) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-h-screen overflow-y-auto sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Create an API key</DialogTitle>
-          <DialogDescription>Create a new api key to use the API</DialogDescription>
+          <DialogTitle>Create an API token</DialogTitle>
+          <DialogDescription>Create a new API token to use the API</DialogDescription>
         </DialogHeader>
         <form id="create-tag-form" onSubmit={submit}>
           {token ? (

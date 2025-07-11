@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin PersonalAccessToken */
-class ApiKeyResource extends JsonResource
+class TokenResource extends JsonResource
 {
     /**
      * @return array<string, mixed>

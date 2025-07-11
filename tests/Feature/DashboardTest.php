@@ -17,7 +17,9 @@ class DashboardTest extends TestCase
 
     public function test_authenticated_users_can_visit_the_dashboard(): void
     {
-        $this->actingAs(User::factory()->create());
+        /** @var User $user */
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
         $this->get(route('dashboard'))->assertOk();
     }

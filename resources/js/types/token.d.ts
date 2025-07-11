@@ -1,4 +1,4 @@
-export interface ApiKey {
+export interface Token {
   id: number;
   name: string;
   abilities: string[];

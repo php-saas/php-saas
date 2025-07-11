@@ -12,6 +12,7 @@ class ProfileUpdateTest extends TestCase
 
     public function test_profile_page_is_displayed(): void
     {
+        /** @var User $user */
         $user = User::factory()->create();
 
         $response = $this
@@ -67,6 +68,7 @@ class ProfileUpdateTest extends TestCase
 
     public function test_user_can_delete_their_account(): void
     {
+        /** @var User $user */
         $user = User::factory()->create();
 
         $response = $this
@@ -85,6 +87,7 @@ class ProfileUpdateTest extends TestCase
 
     public function test_correct_password_must_be_provided_to_delete_account(): void
     {
+        /** @var User $user */
         $user = User::factory()->create();
 
         $response = $this

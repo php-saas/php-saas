@@ -21,8 +21,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property int|null $current_project_id
- * @property string $two_factor_recovery_codes
- * @property string $two_factor_secret
+ * @property ?string $two_factor_recovery_codes
+ * @property ?string $two_factor_secret
  * @property Carbon|null $two_factor_confirmed_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -33,10 +33,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Billable;
+    use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use HasApiTokens;
 
     /**
      * @var list<string>

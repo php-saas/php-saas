@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ApiKeyResource;
+use App\Http\Resources\TokenResource;
 use App\Models\PersonalAccessToken;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ApiKeyController extends Controller
+class TokenController extends Controller
 {
     public function index(): Response
     {
         $this->authorize('viewAny', PersonalAccessToken::class);
 
-        return Inertia::render('api-keys/index', [
-            'apiKeys' => ApiKeyResource::collection(user()->tokens()->simplePaginate(20))
+        return Inertia::render('tokens/index', [
+            'tokens' => TokenResource::collection(user()->tokens()->simplePaginate(20)),
         ]);
     }
 
@@ -42,12 +42,12 @@ class ApiKeyController extends Controller
             ]);
     }
 
-    public function destroy(PersonalAccessToken $apiKey): RedirectResponse
+    public function destroy(PersonalAccessToken $token): RedirectResponse
     {
-        $this->authorize('delete', $apiKey);
+        $this->authorize('delete', $token);
 
-        $apiKey->delete();
+        $token->delete();
 
-        return back()->with('success', __('Api Key deleted.'));
+        return back()->with('success', __('Token deleted.'));
     }
 }

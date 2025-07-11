@@ -16,6 +16,4 @@ use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class PersonalAccessToken extends SanctumPersonalAccessToken
-{
-}
+class PersonalAccessToken extends SanctumPersonalAccessToken {}

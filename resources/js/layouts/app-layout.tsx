@@ -2,6 +2,7 @@ import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
 import { type BreadcrumbItem } from '@/types';
 import { type ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Toast from '@/components/toast';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ export default function AppLayout({ children, breadcrumbs, ...props }: AppLayout
     <QueryClientProvider client={queryClient}>
       <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
         {children}
+        <Toast />
       </AppLayoutTemplate>
     </QueryClientProvider>
   );

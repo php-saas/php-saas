@@ -18,8 +18,8 @@ const sidebarNavItems: NavItem[] = [
     icon: BriefcaseIcon,
   },
   {
-    title: 'API Keys',
-    href: route('api-keys.index'),
+    title: 'API Tokens',
+    href: route('tokens.index'),
     icon: CommandIcon,
   },
 ];
