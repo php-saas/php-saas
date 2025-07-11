@@ -14,12 +14,6 @@ const mainNavItems: NavItem[] = [
     icon: LayoutGrid,
   },
   {
-    title: 'Billing',
-    href: route('billing.index'),
-    icon: CreditCardIcon,
-    redirect: true,
-  },
-  {
     title: 'Settings',
     href: route('settings'),
     icon: SettingsIcon,
@@ -28,14 +22,21 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
   {
+    title: 'Billing',
+    href: route('billing.index'),
+    icon: CreditCardIcon,
+  },
+  {
     title: 'Repository',
     href: 'https://github.com/laravel/react-starter-kit',
     icon: Folder,
+    external: true,
   },
   {
     title: 'Documentation',
     href: 'https://laravel.com/docs/starter-kits#react',
     icon: BookOpen,
+    external: true,
   },
 ];
 

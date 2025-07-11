@@ -3,7 +3,7 @@ import { UserInfo } from '@/components/user-info';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { type User } from '@/types/user';
 import { Link, router } from '@inertiajs/react';
-import { LogOut, Settings } from 'lucide-react';
+import { CreditCardIcon, LogOut, Settings } from 'lucide-react';
 import AppearanceToggleTab from '@/components/appearance-tabs';
 
 interface UserMenuContentProps {
@@ -34,6 +34,12 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             <Settings className="mr-2" />
             Profile
           </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <a className="block w-full" href={route('billing.index')}>
+            <CreditCardIcon className="mr-2" />
+            Billing
+          </a>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />

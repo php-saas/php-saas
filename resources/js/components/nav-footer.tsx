@@ -17,7 +17,7 @@ export function NavFooter({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
-                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                <a href={item.href} target={item.external ? '_blank' : '_self'} rel="noopener noreferrer">
                   {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
                   <span>{item.title}</span>
                 </a>

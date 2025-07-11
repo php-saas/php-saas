@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ChevronsUpDownIcon, CreditCardIcon, Folder, LayoutGrid, Menu } from 'lucide-react';
+import { BookOpen, ChevronsUpDownIcon, Folder, LayoutGrid, Menu } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { ProjectSwitch } from '@/components/project-switch';
@@ -23,12 +23,6 @@ const mainNavItems: NavItem[] = [
     title: 'Dashboard',
     href: route('dashboard'),
     icon: LayoutGrid,
-  },
-  {
-    title: 'Billing',
-    href: route('billing.index'),
-    icon: CreditCardIcon,
-    redirect: true,
   },
 ];
 
@@ -194,12 +188,12 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 {rightNavItems.map((item) => (
                   <TooltipProvider key={item.title} delayDuration={0}>
                     <Tooltip>
-                      <TooltipTrigger>
+                      <TooltipTrigger asChild>
                         <a
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group text-accent-foreground ring-offset-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+                          className="group text-accent-foreground hover:bg-accent hover:text-accent-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium transition-colors outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50"
                         >
                           <span className="sr-only">{item.title}</span>
                           {item.icon && <Icon iconNode={item.icon} className="size-5 opacity-80 group-hover:opacity-100" />}
@@ -215,12 +209,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="size-10 rounded-full p-1">
-                  <Avatar className="size-8 overflow-hidden rounded-full">
+                <Button variant="ghost" className="size-10 rounded-md p-1">
+                  <Avatar className="size-8 overflow-hidden rounded-md">
                     <AvatarImage src={auth.user.avatar} alt={auth.user.name} />
-                    <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                      {getInitials(auth.user.name)}
-                    </AvatarFallback>
+                    <AvatarFallback className="rounded-md border">{getInitials(auth.user.name)}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
