@@ -29,6 +29,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Collection<int, Project> $ownedProjects
  * @property Collection<int, Project> $invitedProjects
  * @property Collection<int, PersonalAccessToken> $tokens
+ *
+ * @method Subscription|null subscription($type = 'default')
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

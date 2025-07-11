@@ -15,10 +15,7 @@
 @if ($subscription = user()->subscription())
     <div x-data="{ show: 'current' }">
         @php
-            $planArray = collect(config('billing.plans'))
-                ->where('price_id', $subscription->items()->first()?->price_id)
-                ->first();
-            $plan = $planArray ? \App\DTOs\BillingPlanDTO::from($planArray) : null;
+            $plan = $subscription->plan();
         @endphp
 
         <div x-show="show === 'current'" class="space-y-5">

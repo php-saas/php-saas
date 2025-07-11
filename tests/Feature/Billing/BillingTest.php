@@ -127,29 +127,6 @@ class BillingTest extends TestCase
 
         Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
 
-        config()->set('billing.plans', [
-            [
-                'name' => 'Basic',
-                'description' => 'Basic plan',
-                'billing' => 'monthly',
-                'price_id' => 'pri_123456',
-                'price' => 10,
-                'features' => [],
-                'options' => [],
-                'archived' => false,
-            ],
-            [
-                'name' => 'Pro',
-                'description' => 'Pro plan',
-                'billing' => 'monthly',
-                'price_id' => 'pri_654321',
-                'price' => 20,
-                'features' => [],
-                'options' => [],
-                'archived' => false,
-            ],
-        ]);
-
         $this
             ->from(route('billing.index'))
             ->post(route('billing.swap'), [
@@ -219,6 +196,29 @@ class BillingTest extends TestCase
 
     private function prepare(): void
     {
+        config()->set('billing.plans', [
+            [
+                'name' => 'Basic',
+                'description' => 'Basic plan',
+                'billing' => 'monthly',
+                'price_id' => 'pri_123456',
+                'price' => 10,
+                'features' => [],
+                'options' => [],
+                'archived' => false,
+            ],
+            [
+                'name' => 'Pro',
+                'description' => 'Pro plan',
+                'billing' => 'monthly',
+                'price_id' => 'pri_654321',
+                'price' => 20,
+                'features' => [],
+                'options' => [],
+                'archived' => false,
+            ],
+        ]);
+
         /** @var User $user */
         $user = User::factory()->create();
         $this->user = $user;
