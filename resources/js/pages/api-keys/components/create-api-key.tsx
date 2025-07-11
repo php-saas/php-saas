@@ -14,13 +14,12 @@ import { useForm } from '@inertiajs/react';
 import React, { FormEventHandler, ReactNode, useRef, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import InputError from '@/components/ui/input-error';
-import { Form, FormField, FormFields } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type ApiKeyForm = {
   name: string;
-  permission: string;
+  ability: string;
 };
 
 export default function CreateApiKey({ children }: { children: ReactNode }) {
@@ -40,7 +39,7 @@ export default function CreateApiKey({ children }: { children: ReactNode }) {
 
   const form = useForm<Required<ApiKeyForm>>({
     name: '',
-    permission: '',
+    ability: '',
   });
 
   const submit: FormEventHandler = (e) => {
@@ -59,47 +58,47 @@ export default function CreateApiKey({ children }: { children: ReactNode }) {
       <DialogContent className="max-h-screen overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Create an API key</DialogTitle>
-          <DialogDescription>Create a new api key</DialogDescription>
+          <DialogDescription>Create a new api key to use the API</DialogDescription>
         </DialogHeader>
-        <Form id="create-tag-form" onSubmit={submit} className="p-4">
+        <form id="create-tag-form" onSubmit={submit}>
           {token ? (
-            <FormFields>
-              <FormField>
+            <div className="grid gap-6">
+              <div className="grid gap-2">
                 <Label htmlFor="token" className="flex items-center gap-1">
                   Token {copySuccess ? <ClipboardCheckIcon className="text-success! size-4" /> : <ClipboardIcon className="size-4" />}
                 </Label>
                 <Input ref={tokenInputRef} id="token" onClick={copyToClipboard} type="text" value={token || ''} className="cursor-pointer" />
-              </FormField>
-            </FormFields>
+              </div>
+            </div>
           ) : (
-            <FormFields>
-              <FormField>
+            <div className="grid gap-6">
+              <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
                 <Input type="text" id="name" name="name" value={form.data.name} onChange={(e) => form.setData('name', e.target.value)} />
                 <InputError message={form.errors.name} />
-              </FormField>
-              <FormField>
+              </div>
+              <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
-                <Select name="permission" value={form.data.permission} onValueChange={(value) => form.setData('permission', value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a permission" />
+                <Select name="ability" value={form.data.ability} onValueChange={(value) => form.setData('ability', value)}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="What can the token do?" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem key="permission-read" value="read">
+                      <SelectItem key="ability-read" value="read">
                         read
                       </SelectItem>
-                      <SelectItem key="permission-write" value="write">
+                      <SelectItem key="ability-write" value="write">
                         read & write
                       </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <InputError message={form.errors.permission} />
-              </FormField>
-            </FormFields>
+                <InputError message={form.errors.ability} />
+              </div>
+            </div>
           )}
-        </Form>
+        </form>
         {!token && (
           <DialogFooter>
             <DialogClose asChild>

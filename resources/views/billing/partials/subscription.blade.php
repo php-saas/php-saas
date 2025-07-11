@@ -31,7 +31,9 @@
                                 <x-ui.card.description>Current Plan</x-ui.card.description>
                             </div>
                             <div class="flex items-center">
-                                <span class="font-semibold">{{ config('billing.currency_sign') }}{{ $plan->price }}</span>
+                                <span class="font-semibold">
+                                    {{ config('billing.currency_sign') }}{{ $plan->price }}
+                                </span>
                                 @if ($plan->priceId)
                                     <span class="text-muted-foreground font-semibold">/{{ $plan->billing }}</span>
                                 @endif
@@ -44,16 +46,16 @@
                             @foreach ($plan->features as $feature)
                                 <li class="flex items-center gap-2 text-sm">
                                     <svg
-                                            class="text-primary size-4"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                        class="text-primary size-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
                                     >
                                         <circle cx="12" cy="12" r="10" />
                                         <path d="m9 12 2 2 4-4" />

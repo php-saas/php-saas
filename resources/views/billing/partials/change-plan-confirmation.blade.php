@@ -12,7 +12,7 @@
     <div class="mt-4 flex items-center justify-end gap-2">
         <form id="change-plan-{{ $newPlan->priceId }}" action="{{ route('billing.swap') }}" method="post">
             @csrf
-            <input type="hidden" name="price_id" value="{{ $newPlan->priceId }}">
+            <input type="hidden" name="price_id" value="{{ $newPlan->priceId }}" />
             <x-ui.button
                 x-data="{processing: false}"
                 x-on:click="processing = true; document.getElementById('change-plan-{{ $newPlan->priceId }}').submit()"

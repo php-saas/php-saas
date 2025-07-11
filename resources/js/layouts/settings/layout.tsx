@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { type ReactNode } from 'react';
-import { BriefcaseIcon, UserIcon } from 'lucide-react';
+import { BriefcaseIcon, CommandIcon, UserIcon } from 'lucide-react';
 import AppLayout from '@/layouts/app-layout';
 import Container from '@/components/container';
 
@@ -17,6 +17,11 @@ const sidebarNavItems: NavItem[] = [
     href: route('projects.index'),
     icon: BriefcaseIcon,
   },
+  {
+    title: 'API Keys',
+    href: route('api-keys.index'),
+    icon: CommandIcon,
+  },
 ];
 
 export default function SettingsLayout({ children, breadcrumbs }: { children: ReactNode; breadcrumbs?: BreadcrumbItem[] }) {
@@ -26,9 +31,9 @@ export default function SettingsLayout({ children, breadcrumbs }: { children: Re
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Container className="max-w-5xl flex items-start flex-col lg:flex-row p-4 lg:gap-5">
-        <div className="lg:w-48 space-y-5">
-          <nav className="flex flex-row lg:flex-col gap-2">
+      <Container className="flex max-w-5xl flex-col items-start p-4 lg:flex-row lg:gap-5">
+        <div className="space-y-5 lg:w-48">
+          <nav className="flex flex-row gap-2 lg:flex-col">
             {sidebarNavItems.map((item) => (
               <Link
                 key={item.title}
@@ -44,7 +49,7 @@ export default function SettingsLayout({ children, breadcrumbs }: { children: Re
             ))}
           </nav>
         </div>
-        <div className="flex-1 w-full">{children}</div>
+        <div className="w-full flex-1">{children}</div>
       </Container>
     </AppLayout>
   );

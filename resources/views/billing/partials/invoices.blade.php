@@ -9,7 +9,9 @@
                     <span>{{ $transaction->created_at->format('M d, Y') }}</span>
                     <span>{{ $transaction->total / 100 }} {{ $transaction->currency }}</span>
                 </div>
-                <a href="{{ route('billing.invoices.download', ['transaction' => $transaction]) }}" class="underline">View receipt</a>
+                <a href="{{ route('billing.invoices.download', ['transaction' => $transaction]) }}" class="underline">
+                    View receipt
+                </a>
             </div>
             @if (count($transactions) > 1 && $key < count($transactions) - 1)
                 <x-ui.separator />

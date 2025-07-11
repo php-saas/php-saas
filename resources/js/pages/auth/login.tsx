@@ -8,7 +8,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
-import { Form, FormItem } from '@/components/ui/form';
 
 export default function Login() {
   const form = useForm<{
@@ -85,7 +84,7 @@ export default function Login() {
           </Button>
         </div>
 
-        <div className="text-muted-foreground text-center text-sm mt-4">
+        <div className="text-muted-foreground mt-4 text-center text-sm">
           Don't have an account?{' '}
           <TextLink href={route('register')} tabIndex={5}>
             Sign up

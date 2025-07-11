@@ -10,7 +10,11 @@
     <div class="mt-4 flex items-center justify-end gap-2">
         <form id="resume-form" action="{{ route('billing.resume') }}" method="post">
             @csrf
-            <x-ui.button x-data="{processing: false}" x-on:click="processing = true; document.getElementById('resume-form').submit()" x-bind:disabled="processing">
+            <x-ui.button
+                x-data="{processing: false}"
+                x-on:click="processing = true; document.getElementById('resume-form').submit()"
+                x-bind:disabled="processing"
+            >
                 <x-icons.loading x-show="processing" class="animate-spin" />
                 {{ __('Resume subscription') }}
             </x-ui.button>

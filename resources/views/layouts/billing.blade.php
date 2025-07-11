@@ -19,12 +19,14 @@
         <div>
             <div x-data="{ menu: false }" class="mx-auto flex h-16 items-center px-4 md:max-w-5xl">
                 <a href="/">
-                    <x-logo class="size-10 mt-1.5" />
+                    <x-logo class="mt-1.5 size-10" />
                 </a>
                 <div class="ml-2 flex h-10 w-full items-start justify-between">
                     <div>
                         <h1 class="font-semibold">{{ __('Billing Management') }}</h1>
-                        <p class="text-sm text-muted-foreground">{{ __('Logged in as :user', ['user' => user()->name]) }}</p>
+                        <p class="text-muted-foreground text-sm">
+                            {{ __('Logged in as :user', ['user' => user()->name]) }}
+                        </p>
                     </div>
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2 underline">
                         {{ __('Return to dashboard') }}

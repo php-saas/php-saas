@@ -1,5 +1,5 @@
-import { Head, Link, useForm } from '@inertiajs/react';
-import { LoaderCircle, LoaderCircleIcon } from 'lucide-react';
+import { Head, useForm } from '@inertiajs/react';
+import { LoaderCircleIcon } from 'lucide-react';
 import { FormEvent } from 'react';
 import InputError from '@/components/ui/input-error';
 import { Button } from '@/components/ui/button';

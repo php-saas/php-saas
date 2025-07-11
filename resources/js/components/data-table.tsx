@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <div className={cn('relative overflow-hidden rounded-md border shadow-xs', className, extraClasses)}>
+    <div className={cn('bg-card text-card-foreground relative overflow-hidden rounded-xl border shadow-sm', className, extraClasses)}>
       {isLoading && (
         <div className="absolute top-0 right-0 left-0 h-[2px] overflow-hidden">
           <div className="animate-loading-bar bg-primary absolute inset-0 w-full" />

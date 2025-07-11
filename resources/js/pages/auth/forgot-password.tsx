@@ -59,7 +59,7 @@ export default function ForgotPassword() {
           </div>
         </div>
 
-        <div className="text-muted-foreground space-x-1 text-center text-sm mt-4">
+        <div className="text-muted-foreground mt-4 space-x-1 text-center text-sm">
           <span>Or, return to</span>
           <TextLink href={route('login')}>log in</TextLink>
         </div>

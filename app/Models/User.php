@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Paddle\Billable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property int $id
@@ -27,6 +28,7 @@ use Laravel\Paddle\Billable;
  * @property Carbon $updated_at
  * @property Collection<int, Project> $ownedProjects
  * @property Collection<int, Project> $invitedProjects
+ * @property Collection<int, PersonalAccessToken> $tokens
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -34,6 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasApiTokens;
 
     /**
      * @var list<string>

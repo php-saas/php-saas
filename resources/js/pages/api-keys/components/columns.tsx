@@ -39,9 +39,9 @@ function Delete({ apiKey }: { apiKey: ApiKey }) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete {apiKey.name}</DialogTitle>
-          <DialogDescription>Delete api key</DialogDescription>
+          <DialogDescription className="sr-only">Delete api key</DialogDescription>
         </DialogHeader>
-        <p className="p-4">
+        <p>
           Are you sure you want to delete <strong>{apiKey.name}</strong>?
         </p>
         <DialogFooter>
@@ -67,12 +67,12 @@ export const columns: ColumnDef<ApiKey>[] = [
     enableSorting: true,
   },
   {
-    accessorKey: 'permissions',
-    header: 'Permissions',
+    accessorKey: 'abilities',
+    header: 'Abilities',
     enableColumnFilter: true,
     enableSorting: true,
     cell: ({ row }) => {
-      return row.original.permissions.includes('write') ? <span>read & write</span> : <span>read</span>;
+      return row.original.abilities.includes('write') ? <span>read & write</span> : <span>read</span>;
     },
   },
   {

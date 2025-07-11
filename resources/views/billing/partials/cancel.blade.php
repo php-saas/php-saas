@@ -9,7 +9,12 @@
         <form id="cancel-form" action="{{ route('billing.destroy') }}" method="post">
             @csrf
             @method('delete')
-            <x-ui.button x-data="{processing: false}" x-on:click="processing = true; document.getElementById('cancel-form').submit()" variant="destructive" x-bind:disabled="processing">
+            <x-ui.button
+                x-data="{processing: false}"
+                x-on:click="processing = true; document.getElementById('cancel-form').submit()"
+                variant="destructive"
+                x-bind:disabled="processing"
+            >
                 <x-icons.loading x-show="processing" class="animate-spin" />
                 {{ __('Cancel my subscription') }}
             </x-ui.button>
