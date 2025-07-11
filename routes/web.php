@@ -16,7 +16,7 @@ Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('billing', [BillingController::class, 'index'])->name('billing.index');
     Route::delete('billing', [BillingController::class, 'destroy'])->name('billing.destroy');
@@ -30,5 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::post('paddle/webhook', [WebhookController::class, '__invoke']);
+
+require __DIR__.'/auth.php';
 
 require __DIR__.'/settings.php';

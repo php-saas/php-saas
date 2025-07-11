@@ -11,7 +11,7 @@
         @vite(['resources/css/app.css', 'resources/js/home.js'])
     </head>
     <body
-        class="bg-background dark:selection:bg-primary/30 dark:selection:text-foreground selection:bg-primary/10 selection:text-primary min-h-svh font-sans antialiased"
+        class="bg-background dark:selection:bg-primary/20 selection:bg-primary/80 min-h-svh font-sans antialiased selection:text-white dark:selection:text-white"
     >
         <x-navbar />
         <div class="py-16 md:py-20">

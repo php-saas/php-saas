@@ -19,7 +19,9 @@
             </div>
             <p class="text-muted-foreground text-sm">{{ $plan->description }}</p>
             <div class="flex items-end">
-                <span class="text-4xl font-semibold">{{ config('billing.currency_sign') }}{{ $plan->price }}</span>
+                <span class="text-4xl font-semibold">
+                    {{ config('billing.currency_sign') }}{{ $plan->price ?? '0' }}
+                </span>
                 @if ($plan->priceId)
                     <span class="text-muted-foreground text-2xl font-semibold">/{{ $plan->billing }}</span>
                 @endif
@@ -52,27 +54,31 @@
         </x-ui.card.content>
         <x-ui.card.footer>
             @if ($plan->priceId)
-                @if (isset($subscription))
-                    @if ($subscription->items()->first()?->price_id === $plan->priceId)
-                        <x-ui.button class="w-full" disabled>{{ __('Current Plan') }}</x-ui.button>
-                    @else
-                        @include('billing.partials.change-plan-confirmation', ['newPlan' => $plan])
-                    @endif
+                @if (isset($public) && $public)
+                    <x-ui.button as="a" href="{{ route('register') }}" class="w-full">Get started</x-ui.button>
                 @else
-                    <x-ui.button
-                        x-data="{processing: false}"
-                        x-on:click="processing = true; setTimeout(() => { processing = false }, 1000)"
-                        as="div"
-                        class="w-full p-0!"
-                    >
-                        <x-paddle-button
-                            :checkout="user()->subscribe($plan->priceId)->returnTo(route('billing.index', ['status' => 'success']))"
-                            class="flex h-full w-full cursor-default items-center justify-center px-2 py-1"
+                    @if (isset($subscription))
+                        @if ($subscription->items()->first()?->price_id === $plan->priceId)
+                            <x-ui.button class="w-full" disabled>{{ __('Current Plan') }}</x-ui.button>
+                        @else
+                            @include('billing.partials.change-plan-confirmation', ['newPlan' => $plan])
+                        @endif
+                    @else
+                        <x-ui.button
+                            x-data="{processing: false}"
+                            x-on:click="processing = true; setTimeout(() => { processing = false }, 1000)"
+                            as="div"
+                            class="w-full p-0!"
                         >
-                            <x-icons.loading x-show="processing" class="animate-spin" />
-                            Subscribe
-                        </x-paddle-button>
-                    </x-ui.button>
+                            <x-paddle-button
+                                :checkout="user()->subscribe($plan->priceId)->returnTo(route('billing.index', ['status' => 'success']))"
+                                class="flex h-full w-full cursor-default items-center justify-center px-2 py-1"
+                            >
+                                <x-icons.loading x-show="processing" class="animate-spin" />
+                                Subscribe
+                            </x-paddle-button>
+                        </x-ui.button>
+                    @endif
                 @endif
             @else
                 <x-ui.button

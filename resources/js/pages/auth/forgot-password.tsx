@@ -27,7 +27,7 @@ export default function ForgotPassword() {
       <Head title="Forgot password" />
 
       {page.props.flash?.status && (
-        <Alert>
+        <Alert className="mb-4">
           <AlertDescription className="flex items-center gap-2">
             <CheckCircle2Icon className="text-success size-4" />
             {page.props.flash?.status}

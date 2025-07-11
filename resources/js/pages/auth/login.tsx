@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircleIcon } from 'lucide-react';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import InputError from '@/components/ui/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
+import { SiGithub } from '@icons-pack/react-simple-icons';
 
 export default function Login() {
   const form = useForm<{
@@ -19,6 +20,7 @@ export default function Login() {
     password: '',
     remember: false,
   });
+  const [socialLoginLoading, setSocialLoginLoading] = useState<string | null>(null);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -28,8 +30,19 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
+    <AuthLayout title="Log in to your account" description="Use your social account to log in.">
       <Head title="Log in" />
+
+      <div className="space-y-2">
+        <a href={route('auth.redirect', { provider: 'github' })} onClick={() => setSocialLoginLoading('github')}>
+          <Button variant="outline" className="w-full" disabled={socialLoginLoading === 'github'}>
+            {socialLoginLoading === 'github' ? <LoaderCircleIcon className="animate-spin" /> : <SiGithub />}
+            Continue with Github
+          </Button>
+        </a>
+      </div>
+
+      <p className="text-muted-foreground text-center text-sm">Or, use your email and password</p>
 
       <form onSubmit={submit}>
         <div className="grid gap-6">
