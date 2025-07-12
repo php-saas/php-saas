@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\ProjectResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -38,8 +37,6 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $user ? new UserResource($request->user()) : null,
-                'currentProject' => $user ? ProjectResource::make($user->currentProject()) : null,
-                'projects' => $user ? ProjectResource::collection($user->allProjects()->get()) : null,
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

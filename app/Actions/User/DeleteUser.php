@@ -2,7 +2,6 @@
 
 namespace App\Actions\User;
 
-use App\Events\UserDeleted;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +16,5 @@ class DeleteUser
 
         Auth::logout();
         $user->delete();
-
-        event(new UserDeleted($user));
     }
 }

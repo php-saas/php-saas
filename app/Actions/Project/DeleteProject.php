@@ -2,7 +2,6 @@
 
 namespace App\Actions\Project;
 
-use App\Events\ProjectDeleted;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -28,10 +27,6 @@ class DeleteProject
             ]);
         }
 
-        $user->currentProject();
-
         $project->delete();
-
-        event(new ProjectDeleted($project));
     }
 }

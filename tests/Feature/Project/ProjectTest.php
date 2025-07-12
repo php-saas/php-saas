@@ -3,11 +3,9 @@
 namespace Tests\Feature\Project;
 
 use App\Enums\ProjectRole;
-use App\Events\ProjectDeleted;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
@@ -172,8 +170,6 @@ class ProjectTest extends TestCase
 
     public function test_user_can_delete_project(): void
     {
-        Event::fake();
-
         /** @var User $user */
         $user = User::factory()->create();
 
@@ -194,8 +190,6 @@ class ProjectTest extends TestCase
         $this->assertDatabaseMissing('projects', [
             'id' => $project->id,
         ]);
-
-        Event::assertDispatched(ProjectDeleted::class);
     }
 
     public function test_user_cannot_delete_default_project(): void

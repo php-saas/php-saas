@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Profile;
 
-use App\Events\UserDeleted;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class DeleteUserTest extends TestCase
@@ -14,8 +12,6 @@ class DeleteUserTest extends TestCase
 
     public function test_user_can_delete_account(): void
     {
-        Event::fake();
-
         /** @var User $user */
         $user = User::factory()->create();
 
@@ -26,8 +22,6 @@ class DeleteUserTest extends TestCase
         ])
             ->assertSessionDoesntHaveErrors()
             ->assertRedirect(route('home'));
-
-        Event::assertDispatched(UserDeleted::class);
     }
 
     public function test_user_cannot_delete_account_with_invalid_password(): void

@@ -1,12 +1,10 @@
 import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
-import { Project } from '@/types/project';
 import { User } from '@/types/user';
+import { Project } from '@/types/project';
 
 export interface Auth {
   user: User;
-  projects: Project[];
-  currentProject: Project;
 }
 
 export interface BreadcrumbItem {
@@ -32,6 +30,10 @@ export interface Configs {
 
 export interface SharedData {
   auth: Auth;
+  project_provider: {
+    current?: Project;
+    list?: Project[];
+  };
   ziggy: Config & { location: string };
   configs: Configs;
   status: string;

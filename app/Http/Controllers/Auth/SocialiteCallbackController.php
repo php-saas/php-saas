@@ -34,7 +34,11 @@ class SocialiteCallbackController extends Controller
             $user->save();
         }
 
-        if ($user->two_factor_secret) {
+        if (
+            $user->two_factor_secret &&
+            config('fortify-options.two-factor-authentication.confirm') &&
+            $user->two_factor_confirmed_at
+        ) {
             session()->put([
                 'login.id' => $user->id,
                 'login.remember' => true,

@@ -14,7 +14,7 @@ import LeaveProject from '@/pages/projects/components/leave-project';
 
 const CurrentProject = ({ project }: { project: Project }) => {
   const page = usePage<SharedData>();
-  return <>{project.id === page.props.auth.currentProject?.id && <Badge variant="default">current</Badge>}</>;
+  return <>{project.id === page.props.project_provider.current?.id && <Badge variant="default">current</Badge>}</>;
 };
 
 export const columns: ColumnDef<Project>[] = [

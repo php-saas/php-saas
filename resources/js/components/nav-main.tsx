@@ -23,10 +23,10 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                 <div className="flex items-center justify-center gap-1.5">
                   <Avatar className="size-5 rounded-xs group-data-[collapsible=icon]:size-8">
                     <AvatarFallback className="rounded-sm">
-                      {useInitials()(page.props.auth.currentProject.name.replaceAll(' ', '') ?? '')}
+                      {useInitials()(page.props.project_provider.current?.name.replaceAll(' ', '') ?? '')}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="group-data-[collapsible=icon]:hidden">{page.props.auth.currentProject.name}</span>
+                  <span className="group-data-[collapsible=icon]:hidden">{page.props.project_provider.current?.name}</span>
                 </div>
                 <ChevronsUpDownIcon size={5} className="group-data-[collapsible=icon]:hidden" />
               </div>

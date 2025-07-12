@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Mail;
+namespace Tests\Unit\Mail;
 
 use App\Mail\ProjectInvitation;
 use App\Models\User;

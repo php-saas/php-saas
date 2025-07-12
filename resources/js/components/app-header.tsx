@@ -15,7 +15,6 @@ import { BookOpen, ChevronsUpDownIcon, Folder, LayoutGrid, Menu } from 'lucide-r
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { ProjectSwitch } from '@/components/project-switch';
-import AppCommand from '@/components/app-command';
 import Refresh from '@/components/refresh';
 
 const mainNavItems: NavItem[] = [
@@ -74,10 +73,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                           <div className="flex items-center justify-center gap-2">
                             <Avatar className="size-6 rounded-md">
                               <AvatarFallback className="rounded-xs">
-                                {useInitials()(page.props.auth.currentProject.name.replaceAll(' ', '') ?? '')}
+                                {useInitials()(page.props.project_provider.current?.name.replaceAll(' ', '') ?? 'Select project')}
                               </AvatarFallback>
                             </Avatar>
-                            <span>{page.props.auth.currentProject.name}</span>
+                            <span>{page.props.project_provider.current?.name || 'Select project'}</span>
                           </div>
                           <ChevronsUpDownIcon size={5} />
                         </Button>
@@ -132,12 +131,14 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                   <NavigationMenuItem asChild>
                     <Button variant="outline" className="px-1.5!">
                       <div className="flex items-center justify-center gap-2">
-                        <Avatar className="size-6 rounded-md">
-                          <AvatarFallback className="rounded-xs">
-                            {useInitials()(page.props.auth.currentProject.name.replaceAll(' ', '') ?? '')}
-                          </AvatarFallback>
-                        </Avatar>
-                        <span>{page.props.auth.currentProject.name}</span>
+                        {page.props.project_provider.current && (
+                          <Avatar className="size-6 rounded-md">
+                            <AvatarFallback className="rounded-xs">
+                              {getInitials(page.props.project_provider.current.name.replaceAll(' ', '') ?? 'Select Project')}
+                            </AvatarFallback>
+                          </Avatar>
+                        )}
+                        <span>{page.props.project_provider.current?.name || 'Select project'}</span>
                       </div>
                       <ChevronsUpDownIcon size={5} />
                     </Button>
@@ -182,7 +183,6 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
 
           <div className="ml-auto flex items-center space-x-2">
             <div className="relative flex items-center gap-2">
-              <AppCommand />
               <Refresh />
               <div className="hidden gap-2 lg:flex">
                 {rightNavItems.map((item) => (

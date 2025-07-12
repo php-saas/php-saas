@@ -14,12 +14,11 @@ import ProjectForm from '@/pages/projects/components/project-form';
 
 export function ProjectSwitch({ children }: { children: ReactNode }) {
   const page = usePage<SharedData>();
-  const { auth } = page.props;
-  const [selectedProject, setSelectedProject] = useState(auth.currentProject.id.toString());
+  const [selectedProject, setSelectedProject] = useState(page.props.project_provider.current?.id.toString());
   const form = useForm();
 
   const handleProjectChange = (projectId: string) => {
-    const selectedProject = auth.projects.find((project) => project.id.toString() === projectId);
+    const selectedProject = page.props.project_provider.list?.find((project) => project.id.toString() === projectId);
     if (selectedProject) {
       setSelectedProject(selectedProject.id.toString());
       form.put(route('projects.switch', { project: projectId, currentPath: window.location.pathname }));
@@ -31,7 +30,7 @@ export function ProjectSwitch({ children }: { children: ReactNode }) {
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="start">
-          {auth.projects.map((project) => (
+          {page.props.project_provider.list?.map((project) => (
             <DropdownMenuCheckboxItem
               key={project.id.toString()}
               checked={selectedProject === project.id.toString()}

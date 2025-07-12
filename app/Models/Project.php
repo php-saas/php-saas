@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $owner_id
  * @property string $name
+ * @property string $slug
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property User $owner
@@ -27,6 +28,7 @@ class Project extends Model
     protected $fillable = [
         'owner_id',
         'name',
+        'slug',
     ];
 
     public function owner(): BelongsTo
