@@ -1,6 +1,6 @@
 {
-  "name": "TheSaaSKit",
-  "short_name": "TheSaaSKit",
+  "name": "PHP-SaaS",
+  "short_name": "PHP-SaaS",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",

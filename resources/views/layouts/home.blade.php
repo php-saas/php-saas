@@ -7,7 +7,7 @@
 >
     <head>
         <x-head />
-        <title>{{ isset($title) && $title ? $title . ' - TheSaaSKit' : 'TheSaaSKit' }}</title>
+        <title>{{ isset($title) && $title ? $title . ' - PHP-SaaS' : 'PHP-SaaS' }}</title>
         @vite(['resources/css/app.css', 'resources/js/home.js'])
     </head>
     <body

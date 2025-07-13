@@ -13,7 +13,7 @@ export default function AuthSplitLayout({ children, title, description }: PropsW
         <div className="bg-muted absolute inset-0" />
         <a href={route('home')} className="relative z-50 flex items-center text-lg font-medium">
           <AppLogoIcon className="mr-2 size-8" />
-          TheSaaSKit
+          PHP-SaaS
         </a>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
