@@ -23,3 +23,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /resources/js
+package.json
+package-lock.json
+composer.lock

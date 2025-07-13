@@ -72,7 +72,7 @@
                         >
                             <x-paddle-button
                                 :checkout="user()->subscribe($plan->priceId)->returnTo(route('billing.index', ['status' => 'success']))"
-                                class="flex h-full w-full cursor-default items-center justify-center px-2 py-1"
+                                class="flex h-full w-full cursor-default items-center justify-center px-2 py-1 gap-2"
                             >
                                 <x-icons.loading x-show="processing" class="animate-spin" />
                                 Subscribe
