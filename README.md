@@ -16,15 +16,16 @@ php-saas new <project-name>
 
 ## Stack
 
-- Laravel
-- Inertia.js with React and Vue
+- PHP and Laravel
+- Web app with Inertia.js with React and Vue
+- Home pages with Blade and Alpine.js
 - Tailwind CSS
 - Shadcn UI
 - Full authentication + two-factor
 - API tokens
 - Billing with Stripe and Paddle
 - Projects, Teams and Organizations
-- Tests with PHPUnit and Pest]
+- Tests with PHPUnit and Pest
 - 100% test coverage
 - GitHub Actions CI/CD
 
