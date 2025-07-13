@@ -24,14 +24,23 @@ function react() {
 
 function vue() {
   cleanup_frontend
+  ln -s package-vue.json package.json
+  ln -s vite-vue.config.ts vite.config.ts
+  ln -s tsconfig-vue.json tsconfig.json
+  ln -s eslint-vue.config.js eslint.config.js
+  ln -s js-vue resources/js
   echo "✅  Now using Vue"
 }
 
 function phpunit() {
+  cleanup_tests
+  ln -s tests-phpunit tests
   echo "✅  Now using PHPUnit"
 }
 
 function pest() {
+  cleanup_tests
+  ln -s tests-pest tests
   echo "✅  Now using Pest"
 }
 
