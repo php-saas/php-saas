@@ -129,8 +129,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "resources/js-react/**/*.ts",
-    "resources/js-react/**/*.d.ts",
-    "resources/js-react/**/*.tsx"
+    "resources/js/**/*.ts",
+    "resources/js/**/*.d.ts",
+    "resources/js/**/*.tsx"
   ]
 }
