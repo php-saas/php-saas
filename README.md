@@ -27,6 +27,8 @@ php-saas new <project-name>
 - Projects, Teams and Organizations
 - Tests with PHPUnit and Pest
 - 100% test coverage
+- Code quality with PHPStan level 5 and ESLint
+- Code style with Laravel Pint and Prettier
 - GitHub Actions CI/CD
 
 ## Deployment
