@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function cleanup() {
+function cleanup_frontend() {
   rm -f package.json
   rm -f vite.config.ts
   rm -f tsconfig.json
@@ -8,8 +8,12 @@ function cleanup() {
   rm -rf resources/js
 }
 
+function cleanup_tests() {
+  rm -f tests
+}
+
 function react() {
-  cleanup
+  cleanup_frontend
   ln -s package-react.json package.json
   ln -s vite-react.config.ts vite.config.ts
   ln -s tsconfig-react.json tsconfig.json
@@ -19,15 +23,27 @@ function react() {
 }
 
 function vue() {
-  echo "Using Vue"
-  # Add your Vue setup commands here
+  cleanup_frontend
+  echo "✅  Now using Vue"
+}
+
+function phpunit() {
+  echo "✅  Now using PHPUnit"
+}
+
+function pest() {
+  echo "✅  Now using Pest"
 }
 
 if [ "$1" == "react" ]; then
   react
 elif [ "$1" == "vue" ]; then
   vue
+elif [ "$1" == "phpunit" ]; then
+  phpunit
+elif [ "$1" == "pest" ]; then
+  pest
 else
-  echo "Usage: $0 {react|vue}"
+  echo "Usage: $0 {react|vue|phpunit|pest}"
   exit 1
 fi
