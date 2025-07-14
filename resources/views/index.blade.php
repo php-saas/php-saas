@@ -42,6 +42,6 @@
                 @include('billing.partials.plans', ['public' => true])
             </x-ui.container>
         </section>
-        <!--<php-saas:billing>-->
+        <!--</php-saas:billing>-->
     </div>
 @endsection

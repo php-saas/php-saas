@@ -17,7 +17,7 @@
                 <x-ui.navigation-menu-item href="/#pricing" x-on:click="menu = false">
                     {{ __('Pricing') }}
                 </x-ui.navigation-menu-item>
-                <!--<php-saas:billing>-->
+                <!--</php-saas:billing>-->
                 <x-ui.navigation-menu-item href="{{ route('contact') }}">
                     {{ __('Contact') }}
                 </x-ui.navigation-menu-item>
@@ -60,7 +60,7 @@
                     <x-ui.navigation-menu-item href="/#pricing">
                         {{ __('Pricing') }}
                     </x-ui.navigation-menu-item>
-                    <!--<php-saas:billing>-->
+                    <!--</php-saas:billing>-->
                     <x-ui.navigation-menu-item
                         href="{{ route('contact') }}"
                         class="{{ request()->routeIs('contact') ? 'text-foreground! font-semibold' : '' }}"
