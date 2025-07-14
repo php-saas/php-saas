@@ -12,7 +12,7 @@
                 </p>
                 <p class="text-muted-foreground mx-auto text-sm">Powered by Laravel</p>
                 <div class="flex items-center justify-center gap-2">
-                    <x-ui.button size="lg" as="a" href="{{ route('register') }}">Pricing</x-ui.button>
+                    <x-ui.button size="lg" as="a" href="{{ route('register') }}">Register</x-ui.button>
                     <x-ui.button variant="outline" size="lg" as="a" href="#" target="_blank">Documentation</x-ui.button>
                 </div>
             </x-ui.container>
@@ -36,10 +36,12 @@
             </x-ui.container>
         </section>
 
+        <!--<php-saas:billing>-->
         <section id="pricing">
             <x-ui.container>
                 @include('billing.partials.plans', ['public' => true])
             </x-ui.container>
         </section>
+        <!--<php-saas:billing>-->
     </div>
 @endsection
