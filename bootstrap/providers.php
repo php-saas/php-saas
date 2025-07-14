@@ -3,10 +3,10 @@
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\AuthServiceProvider::class,
-    // <projects>
+    // <php-saas:projects>
     App\Providers\ProjectServiceProvider::class,
-    // </projects>
-    // <billing>
+    // </php-saas:projects>
+    // <php-saas:billing>
     App\Providers\BillingServiceProvider::class,
-    // </billing>
+    // </php-saas:billing>
 ];
