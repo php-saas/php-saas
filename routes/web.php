@@ -18,7 +18,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    // php-saas: billing-routes
+    // <php-saas:billing>
     Route::get('billing', [BillingController::class, 'index'])->name('billing.index');
     Route::delete('billing', [BillingController::class, 'destroy'])->name('billing.destroy');
     Route::get('billing/update-payment-method', UpdatePaymentMethodController::class)
@@ -28,12 +28,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('billing/transactions/{transaction}/download', DownloadInvoiceController::class)
         ->name('billing.invoices.download');
     Route::post('billing/swap', SwapSubscriptionController::class)->name('billing.swap');
-    // php-saas: end-billing-routes
+    // </php-saas:billing>
 });
 
-// php-saas: billing-routes
+// <php-saas:billing>
 Route::post('paddle/webhook', [WebhookController::class, '__invoke']);
-// php-saas: end-billing-routes
+// </php-saas:billing>
 
 require __DIR__.'/auth.php';
 
