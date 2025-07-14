@@ -21,11 +21,13 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
+  // <php-saas:billing>
   {
     title: 'Billing',
     href: route('billing.index'),
     icon: CreditCardIcon,
   },
+  // </php-saas:billing>
   {
     title: 'Repository',
     href: 'https://github.com/laravel/react-starter-kit',

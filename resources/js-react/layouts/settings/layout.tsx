@@ -12,16 +12,20 @@ const sidebarNavItems: NavItem[] = [
     href: route('profile.index'),
     icon: UserIcon,
   },
+  // <php-saas:projects>
   {
     title: 'Projects',
     href: route('projects.index'),
     icon: BriefcaseIcon,
   },
+  // </php-saas:projects>
+  // <php-saas:tokens>
   {
     title: 'API Tokens',
     href: route('tokens.index'),
     icon: CommandIcon,
   },
+  // </php-saas:tokens>
 ];
 
 export default function SettingsLayout({ children, breadcrumbs }: { children: ReactNode; breadcrumbs?: BreadcrumbItem[] }) {

@@ -35,12 +35,14 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             Profile
           </Link>
         </DropdownMenuItem>
+        {/*<php-saas:billing>*/}
         <DropdownMenuItem asChild>
           <a className="block w-full" href={route('billing.index')}>
             <CreditCardIcon className="mr-2" />
             Billing
           </a>
         </DropdownMenuItem>
+        {/*</php-saas:billing>*/}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem asChild>

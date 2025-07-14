@@ -1,30 +1,71 @@
-<svg {{ $attributes->merge(['class' => 'size-5']) }} width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+    {{ $attributes->merge(['class' => 'size-5']) }}
+    width="1024"
+    height="1024"
+    viewBox="0 0 1024 1024"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
     <rect width="1024" height="1024" rx="150" fill="url(#paint0_linear_29_4)" />
     <g filter="url(#filter0_d_29_4)">
         <path
             d="M287.188 646.687C242.125 684.54 227.104 796.896 227.104 796.896C227.104 796.896 339.46 781.875 377.313 736.813C398.642 711.578 398.342 672.824 374.609 649.391C362.932 638.246 347.55 631.806 331.416 631.307C315.281 630.808 299.531 636.285 287.188 646.687Z"
-            stroke="white" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="white"
+            stroke-width="30"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
         <path
             d="M512.5 601.625L422.375 511.5C438.362 470.025 458.491 430.269 482.458 392.835C517.462 336.867 566.203 290.785 624.045 258.972C681.886 227.16 746.905 210.674 812.917 211.083C812.917 292.797 789.484 436.396 632.667 541.542C594.721 565.537 554.464 585.665 512.5 601.625Z"
-            stroke="white" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="white"
+            stroke-width="30"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
         <path
             d="M422.375 511.5L272.167 511.5C272.167 511.5 288.69 420.474 332.25 391.333C380.917 358.888 482.458 391.333 482.458 391.333"
-            stroke="white" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="white"
+            stroke-width="30"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
         <path
             d="M512.5 601.625L512.5 751.833C512.5 751.833 603.526 735.31 632.667 691.75C665.112 643.082 632.667 541.542 632.667 541.542"
-            stroke="white" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
-        <ellipse cx="312.424" cy="714.613" rx="55.3342" ry="94.4203" transform="rotate(40.8549 312.424 714.613)"
-                 fill="white" />
+            stroke="white"
+            stroke-width="30"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+        <ellipse
+            cx="312.424"
+            cy="714.613"
+            rx="55.3342"
+            ry="94.4203"
+            transform="rotate(40.8549 312.424 714.613)"
+            fill="white"
+        />
         <path
             d="M254.488 734.853L259.078 739.313C257.531 734.018 258.544 729.647 262.335 725.745C265.959 722.016 271.645 720.068 276.578 720.845C281.453 721.567 287.04 724.542 291.401 728.779C300.81 737.923 302.458 750.232 295.21 757.691C291.419 761.592 287.137 762.785 281.799 761.391L297.978 777.113L290.173 785.145L246.683 742.886L254.488 734.853ZM267.263 734.104C263.305 738.178 264.586 744.665 270.438 750.352C276.233 755.983 282.755 757.077 286.713 753.004C290.616 748.988 289.391 742.443 283.71 736.923C277.744 731.125 271.222 730.031 267.263 734.104ZM270.424 696.758L278.229 688.725L293.548 703.611C292.279 698.028 293.518 693.654 297.365 689.696C299.874 687.114 303.243 685.368 306.463 685.039C310.304 684.644 314.062 686.288 317.906 690.023L338.675 710.205L330.87 718.237L311.937 699.84C309.986 697.944 308.958 697.28 307.201 697.022C305.046 696.714 303.133 697.42 301.405 699.199C297.892 702.813 297.908 707.848 301.465 711.305L320.055 729.368L312.249 737.4L270.424 696.758ZM322.653 664.704L327.243 669.164C325.696 663.869 326.708 659.498 330.499 655.596C334.123 651.867 339.809 649.919 344.742 650.696C349.618 651.418 355.205 654.393 359.565 658.63C368.975 667.774 370.622 680.083 363.375 687.542C359.584 691.443 355.301 692.636 349.963 691.242L366.143 706.964L358.337 714.996L314.848 672.737L322.653 664.704ZM335.428 663.955C331.47 668.029 332.751 674.517 338.603 680.203C344.398 685.834 350.92 686.929 354.878 682.855C358.78 678.839 357.555 672.294 351.875 666.774C345.908 660.976 339.386 659.882 335.428 663.955Z"
-            fill="#6575BF" />
+            fill="#6575BF"
+        />
     </g>
     <defs>
-        <filter id="filter0_d_29_4" x="148" y="151" width="729" height="729" filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB">
+        <filter
+            id="filter0_d_29_4"
+            x="148"
+            y="151"
+            width="729"
+            height="729"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                           result="hardAlpha" />
+            <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+            />
             <feOffset dy="4" />
             <feGaussianBlur stdDeviation="2" />
             <feComposite in2="hardAlpha" operator="out" />
