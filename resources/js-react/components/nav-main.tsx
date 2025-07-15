@@ -7,7 +7,9 @@ import { ChevronsUpDownIcon } from 'lucide-react';
 import { useInitials } from '@/hooks/use-initials';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
+  // <php-saas:projects>
   const page = usePage<SharedData>();
+  // </php-saas:projects>
   return (
     <SidebarGroup className="px-2 py-0">
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
