@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "aws/aws-sdk-php": "^3.158",
         "erusev/parsedown": "^1.7",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/cashier-paddle": "^2.6",
