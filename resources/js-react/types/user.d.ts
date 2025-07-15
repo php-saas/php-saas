@@ -9,7 +9,9 @@ export interface User {
   created_at: string;
   updated_at: string;
   timezone: string;
+  // <php-saas:projects>
   projects?: Project[];
+  // </php-saas:projects>
   role: string;
   [key: string]: unknown;
 }

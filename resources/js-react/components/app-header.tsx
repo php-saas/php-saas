@@ -68,6 +68,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                   <div className="flex h-full flex-col justify-between text-sm">
                     <div className="flex flex-col space-y-4">
+                      {/*<php-saas:projects>*/}
                       <ProjectSwitch>
                         <Button variant="outline" className="flex w-full items-center justify-between px-1.5!">
                           <div className="flex items-center justify-center gap-2">
@@ -81,6 +82,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                           <ChevronsUpDownIcon size={5} />
                         </Button>
                       </ProjectSwitch>
+                      {/*</php-saas:projects>*/}
 
                       {mainNavItems.map((item) => (
                         <>
@@ -127,6 +129,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
           <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
             <NavigationMenu className="flex h-full items-stretch">
               <NavigationMenuList className="flex h-full items-stretch space-x-2">
+                {/*<php-saas:projects>*/}
                 <ProjectSwitch>
                   <NavigationMenuItem asChild>
                     <Button variant="outline" className="px-1.5!">
@@ -144,6 +147,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                     </Button>
                   </NavigationMenuItem>
                 </ProjectSwitch>
+                {/*</php-saas:projects>*/}
                 {mainNavItems.map((item, index) => (
                   <NavigationMenuItem key={index} className="relative flex h-full items-center">
                     {item.redirect ? (
