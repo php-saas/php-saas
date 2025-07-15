@@ -8,7 +8,7 @@
             <div class="flex flex-col items-center justify-center gap-6 md:flex-row md:items-stretch">
                 @foreach (config('billing.plans') as $key => $plan)
                     @php($plan = \App\DTOs\BillingPlanDTO::from($plan))
-                    @if ($plan->billing === 'monthly' || ! $plan->priceId)
+                    @if ($plan->billing === 'monthly' || $plan->price == 0)
                         @include('billing.partials.plan', ['plan' => $plan, 'subscription' => $subscription ?? null])
                     @endif
                 @endforeach
@@ -18,7 +18,7 @@
             <div class="flex flex-col items-center justify-center gap-6 md:flex-row md:items-stretch">
                 @foreach (config('billing.plans') as $plan)
                     @php($plan = \App\DTOs\BillingPlanDTO::from($plan))
-                    @if ($plan->billing === 'yearly' || ! $plan->priceId)
+                    @if ($plan->billing === 'yearly' || $plan->price == 0)
                         @include('billing.partials.plan', ['plan' => $plan, 'subscription' => $subscription ?? null])
                     @endif
                 @endforeach

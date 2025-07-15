@@ -14,7 +14,6 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
     // <php-saas:projects>
     Route::resource('projects', ProjectController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::put('/projects/{project}/switch', ProjectSwitchController::class)->name('projects.switch');
@@ -25,7 +24,6 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     Route::get('/projects/{project}/invitations/accept', AcceptProjectInviteController::class)
         ->name('projects.invitations.accept');
     // </php-saas:projects>
-
 
     // <php-saas:tokens>
     Route::resource('tokens', TokenController::class)->only(['index', 'store', 'destroy']);

@@ -10,6 +10,7 @@ return [
         [
             'name' => 'Free',
             'description' => 'Free plan with limited features',
+            'price' => 0,
             'features' => [
                 '1 Project',
                 'API Access',

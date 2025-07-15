@@ -9,7 +9,7 @@
 @if (! isset($subscription) || $plan->priceId)
     <x-ui.card class="w-full">
         <x-ui.card.header>
-            <div class="flex h-6 items-center gap-2 leading-none font-semibold">
+            <div class="flex h-6 items-center justify-between gap-2 leading-none font-semibold">
                 <p>{{ $plan->name }}</p>
                 @if ($plan->motivationText)
                     <span class="text-muted-foreground bg-muted rounded-md px-2 py-1 text-xs">
