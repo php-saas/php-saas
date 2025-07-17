@@ -8,7 +8,7 @@
     <head>
         <x-head />
         <title>{{ isset($title) && $title ? $title . ' - PHP-SaaS' : 'PHP-SaaS' }}</title>
-        @vite(['resources/css/app.css', 'resources/js/home.js'])
+        @vite(['resources/css/app.css', 'resources/js-home/app.js'])
     </head>
     <body
         class="bg-background dark:selection:bg-primary/20 selection:bg-primary/80 min-h-svh font-sans antialiased selection:text-white dark:selection:text-white"

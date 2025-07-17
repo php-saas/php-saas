@@ -22,26 +22,22 @@ $links = [];
 
 if ($framework === 'laravel') {
     if ($feature === 'react') {
-        $links = [
-            'laravel/resources/js' => 'react/src',
-            'laravel/eslint.config.js' => 'react/eslint.config.js',
-            'laravel/package.json' => 'react/package.json',
-            'laravel/tsconfig.json' => 'react/tsconfig.json',
-            'laravel/vite.config.ts' => 'react/vite.config.ts',
-        ];
+        $links['laravel/resources/js'] = 'react/src';
+        $links['laravel/eslint.config.js'] = 'react/eslint.config.js';
+        $links['laravel/package.json'] = 'react/package.json';
+        $links['laravel/tsconfig.json'] = 'react/tsconfig.json';
+        $links['laravel/vite.config.ts'] = 'react/vite.config.ts';
     }
 
     if ($feature === 'phpunit') {
-        $links = [
-            'laravel/tests' => 'laravel/tests-phpunit',
-        ];
+        $links['laravel/tests'] = 'laravel/tests-phpunit';
     }
 
     if ($feature === 'pest') {
-        $links = [
-            'laravel/tests' => 'laravel/tests-pest',
-        ];
+        $links['laravel/tests'] = 'laravel/tests-pest';
     }
+
+    $links['laravel/resources/js/home.js'] = 'shared/home.js';
 }
 
 foreach ($links as $link => $target) {

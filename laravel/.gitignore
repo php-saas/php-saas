@@ -19,14 +19,6 @@
 /storage/*.key
 /storage/pail
 /vendor
-/tests
 Homestead.json
 Homestead.yaml
 Thumbs.db
-/resources/js
-package.json
-package-lock.json
-composer.lock
-eslint.config.js
-vite.config.ts
-tsconfig.json
