@@ -36,6 +36,12 @@ if ($framework === 'laravel') {
             'laravel/tests' => 'laravel/tests-phpunit',
         ];
     }
+
+    if ($feature === 'pest') {
+        $links = [
+            'laravel/tests' => 'laravel/tests-pest',
+        ];
+    }
 }
 
 foreach ($links as $link => $target) {
@@ -64,3 +70,9 @@ foreach ($links as $link => $target) {
 }
 
 echo "✅ Now using $framework with $feature.\n";
+
+if (in_array($feature, ['react', 'vue'])) {
+  echo "Installing dependencies...\n";
+
+  exec("npm install --prefix=" . __DIR__ . "/laravel");
+}
