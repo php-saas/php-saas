@@ -23,25 +23,44 @@ $links = [];
 if ($framework === 'laravel') {
     if ($feature === 'react') {
         $links = [
-            'react/src' => 'laravel/resources/js',
-            'react/eslint.config.js' => 'laravel/eslint.config.js',
-            'react/package.json' => 'laravel/package.json',
-            'react/tsconfig.json' => 'laravel/tsconfig.json',
-            'react/vite.config.ts' => 'laravel/vite.config.ts',
+            'laravel/resources/js' => 'react/src',
+            'laravel/eslint.config.js' => 'react/eslint.config.js',
+            'laravel/package.json' => 'react/package.json',
+            'laravel/tsconfig.json' => 'react/tsconfig.json',
+            'laravel/vite.config.ts' => 'react/vite.config.ts',
+        ];
+    }
+
+    if ($feature === 'phpunit') {
+        $links = [
+            'laravel/tests' => 'laravel/tests-phpunit',
         ];
     }
 }
 
-foreach ($links as $link => $path) {
+foreach ($links as $link => $target) {
     $linkPath = __DIR__ . '/' . $link;
-    $targetPath = __DIR__ . '/' . $path;
+    $targetPath = __DIR__ . '/' . $target;
 
-    // remove link if it exists
-    if (file_exists($linkPath)) {
+    // Delete existing linkPath (symlink, file, or directory)
+    if (is_link($linkPath)) {
         unlink($linkPath);
+    } elseif (is_file($linkPath)) {
+        unlink($linkPath);
+    } elseif (is_dir($linkPath)) {
+        // Recursive delete
+        $it = new RecursiveDirectoryIterator($linkPath, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            $file->isDir() ? rmdir($file) : unlink($file);
+        }
+        rmdir($linkPath);
     }
 
+    // Create symlink
     if (!symlink($targetPath, $linkPath)) {
-        echo "Failed to create symlink: $linkPath -> $targetPath\n";
+        echo "❌ Failed to link: $linkPath → $targetPath\n";
     }
 }
+
+echo "✅ Now using $framework with $feature.\n";
