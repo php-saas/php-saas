@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+
+// get arguments
+$arguments = $argv;
+
+$framework = $arguments[1] ?? '';
+
+if (empty($framework)) {
+    echo "Usage: php use <framework>\n";
+    exit(1);
+}
+
+$feature = $arguments[2] ?? '';
+
+if (empty($feature)) {
+    echo "Usage: php use <framework> <react|vue|phpunit|pest>\n";
+    exit(1);
+}
+
+$links = [];
+
+if ($framework === 'laravel') {
+    if ($feature === 'react') {
+        $links = [
+            'react/src' => 'laravel/resources/js',
+            'react/eslint.config.js' => 'laravel/eslint.config.js',
+            'react/package.json' => 'laravel/package.json',
+            'react/tsconfig.json' => 'laravel/tsconfig.json',
+            'react/vite.config.ts' => 'laravel/vite.config.ts',
+        ];
+    }
+}
+
+foreach ($links as $link => $path) {
+    $linkPath = __DIR__ . '/' . $link;
+    $targetPath = __DIR__ . '/' . $path;
+
+    // remove link if it exists
+    if (file_exists($linkPath)) {
+        unlink($linkPath);
+    }
+
+    if (!symlink($targetPath, $linkPath)) {
+        echo "Failed to create symlink: $linkPath -> $targetPath\n";
+    }
+}
