@@ -1,0 +1,29 @@
+{
+    "name": "php-saas/php-saas",
+    "description": "The everything-included starter kit for your next idea",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "PhpSaas\\PhpSaas\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saeed Vaziry",
+            "email": "mr.saeedvaziry@gmail.com"
+        }
+    ],
+    "scripts": {
+        "laravel-react": [
+            "@php use laravel react"
+        ],
+        "laravel-phpunit": [
+            "@php use laravel phpunit"
+        ],
+        "laravel-pest": [
+            "@php use laravel pest"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

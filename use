@@ -36,8 +36,6 @@ if ($framework === 'laravel') {
     if ($feature === 'pest') {
         $links['laravel/tests'] = 'laravel/tests-pest';
     }
-
-    $links['laravel/resources/js/home.js'] = 'shared/home.js';
 }
 
 foreach ($links as $link => $target) {
