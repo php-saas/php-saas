@@ -1,5 +1,4 @@
 .git/
-.scribe/
 node_modules/
 public/
 storage/
@@ -12,7 +11,5 @@ sail
 *.yml
 !*.blade.php
 !*.sh
-resources/views/ssh/
-resources/views/scribe/
 resources/js/ziggy.js
 resources/views/mail/*

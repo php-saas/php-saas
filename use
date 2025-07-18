@@ -1,0 +1,72 @@
+#!/usr/bin/env php
+<?php
+
+// get arguments
+$arguments = $argv;
+
+$framework = $arguments[1] ?? '';
+
+if (empty($framework)) {
+    echo "Usage: php use <framework>\n";
+    exit(1);
+}
+
+$feature = $arguments[2] ?? '';
+
+if (empty($feature)) {
+    echo "Usage: php use <framework> <react|vue|phpunit|pest>\n";
+    exit(1);
+}
+
+$links = [];
+
+if ($framework === 'laravel') {
+    if ($feature === 'react') {
+        $links['laravel/resources/js'] = 'react/src';
+        $links['laravel/eslint.config.js'] = 'react/eslint.config.js';
+        $links['laravel/package.json'] = 'react/package.json';
+        $links['laravel/tsconfig.json'] = 'react/tsconfig.json';
+        $links['laravel/vite.config.ts'] = 'react/vite.config.ts';
+    }
+
+    if ($feature === 'phpunit') {
+        $links['laravel/tests'] = 'laravel/tests-phpunit';
+    }
+
+    if ($feature === 'pest') {
+        $links['laravel/tests'] = 'laravel/tests-pest';
+    }
+}
+
+foreach ($links as $link => $target) {
+    $linkPath = __DIR__ . '/' . $link;
+    $targetPath = __DIR__ . '/' . $target;
+
+    // Delete existing linkPath (symlink, file, or directory)
+    if (is_link($linkPath)) {
+        unlink($linkPath);
+    } elseif (is_file($linkPath)) {
+        unlink($linkPath);
+    } elseif (is_dir($linkPath)) {
+        // Recursive delete
+        $it = new RecursiveDirectoryIterator($linkPath, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            $file->isDir() ? rmdir($file) : unlink($file);
+        }
+        rmdir($linkPath);
+    }
+
+    // Create symlink
+    if (!symlink($targetPath, $linkPath)) {
+        echo "❌ Failed to link: $linkPath → $targetPath\n";
+    }
+}
+
+echo "✅ Now using $framework with $feature.\n";
+
+if (in_array($feature, ['react', 'vue'])) {
+  echo "Installing dependencies...\n";
+
+  exec("npm install --prefix=" . __DIR__ . "/laravel");
+}

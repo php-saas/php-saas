@@ -10,7 +10,7 @@
         <title>
             {{ isset($title) && $title ? $title . ' - ' . config('app.name') : 'Billing - ' . config('app.name') }}
         </title>
-        @vite(['resources/css/app.css', 'resources/js/home.js'])
+        @vite(['resources/css/app.css', 'resources/js-home/app.js'])
         @paddleJS
     </head>
     <body
