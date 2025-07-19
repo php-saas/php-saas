@@ -32,6 +32,7 @@ export default function ConfirmPassword() {
               id="password"
               type="password"
               name="password"
+              required
               placeholder="Password"
               autoComplete="current-password"
               value={form.data.password}

@@ -42,6 +42,7 @@ export default function ForgotPassword() {
             <Input
               id="email"
               type="email"
+              required
               name="email"
               value={form.data.email}
               autoFocus

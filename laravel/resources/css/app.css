@@ -30,3 +30,7 @@
 [x-cloak] {
   @apply hidden;
 }
+
+form {
+  margin: 0;
+}
