@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, defineProps, defineEmits } from 'vue';
+import { ref, watch, defineProps } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import {
   Dialog,
@@ -23,34 +23,25 @@ const props = defineProps<{
   defaultOpen?: boolean;
 }>();
 
-const emit = defineEmits<{
-  (e: 'update:open', value: boolean): void;
-}>();
-
 const open = ref(props.defaultOpen ?? false);
 
 watch(() => props.defaultOpen, (val) => {
   if (val !== undefined) open.value = val;
 });
 
-function handleOpenChange(value: boolean) {
-  open.value = value;
-  emit('update:open', value);
-}
-
 const form = useForm({
   name: props.project?.name ?? '',
 });
 
 function submit(e?: Event) {
-  if (e) e.preventDefault();
+  e?.preventDefault();
 
   if (props.project) {
-    form.put(route('projects.update', props.project.id), {
+    form.put(`/settings/projects/${props.project.id}`, {
       onSuccess: () => (open.value = false),
     });
   } else {
-    form.post(route('projects.store'), {
+    form.post(`/settings/projects`, {
       onSuccess: () => (open.value = false),
     });
   }
@@ -58,7 +49,7 @@ function submit(e?: Event) {
 </script>
 
 <template>
-  <Dialog :open="open" @update:open="handleOpenChange">
+  <Dialog :open="open" @update:open="open = $event">
     <DialogTrigger as-child>
       <slot />
     </DialogTrigger>
@@ -78,7 +69,7 @@ function submit(e?: Event) {
             <Input
               id="name"
               type="text"
-              v-model="form.data.name"
+              v-model="form.name"
               name="name"
             />
             <InputError :message="form.errors.name" />

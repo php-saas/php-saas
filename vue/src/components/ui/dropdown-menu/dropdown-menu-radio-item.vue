@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
-import { Circle } from "lucide-vue-next";
+import { Check } from "lucide-vue-next";
 import {
   DropdownMenuItemIndicator,
   DropdownMenuRadioItem,
@@ -40,7 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       class="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center"
     >
       <DropdownMenuItemIndicator>
-        <Circle class="size-2 fill-current" />
+        <Check class="size-4" />
       </DropdownMenuItemIndicator>
     </span>
     <slot />

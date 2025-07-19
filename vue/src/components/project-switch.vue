@@ -8,9 +8,9 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
 const page = usePage<SharedData>();
@@ -22,7 +22,7 @@ function handleProjectChange(projectId: string) {
   const selectedProject = projects.value.find((p) => p.id.toString() === projectId);
   if (selectedProject) {
     currentProjectId.value = selectedProject.id.toString();
-    form.put(`/projects/${projectId}/switch?currentPath=${window.location.pathname}`);
+    form.put(`/settings/projects/${projectId}/switch?currentPath=${window.location.pathname}`);
   }
 }
 </script>
@@ -35,14 +35,16 @@ function handleProjectChange(projectId: string) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent class="w-56" align="start">
-        <DropdownMenuCheckboxItem
-          v-for="project in projects"
-          :key="project.id.toString()"
-          :checked="currentProjectId === project.id.toString()"
-          @update:checked="() => handleProjectChange(project.id.toString())"
-        >
-          {{ project.name }}
-        </DropdownMenuCheckboxItem>
+        <DropdownMenuRadioGroup v-model="currentProjectId">
+          <DropdownMenuRadioItem
+            v-for="project in projects"
+            :key="project.id.toString()"
+            :value="project.id.toString()"
+            @select="handleProjectChange(project.id.toString())"
+          >
+            {{ project.name }}
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
 
         <DropdownMenuSeparator />
 
