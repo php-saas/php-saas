@@ -125,7 +125,7 @@ const rightNavItems: NavItem[] = [
         <!-- Desktop Menu -->
         <div class="hidden h-full lg:flex lg:flex-1">
           <NavigationMenu class="ml-6 flex h-full items-stretch">
-            <NavigationMenuList class="flex h-full items-stretch space-x-2">
+            <NavigationMenuList class="flex h-full items-stretch space-x-1">
               <!--<php-saas:projects>-->
               <ProjectSwitch>
                 <NavigationMenuItem asChild>

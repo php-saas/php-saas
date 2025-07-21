@@ -6,6 +6,7 @@ export interface Project {
   owner?: ProjectUser;
   users: ProjectUser[];
   role: string;
+  is_current: boolean;
   created_at: string;
   updated_at: string;
 

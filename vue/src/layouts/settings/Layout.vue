@@ -1,68 +1,72 @@
 <script setup lang="ts">
-import Heading from "@/components/heading.vue";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { type NavItem } from "@/types";
-import { Link, usePage } from "@inertiajs/vue3";
+import Heading from '@/components/heading.vue';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/app-layout.vue';
+import type { BreadcrumbItem } from '@/types';
+import Container from '@/components/container.vue';
+import { cn } from '@/lib/utils';
+import { BriefcaseIcon, CommandIcon, UserIcon } from 'lucide-vue-next';
 
 const sidebarNavItems: NavItem[] = [
   {
-    title: "Profile",
-    href: "/settings/profile",
+    title: 'Profile',
+    href: '/settings/profile',
+    icon: UserIcon,
   },
+  // <php-saas:projects>
   {
-    title: "Password",
-    href: "/settings/password",
+    title: 'Projects',
+    href: '/settings/projects',
+    icon: BriefcaseIcon,
   },
+  // </php-saas:projects>
+  // <php-saas:tokens>
   {
-    title: "Appearance",
-    href: "/settings/appearance",
+    title: 'API Tokens',
+    href: '/settings/tokens',
+    icon: CommandIcon,
   },
+  // </php-saas:tokens>
 ];
 
-const page = usePage();
+interface Props {
+  breadcrumbs?: BreadcrumbItem[];
+}
 
-const currentPath = page.props.ziggy?.location
-  ? new URL(page.props.ziggy.location).pathname
-  : "";
+withDefaults(defineProps<Props>(), {
+  breadcrumbs: () => [],
+});
+
+const currentUrl = window.location.pathname;
 </script>
 
 <template>
-  <div class="px-4 py-6">
-    <Heading
-      title="Settings"
-      description="Manage your profile and account settings"
-    />
-
-    <div
-      class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-y-0 lg:space-x-12"
-    >
-      <aside class="w-full max-w-xl lg:w-48">
-        <nav class="flex flex-col space-y-1 space-x-0">
-          <Button
+  <AppLayout :breadcrumbs="$props.breadcrumbs">
+    <Container class="flex max-w-5xl flex-col items-start p-4 lg:flex-row lg:gap-5">
+      <div class="space-y-5 lg:w-48">
+        <nav class="flex flex-row gap-2 lg:flex-col">
+          <Link
             v-for="item in sidebarNavItems"
-            :key="item.href"
-            variant="ghost"
-            :class="[
-              'w-full justify-start',
-              { 'bg-muted': currentPath === item.href },
-            ]"
-            as-child
+            :key="item.title"
+            :href="item.href"
+            :class="
+              cn(
+                'hover:bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium',
+                item.onlyActivePath ? currentUrl === item.href : currentUrl.startsWith(item.href) ? 'bg-muted' : '',
+              )
+            "
           >
-            <Link :href="item.href">
-              {{ item.title }}
-            </Link>
-          </Button>
+            <component :is="item.icon" class="h-4 w-4" />
+            {{ item.title }}
+          </Link>
         </nav>
-      </aside>
-
-      <Separator class="my-6 md:hidden" />
-
-      <div class="flex-1 md:max-w-2xl">
-        <section class="max-w-xl space-y-12">
-          <slot />
-        </section>
       </div>
-    </div>
-  </div>
+      <div class="w-full flex-1">
+        <slot />
+      </div>
+    </Container>
+  </AppLayout>
 </template>
