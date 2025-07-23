@@ -1,7 +1,5 @@
 import { ColumnDef } from '@tanstack/vue-table';
 import { Token } from '@/types/token';
-import { h } from 'vue';
-import { Badge } from '@/components/ui/badge';
 
 export const columns: ColumnDef<Token>[] = [
   {

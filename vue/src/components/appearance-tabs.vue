@@ -16,7 +16,7 @@ const tabs = [
     class="w-full flex items-center justify-between gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800"
   >
     <button
-      v-for="{ value, Icon, label } in tabs"
+      v-for="{ value, Icon } in tabs"
       :key="value"
       @click="updateAppearance(value)"
       :class="[

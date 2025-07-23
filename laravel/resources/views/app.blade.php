@@ -4,6 +4,7 @@
         <x-head />
         <title inertia>PHP-SaaS</title>
         @viteReactRefresh
+
         <!--<php-saas:vite>-->
         @php
             $component = $page['component'];
@@ -15,6 +16,7 @@
         @endphp
         @vite(['resources/js/app.ts', $pageScript])
         <!--</php-saas:vite>-->
+
         @inertiaHead
     </head>
     <body

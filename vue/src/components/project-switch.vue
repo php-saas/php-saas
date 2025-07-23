@@ -6,7 +6,6 @@ import { PlusIcon } from 'lucide-vue-next';
 import { SharedData } from '@/types';
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem,
   DropdownMenuSeparator,
