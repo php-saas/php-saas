@@ -15,7 +15,7 @@ export default function ConfirmPassword() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
 
-    form.post(route('password.confirm.store'), {
+    form.post('/user/confirm-password', {
       onFinish: () => form.reset('password'),
     });
   };
@@ -32,6 +32,7 @@ export default function ConfirmPassword() {
               id="password"
               type="password"
               name="password"
+              required
               placeholder="Password"
               autoComplete="current-password"
               value={form.data.password}

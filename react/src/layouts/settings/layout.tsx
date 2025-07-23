@@ -9,20 +9,20 @@ import Container from '@/components/container';
 const sidebarNavItems: NavItem[] = [
   {
     title: 'Profile',
-    href: route('profile.index'),
+    href: '/settings/profile',
     icon: UserIcon,
   },
   // <php-saas:projects>
   {
     title: 'Projects',
-    href: route('projects.index'),
+    href: '/settings/projects',
     icon: BriefcaseIcon,
   },
   // </php-saas:projects>
   // <php-saas:tokens>
   {
     title: 'API Tokens',
-    href: route('tokens.index'),
+    href: '/settings/tokens',
     icon: CommandIcon,
   },
   // </php-saas:tokens>
@@ -44,7 +44,7 @@ export default function SettingsLayout({ children, breadcrumbs }: { children: Re
                 href={item.href}
                 className={cn(
                   'hover:bg-muted flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium',
-                  item.onlyActivePath ? window.location.href === item.href : window.location.href.startsWith(item.href) ? 'bg-muted' : '',
+                  item.onlyActivePath ? window.location.pathname === item.href : window.location.pathname.startsWith(item.href) ? 'bg-muted' : '',
                 )}
               >
                 {item.icon && <item.icon className="size-4" />}

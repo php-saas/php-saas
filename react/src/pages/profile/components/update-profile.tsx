@@ -27,7 +27,7 @@ export default function UpdateProfile() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
 
-    form.put(route('user-profile-information.update'), {
+    form.put('/user/profile-information', {
       preserveScroll: true,
       errorBag: 'updateProfileInformation',
     });
@@ -68,7 +68,7 @@ export default function UpdateProfile() {
               <div>
                 <p className="text-muted-foreground -mt-4 text-sm">
                   Your email address is unverified.{' '}
-                  <Link href={route('verification.send')} method="post" as="button" className="text-foreground underline">
+                  <Link href="/email/verification-notification" method="post" as="button" className="text-foreground underline">
                     Click here to resend the verification email.
                   </Link>
                 </p>

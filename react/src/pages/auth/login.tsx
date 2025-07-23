@@ -24,7 +24,7 @@ export default function Login() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.post(route('login.store'), {
+    form.post('/login', {
       onFinish: () => form.reset('password'),
     });
   };
@@ -34,7 +34,7 @@ export default function Login() {
       <Head title="Log in" />
 
       <div className="space-y-2">
-        <a href={route('auth.redirect', { provider: 'github' })} onClick={() => setSocialLoginLoading('github')}>
+        <a href="/auth/github/redirect" onClick={() => setSocialLoginLoading('github')}>
           <Button variant="outline" className="w-full" disabled={socialLoginLoading === 'github'}>
             {socialLoginLoading === 'github' ? <LoaderCircleIcon className="animate-spin" /> : <SiGithub />}
             Continue with Github
@@ -51,6 +51,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
+              required
               autoFocus
               tabIndex={1}
               autoComplete="email"
@@ -64,13 +65,14 @@ export default function Login() {
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
+              <TextLink href="/forgot-password" className="ml-auto text-sm" tabIndex={5}>
                 Forgot password?
               </TextLink>
             </div>
             <Input
               id="password"
               type="password"
+              required
               tabIndex={2}
               autoComplete="current-password"
               value={form.data.password}
@@ -99,7 +101,7 @@ export default function Login() {
 
         <div className="text-muted-foreground mt-4 text-center text-sm">
           Don't have an account?{' '}
-          <TextLink href={route('register')} tabIndex={5}>
+          <TextLink href="/register" tabIndex={5}>
             Sign up
           </TextLink>
         </div>

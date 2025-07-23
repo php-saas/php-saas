@@ -19,15 +19,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     // <php-saas:billing>
-    Route::get('billing', [BillingController::class, 'index'])->name('billing.index');
-    Route::delete('billing', [BillingController::class, 'destroy'])->name('billing.destroy');
+    Route::get('billing', [BillingController::class, 'index'])
+        ->name('billing.index');
+    Route::delete('billing', [BillingController::class, 'destroy'])
+        ->name('billing.destroy');
     Route::get('billing/update-payment-method', UpdatePaymentMethodController::class)
         ->name('billing.update-payment-method');
     Route::post('billing/resume', ResumeSubscriptionController::class)
         ->name('billing.resume');
     Route::get('billing/transactions/{transaction}/download', DownloadInvoiceController::class)
         ->name('billing.invoices.download');
-    Route::post('billing/swap', SwapSubscriptionController::class)->name('billing.swap');
+    Route::post('billing/swap', SwapSubscriptionController::class)
+        ->name('billing.swap');
     // </php-saas:billing>
 });
 

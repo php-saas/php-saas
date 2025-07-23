@@ -50,7 +50,7 @@ export default function ProjectForm({
     e.preventDefault();
 
     if (project) {
-      form.put(route('projects.update', project.id), {
+      form.put(`/settings/projects/${project.id}`, {
         onSuccess() {
           setOpen(false);
         },
@@ -58,7 +58,7 @@ export default function ProjectForm({
       return;
     }
 
-    form.post(route('projects.store'), {
+    form.post('/settings/projects', {
       onSuccess() {
         setOpen(false);
       },

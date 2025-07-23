@@ -14,7 +14,7 @@ export default function VerifyEmail() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
 
-    form.post(route('verification.send'));
+    form.post('/email/verification-notification');
   };
 
   return (
@@ -35,7 +35,7 @@ export default function VerifyEmail() {
           Resend verification email
         </Button>
 
-        <TextLink href={route('logout')} method="post" className="mx-auto block text-sm">
+        <TextLink href="/logout" method="post" className="mx-auto block text-sm">
           Log out
         </TextLink>
       </form>

@@ -27,6 +27,16 @@ if ($framework === 'laravel') {
         $links['laravel/package.json'] = 'react/package.json';
         $links['laravel/tsconfig.json'] = 'react/tsconfig.json';
         $links['laravel/vite.config.ts'] = 'react/vite.config.ts';
+        $links['laravel/components.json'] = 'react/components.json';
+    }
+
+    if ($feature === 'vue') {
+        $links['laravel/resources/js'] = 'vue/src';
+        $links['laravel/eslint.config.js'] = 'vue/eslint.config.js';
+        $links['laravel/package.json'] = 'vue/package.json';
+        $links['laravel/tsconfig.json'] = 'vue/tsconfig.json';
+        $links['laravel/vite.config.ts'] = 'vue/vite.config.ts';
+        $links['laravel/components.json'] = 'vue/components.json';
     }
 
     if ($feature === 'phpunit') {

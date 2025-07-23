@@ -16,4 +16,9 @@ laravel/composer.lock
 laravel/eslint.config.js
 laravel/vite.config.ts
 laravel/tsconfig.json
+laravel/components.json
 vendor/
+react/node_modules/
+react/package-lock.json
+vue/node_modules/
+vue/package-lock.json

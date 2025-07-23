@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
   {
     title: 'Projects',
-    href: route('projects.index'),
+    href: '/settings/projects',
   },
 ];
 

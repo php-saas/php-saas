@@ -17,7 +17,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
   {
     title: 'Profile',
-    href: route('profile.index'),
+    href: '/settings/profile',
   },
 ];
 

@@ -3,9 +3,20 @@
     <head>
         <x-head />
         <title inertia>PHP-SaaS</title>
-        @routes
         @viteReactRefresh
-        @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+
+        <!--<php-saas:vite>-->
+        @php
+            $component = $page['component'];
+            $vuePath = resource_path("js/pages/{$component}.vue");
+            $tsxPath = resource_path("js/pages/{$component}.tsx");
+            $pageScript = file_exists($vuePath)
+                ? "resources/js/pages/{$component}.vue"
+                : "resources/js/pages/{$component}.tsx";
+        @endphp
+        @vite(['resources/js/app.ts', $pageScript])
+        <!--</php-saas:vite>-->
+
         @inertiaHead
     </head>
     <body

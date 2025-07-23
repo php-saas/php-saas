@@ -21,10 +21,7 @@ export default function RemoveUser({ projectId, user, children }: { projectId: n
   const submit = (e: FormEvent) => {
     e.preventDefault();
     form.delete(
-      route('projects.users.destroy', {
-        project: projectId,
-        email: user.email,
-      }),
+      `/settings/projects/${projectId}/users/${user.email}`,
       {
         onSuccess: () => {
           setOpen(false);

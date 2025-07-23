@@ -20,7 +20,7 @@ export default function LeaveProject({ project, children }: { project: Project; 
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.delete(route('projects.leave', { project: project.id }), {
+    form.delete(`/settings/projects/${project.id}/leave`, {
       onSuccess: () => {
         setOpen(false);
       },

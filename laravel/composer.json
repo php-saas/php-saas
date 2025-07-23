@@ -17,8 +17,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.21",
         "laravel/tinker": "^2.8",
-        "spatie/laravel-data": "^4.17",
-        "tightenco/ziggy": "^2.5"
+        "spatie/laravel-data": "^4.17"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

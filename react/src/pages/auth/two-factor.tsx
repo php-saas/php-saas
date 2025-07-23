@@ -17,7 +17,7 @@ export default function TwoFactor() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
 
-    form.post(route('two-factor.login.store'), {
+    form.post('/two-factor-challenge', {
       onFinish: () => form.reset(),
     });
   };
@@ -66,7 +66,7 @@ export default function TwoFactor() {
         </div>
 
         <div className="text-muted-foreground mt-4 text-center text-sm">
-          <TextLink href={route('login')} tabIndex={6}>
+          <TextLink href="/login" tabIndex={6}>
             Back to login
           </TextLink>
         </div>

@@ -1,13 +1,13 @@
+// @ts-expect-error-next-line
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
     laravel({
-      input: ['resources/css/app.css', 'resources/js/app.tsx', 'resources/js-home/app.js'],
+      input: ['resources/css/app.css', 'resources/js/app.ts', 'resources/js-home/app.js'],
       ssr: 'resources/js/ssr.tsx',
       refresh: true,
     }),
@@ -18,9 +18,6 @@ export default defineConfig({
     jsx: 'automatic',
   },
   resolve: {
-    alias: {
-      'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
-    },
     preserveSymlinks: true,
   }
 });

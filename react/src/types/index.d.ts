@@ -1,5 +1,4 @@
 import { LucideIcon } from 'lucide-react';
-import type { Config } from 'ziggy-js';
 import { User } from '@/types/user';
 import { Project } from '@/types/project';
 
@@ -34,7 +33,6 @@ export interface SharedData {
     current?: Project;
     list?: Project[];
   };
-  ziggy: Config & { location: string };
   configs: Configs;
   status: string;
   flash?: {

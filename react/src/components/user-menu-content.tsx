@@ -30,14 +30,14 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
         <DropdownMenuItem asChild>
-          <Link className="block w-full" href={route('profile.index')} as="button" prefetch onClick={cleanup}>
+          <Link className="block w-full" href="/settings/profile" as="button" prefetch onClick={cleanup}>
             <Settings className="mr-2" />
             Profile
           </Link>
         </DropdownMenuItem>
         {/*<php-saas:billing>*/}
         <DropdownMenuItem asChild>
-          <a className="block w-full" href={route('billing.index')}>
+          <a className="block w-full" href="/billing">
             <CreditCardIcon className="mr-2" />
             Billing
           </a>
@@ -46,7 +46,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem asChild>
-        <Link className="block w-full" method="post" href={route('logout')} as="button" onClick={handleLogout}>
+        <Link className="block w-full" method="post" href="/logout" as="button" onClick={handleLogout}>
           <LogOut className="mr-2" />
           Log out
         </Link>
