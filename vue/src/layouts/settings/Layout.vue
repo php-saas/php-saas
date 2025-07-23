@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import Heading from '@/components/heading.vue';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { type NavItem } from '@/types';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/app-layout.vue';
 import type { BreadcrumbItem } from '@/types';
 import Container from '@/components/container.vue';
