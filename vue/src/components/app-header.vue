@@ -128,7 +128,7 @@ const rightNavItems: NavItem[] = [
             <NavigationMenuList class="flex h-full items-stretch space-x-1">
               <!--<php-saas:projects>-->
               <ProjectSwitch>
-                <NavigationMenuItem asChild>
+                <NavigationMenuItem as-child>
                   <Button variant="outline" class="px-1.5!">
                     <div class="flex items-center justify-center gap-2">
                       <Avatar v-if="page.props.project_provider.current" class="size-6 rounded-md">

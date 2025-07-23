@@ -79,7 +79,7 @@ const submit = (e: Event) => {
         </div>
       </form>
       <DialogFooter>
-        <DialogClose asChild>
+        <DialogClose as-child>
           <Button variant="outline">Close</Button>
         </DialogClose>
         <Button form="invite-form" :disabled="form.processing" @click="submit">

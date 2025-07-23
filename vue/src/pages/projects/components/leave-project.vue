@@ -45,7 +45,7 @@ const submit = (e: Event) => {
       <p>Are you sure you want to leave this project?</p>
 
       <DialogFooter class="gap-2">
-        <DialogClose asChild>
+        <DialogClose as-child>
           <Button variant="outline">Cancel</Button>
         </DialogClose>
 

@@ -44,7 +44,7 @@ const closeModal = () => {
     <CardContent class="space-y-2">
       <p>Please proceed with caution, this cannot be undone.</p>
       <Dialog>
-        <DialogTrigger asChild>
+        <DialogTrigger as-child>
           <Button variant="destructive">Delete account</Button>
         </DialogTrigger>
         <DialogContent>
@@ -69,7 +69,7 @@ const closeModal = () => {
             </div>
           </form>
           <DialogFooter class="gap-2">
-            <DialogClose asChild>
+            <DialogClose as-child>
               <Button variant="outline" @click="closeModal">Cancel</Button>
             </DialogClose>
             <Button form="delete-account-form" variant="destructive" :disabled="form.processing">

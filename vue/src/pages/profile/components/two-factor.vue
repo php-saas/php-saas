@@ -149,7 +149,7 @@ const twoFactorRecoveryCodes = computed(() => {
             </div>
           </form>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogClose as-child>
               <Button variant="outline">Close</Button>
             </DialogClose>
             <Button v-if="page.props.two_factor_must_confirm" form="confirm-form" :disabled="confirmForm.processing">
@@ -161,7 +161,7 @@ const twoFactorRecoveryCodes = computed(() => {
       </Dialog>
 
       <Dialog v-model:open="regenOpen" v-if="isEnabled">
-        <DialogTrigger asChild>
+        <DialogTrigger as-child>
           <Button>Regenerate recovery codes</Button>
         </DialogTrigger>
         <DialogContent>
@@ -171,7 +171,7 @@ const twoFactorRecoveryCodes = computed(() => {
           </DialogHeader>
           <p>Are you sure you want to regenerate the recovery codes?</p>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogClose as-child>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button @click="regenSubmit" :disabled="regenForm.processing">
@@ -183,7 +183,7 @@ const twoFactorRecoveryCodes = computed(() => {
       </Dialog>
 
       <Dialog v-model:open="disableOpen" v-if="isEnabled">
-        <DialogTrigger asChild>
+        <DialogTrigger as-child>
           <Button variant="destructive">Disable Two Factor</Button>
         </DialogTrigger>
         <DialogContent>
@@ -193,7 +193,7 @@ const twoFactorRecoveryCodes = computed(() => {
           </DialogHeader>
           <p>Are you sure you want to disable two factor authentication?</p>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogClose as-child>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button @click="disableSubmit" variant="destructive" :disabled="disableForm.processing">
