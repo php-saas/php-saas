@@ -30,13 +30,13 @@ const footerNavItems: NavItem[] = [
   // </php-saas:billing>
   {
     title: 'Repository',
-    href: 'https://github.com/laravel/react-starter-kit',
+    href: 'https://github.com/php-saas',
     icon: Folder,
     external: true,
   },
   {
     title: 'Documentation',
-    href: 'https://laravel.com/docs/starter-kits#react',
+    href: 'https://php-saas.com',
     icon: BookOpen,
     external: true,
   },

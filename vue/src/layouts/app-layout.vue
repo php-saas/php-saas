@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from "@/layouts/app/app-header-layout.vue";
+import AppLayout from "@/layouts/app/app-sidebar-layout.vue";
 import type { BreadcrumbItem } from "@/types";
 import Toast from '@/components/toast.vue';
 

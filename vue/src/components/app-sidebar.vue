@@ -13,27 +13,41 @@ import {
 } from "@/components/ui/sidebar";
 import { type NavItem } from "@/types";
 import { Link } from "@inertiajs/vue3";
-import { BookOpen, Folder, LayoutGrid } from "lucide-vue-next";
+import { BookOpen, Folder, LayoutGrid, SettingsIcon, CreditCardIcon } from "lucide-vue-next";
 import AppLogo from "./app-logo.vue";
 
 const mainNavItems: NavItem[] = [
   {
-    title: "Dashboard",
-    href: "/dashboard",
+    title: 'Dashboard',
+    href: '/dashboard',
     icon: LayoutGrid,
+  },
+  {
+    title: 'Settings',
+    href: '/settings',
+    icon: SettingsIcon,
   },
 ];
 
 const footerNavItems: NavItem[] = [
+  // <php-saas:billing>
   {
-    title: "Github Repo",
-    href: "https://github.com/laravel/vue-starter-kit",
+    title: 'Billing',
+    href: '/billing',
+    icon: CreditCardIcon,
+  },
+  // </php-saas:billing>
+  {
+    title: 'Repository',
+    href: 'https://github.com/php-saas',
     icon: Folder,
+    external: true,
   },
   {
-    title: "Documentation",
-    href: "https://laravel.com/docs/starter-kits#vue",
+    title: 'Documentation',
+    href: 'https://php-saas.com',
     icon: BookOpen,
+    external: true,
   },
 ];
 </script>
