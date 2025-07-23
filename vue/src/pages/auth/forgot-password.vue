@@ -17,7 +17,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post(route("password.email"));
+  form.post('/forgot-password');
 };
 </script>
 

@@ -3,7 +3,6 @@
     <head>
         <x-head />
         <title inertia>PHP-SaaS</title>
-        @routes
         @viteReactRefresh
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         @inertiaHead

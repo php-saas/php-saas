@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/app/app-header-layout.vue";
 import type { BreadcrumbItem } from "@/types";
+import Toast from '@/components/toast.vue';
 
 interface Props {
   breadcrumbs?: BreadcrumbItem[];
@@ -14,5 +15,6 @@ withDefaults(defineProps<Props>(), {
 <template>
   <AppLayout :breadcrumbs="breadcrumbs">
     <slot />
+    <Toast />
   </AppLayout>
 </template>

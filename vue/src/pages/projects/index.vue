@@ -11,6 +11,8 @@ import { Project } from '@/types/project';
 import { ProjectUser } from '@/types/project-user';
 import DataTable from '@/components/data-table.vue';
 import { columns } from '@/pages/projects/components/columns';
+import { invitationColumns } from '@/pages/projects/components/invitation-columns';
+import { computed } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -27,6 +29,8 @@ const page = usePage<{
   projects: PaginatedData<Project>;
   invitations: PaginatedData<ProjectUser>;
 }>();
+
+const projects = computed(() => page.props.projects);
 </script>
 
 <template>
@@ -45,12 +49,13 @@ const page = usePage<{
           </ProjectForm>
         </div>
       </div>
-      <DataTable :columns="columns" :paginatedData="page.props.projects" />
 
-      <div v-if="page.props.invitations.data.length > 0">
+      <DataTable :columns="columns" :paginatedData="projects" />
+
+      <template v-if="page.props.invitations.data.length > 0">
         <Heading title="Invitations" description="Here you can see the projects you're invited to" />
-        <!--        <DataTable columns="{invitationColumns}" paginatedData="{page.props.invitations}" />-->
-      </div>
+        <DataTable :columns="invitationColumns" :paginatedData="page.props.invitations" />
+      </template>
     </Container>
   </Layout>
 </template>

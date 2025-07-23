@@ -16,6 +16,7 @@ import InputError from '@/components/input-error.vue';
 import { useForm } from '@inertiajs/vue3';
 import { Button } from '@/components/ui/button';
 import { LoaderCircleIcon } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const props = defineProps<{
   project: Project;
@@ -25,18 +26,20 @@ const form = useForm({
   name: '',
 });
 
+const dialog = ref(false);
+
 const submit = (e: Event) => {
   e.preventDefault();
-  form.delete(route('projects.destroy', props.project.id), {
+  form.delete(`/settings/projects/${props.project.id}`, {
     onSuccess: () => {
-      //
+      dialog.value = false;
     },
   });
 };
 </script>
 
 <template>
-  <Dialog>
+  <Dialog v-model:open="dialog">
     <DialogTrigger as-child>
       <slot />
     </DialogTrigger>

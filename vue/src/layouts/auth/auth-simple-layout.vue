@@ -16,7 +16,7 @@ defineProps<{
       <div class="flex flex-col gap-8">
         <div class="flex flex-col items-center gap-4">
           <Link
-            :href="route('home')"
+            href="/"
             class="flex flex-col items-center gap-2 font-medium"
           >
             <div

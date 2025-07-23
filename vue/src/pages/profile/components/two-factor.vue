@@ -42,11 +42,11 @@ const qrCode = ref('');
 const qrCodeUrl = ref('');
 
 function enableSubmit() {
-  enableForm.post(route('two-factor.enable'), {
+  enableForm.post('/user/two-factor-authentication', {
     preserveScroll: true,
     preserveState: true,
     onSuccess: () => {
-      axios.get(route('two-factor.qr-code')).then((response) => {
+      axios.get('/user/two-factor-qr-code').then((response) => {
         qrCode.value = response.data.svg;
         qrCodeUrl.value = response.data.url;
       });
@@ -56,7 +56,7 @@ function enableSubmit() {
 }
 
 function confirmSubmit() {
-  confirmForm.post(route('two-factor.confirm'), {
+  confirmForm.post('/user/confirmed-two-factor-authentication', {
     preserveScroll: true,
     errorBag: 'confirmTwoFactorAuthentication',
     onSuccess: () => (enableOpen.value = false),
@@ -66,7 +66,7 @@ function confirmSubmit() {
 const disableOpen = ref(false);
 const disableForm = useForm({});
 function disableSubmit() {
-  disableForm.delete(route('two-factor.disable'), {
+  disableForm.delete('/user/two-factor-authentication', {
     preserveScroll: true,
     onSuccess: () => (disableOpen.value = false),
   });
@@ -75,7 +75,7 @@ function disableSubmit() {
 const regenOpen = ref(false);
 const regenForm = useForm({});
 function regenSubmit() {
-  regenForm.post(route('two-factor.recovery-codes'), {
+  regenForm.post('/user/two-factor-recovery-codes', {
     preserveScroll: true,
     onSuccess: () => (regenOpen.value = false),
   });

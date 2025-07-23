@@ -24,7 +24,7 @@ const props = defineProps<DataTableProps<any>>();
 
 const tableData = computed(() => props.paginatedData?.data || props.data || []);
 const table = useVueTable({
-  data: tableData.value,
+  data: tableData,
   columns: props.columns,
   getCoreRowModel: getCoreRowModel(),
 });
