@@ -44,7 +44,7 @@ export default function CreateToken({ children }: { children: ReactNode }) {
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-    form.post(route('tokens.store'), {
+    form.post('/settings/tokens', {
       onSuccess: (page) => {
         const flash = page.props.flash as { data?: { token?: string } };
         setToken(flash.data?.token);

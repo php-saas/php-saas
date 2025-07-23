@@ -39,7 +39,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
         {/*</php-saas:projects>*/}
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild isActive={window.location.href.startsWith(item.href)} tooltip={{ children: item.title }}>
+            <SidebarMenuButton asChild isActive={window.location.pathname.startsWith(item.href)} tooltip={{ children: item.title }}>
               {item.redirect ? (
                 <a href={item.href} target={item.external ? '_blank' : '_self'}>
                   {item.icon && <item.icon />}

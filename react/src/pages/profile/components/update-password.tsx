@@ -25,7 +25,7 @@ export default function UpdatePassword() {
   const updatePassword = (e: FormEvent) => {
     e.preventDefault();
 
-    form.put(route('user-password.update'), {
+    form.put('/user/password', {
       preserveScroll: true,
       errorBag: 'updatePassword',
       onSuccess: () => form.reset(),

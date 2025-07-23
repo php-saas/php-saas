@@ -25,7 +25,7 @@ export default function DeleteUser() {
   const deleteUser: FormEventHandler = (e) => {
     e.preventDefault();
 
-    form.delete(route('profile.destroy'), {
+    form.delete('/settings/profile', {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onError: () => passwordInput.current?.focus(),

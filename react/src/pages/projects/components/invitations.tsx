@@ -23,7 +23,7 @@ function Reject({ invitation, children }: { invitation: ProjectUser; children: R
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.delete(route('projects.leave', { project: invitation.project_id }), {
+    form.delete(`/settings/projects/${invitation.project_id}/leave`, {
       onSuccess: () => {
         setOpen(false);
       },
@@ -90,7 +90,7 @@ export const columns: ColumnDef<ProjectUser>[] = [
               <DropdownMenuItem
                 onSelect={(e) => {
                   e.preventDefault();
-                  window.location.href = route('projects.invitations.accept', { project: row.original.project_id });
+                  window.location.href = `/settings/projects/${row.original.project_id}/invitations/accept`;
                 }}
               >
                 Accept & Join

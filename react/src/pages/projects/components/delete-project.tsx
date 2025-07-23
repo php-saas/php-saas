@@ -25,7 +25,7 @@ export default function DeleteProject({ project, children }: { project: Project;
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.delete(route('projects.destroy', project.id), {
+    form.delete(`/settings/projects/${project.id}`, {
       onSuccess: () => {
         setOpen(false);
       },

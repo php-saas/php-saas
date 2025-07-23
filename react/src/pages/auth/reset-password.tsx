@@ -27,7 +27,7 @@ export default function ResetPassword() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.post(route('password.update'), {
+    form.post('/reset-password', {
       onFinish: () => form.reset('password', 'password_confirmation'),
     });
   };

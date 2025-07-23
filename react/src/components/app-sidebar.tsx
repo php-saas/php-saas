@@ -10,12 +10,12 @@ import AppLogo from './app-logo';
 const mainNavItems: NavItem[] = [
   {
     title: 'Dashboard',
-    href: route('dashboard'),
+    href: '/dashboard',
     icon: LayoutGrid,
   },
   {
     title: 'Settings',
-    href: route('settings'),
+    href: '/settings',
     icon: SettingsIcon,
   },
 ];
@@ -24,7 +24,7 @@ const footerNavItems: NavItem[] = [
   // <php-saas:billing>
   {
     title: 'Billing',
-    href: route('billing.index'),
+    href: '/billing',
     icon: CreditCardIcon,
   },
   // </php-saas:billing>
@@ -49,7 +49,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href={route('dashboard')} prefetch>
+              <Link href="/dashboard" prefetch>
                 <AppLogo />
               </Link>
             </SidebarMenuButton>

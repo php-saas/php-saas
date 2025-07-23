@@ -18,7 +18,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
   {
     title: 'API Tokens',
-    href: route('tokens.index'),
+    href: '/settings/tokens',
   },
 ];
 

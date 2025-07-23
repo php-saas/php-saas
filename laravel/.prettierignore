@@ -11,5 +11,4 @@ sail
 *.yml
 !*.blade.php
 !*.sh
-resources/js/ziggy.js
 resources/views/mail/*

@@ -21,7 +21,7 @@ export function ProjectSwitch({ children }: { children: ReactNode }) {
     const selectedProject = page.props.project_provider.list?.find((project) => project.id.toString() === projectId);
     if (selectedProject) {
       setSelectedProject(selectedProject.id.toString());
-      form.put(route('projects.switch', { project: projectId, currentPath: window.location.pathname }));
+      form.put(`/settings/projects/${projectId}/switch?currentPath=${encodeURIComponent(window.location.pathname)}`);
     }
   };
 

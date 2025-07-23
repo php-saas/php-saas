@@ -24,7 +24,7 @@ export default function Register() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.post(route('register'), {
+    form.post('/register', {
       onFinish: () => form.reset('password', 'password_confirmation'),
     });
   };
@@ -100,11 +100,11 @@ export default function Register() {
               <AlertDescription>
                 <p className="space-x-1 text-sm">
                   <span>By creating an account, you agree to our</span>
-                  <a href={route('terms')} className="text-primary" target="_blank">
+                  <a href="/terms" className="text-primary" target="_blank">
                     terms of service
                   </a>
                   <span>and</span>
-                  <a href={route('privacy')} className="text-primary" target="_blank">
+                  <a href="/privacy" className="text-primary" target="_blank">
                     privacy policy
                   </a>
                   .
@@ -121,7 +121,7 @@ export default function Register() {
 
         <div className="text-muted-foreground mt-4 text-center text-sm">
           Already have an account?{' '}
-          <TextLink href={route('login')} tabIndex={6}>
+          <TextLink href="/login" tabIndex={6}>
             Log in
           </TextLink>
         </div>

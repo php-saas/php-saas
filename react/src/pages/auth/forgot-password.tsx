@@ -19,7 +19,7 @@ export default function ForgotPassword() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
 
-    form.post(route('password.email'));
+    form.post('/forgot-password');
   };
 
   return (
@@ -62,7 +62,7 @@ export default function ForgotPassword() {
 
         <div className="text-muted-foreground mt-4 space-x-1 text-center text-sm">
           <span>Or, return to</span>
-          <TextLink href={route('login')}>log in</TextLink>
+          <TextLink href="/login">log in</TextLink>
         </div>
       </form>
     </AuthLayout>

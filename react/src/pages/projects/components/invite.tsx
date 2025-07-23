@@ -27,7 +27,7 @@ export default function Invite({ project, onInviteSent, children }: { project: P
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    form.post(route('projects.users.store', { project: project.id }), {
+    form.post(`/settings/projects/${project.id}/users`, {
       onSuccess: () => {
         setOpen(false);
         if (onInviteSent) {

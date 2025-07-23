@@ -37,9 +37,9 @@ function Enable({ show = true }: { show?: boolean }): ReactNode {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    enableForm.post(route('two-factor.enable'), {
+    enableForm.post('/user/two-factor-authentication', {
       onSuccess: () => {
-        axios.get(route('two-factor.qr-code')).then((response) => {
+        axios.get('/user/two-factor-qr-code').then((response) => {
           setQrCode(response.data.svg);
           setQrCodeUrl(response.data.url);
         });
@@ -52,7 +52,7 @@ function Enable({ show = true }: { show?: boolean }): ReactNode {
 
   const confirm = (e: FormEvent) => {
     e.preventDefault();
-    confirmForm.post(route('two-factor.confirm'), {
+    confirmForm.post('/user/confirmed-two-factor-authentication', {
       onSuccess: () => setOpen(false),
       preserveScroll: true,
       errorBag: 'confirmTwoFactorAuthentication',
@@ -124,7 +124,7 @@ function Disable(): ReactNode {
   const form = useForm();
 
   const submit = () => {
-    form.delete(route('two-factor.disable'), {
+    form.delete('/user/two-factor-authentication', {
       preserveScroll: true,
       onSuccess: () => setOpen(false),
     });
@@ -160,7 +160,7 @@ function Regenerate(): ReactNode {
   const form = useForm();
 
   const submit = () => {
-    form.post(route('two-factor.recovery-codes'), {
+    form.post('/user/two-factor-recovery-codes', {
       preserveScroll: true,
       onSuccess: () => setOpen(false),
     });

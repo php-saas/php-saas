@@ -23,7 +23,7 @@ function Delete({ token }: { token: Token }) {
   const form = useForm();
 
   const submit = () => {
-    form.delete(route('tokens.destroy', token.id), {
+    form.delete(`/settings/tokens/${token.id}`, {
       onSuccess: () => {
         setOpen(false);
       },
