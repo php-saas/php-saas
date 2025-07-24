@@ -12,7 +12,7 @@ import UserMenuContent from '@/components/user-menu-content.vue';
 import { getInitials } from '@/composables/use-initials';
 import type { BreadcrumbItem, NavItem, SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search, ChevronsUpDownIcon } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Menu, ChevronsUpDownIcon } from 'lucide-vue-next';
 import { computed } from 'vue';
 import ProjectSwitch from '@/components/project-switch.vue';
 import Refresh from '@/components/refresh.vue';
