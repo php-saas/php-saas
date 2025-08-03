@@ -56,8 +56,6 @@ if ($framework === 'laravel') {
         $links['laravel/app/Http/Controllers/Billing'] = 'laravel/app/Http/Controllers/BillingPaddle';
         $links['laravel/routes/billing.php'] = 'laravel/routes/billing-paddle.php';
         $links['laravel/resources/views/billing'] = 'laravel/resources/views/billing-paddle';
-        $links['laravel/tests-pest/Feature/Billing'] = 'laravel/tests-pest/Feature/BillingPaddle';
-        $links['laravel/tests-phpunit/Feature/Billing'] = 'laravel/tests-phpunit/Feature/BillingPaddle';
 
         $envPath = __DIR__.'/laravel/.env';
         if (file_exists($envPath)) {
@@ -73,8 +71,6 @@ if ($framework === 'laravel') {
         $links['laravel/app/Http/Controllers/Billing'] = 'laravel/app/Http/Controllers/BillingStripe';
         $links['laravel/routes/billing.php'] = 'laravel/routes/billing-stripe.php';
         $links['laravel/resources/views/billing'] = 'laravel/resources/views/billing-stripe';
-        $links['laravel/tests-pest/Feature/Billing'] = 'laravel/tests-pest/Feature/BillingStripe';
-        $links['laravel/tests-phpunit/Feature/Billing'] = 'laravel/tests-phpunit/Feature/BillingStripe';
 
         $envPath = __DIR__.'/laravel/.env';
         if (file_exists($envPath)) {

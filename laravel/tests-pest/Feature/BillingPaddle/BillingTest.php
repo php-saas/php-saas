@@ -10,7 +10,7 @@ use Laravel\Paddle\Transaction;
 uses(RefreshDatabase::class);
 
 test('user can see billing page', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->get(route('billing.index'))
@@ -19,10 +19,10 @@ test('user can see billing page', function () {
 });
 
 test('user can cancel subscription', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/Billing/paddle-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
 
     expect($this->user->fresh()->subscription()->ends_at)->toBeNull();
 
@@ -33,7 +33,7 @@ test('user can cancel subscription', function () {
 });
 
 test('cannot cancel subscription if already cancelled', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->user->subscription()->update(['ends_at' => now()]);
@@ -43,7 +43,7 @@ test('cannot cancel subscription if already cancelled', function () {
 });
 
 test('user can download invoice', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $transaction = Transaction::query()->create([
@@ -69,7 +69,7 @@ test('user can download invoice', function () {
 });
 
 test('cannot download others invoice', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $transaction = Transaction::query()->create([
@@ -91,12 +91,12 @@ test('cannot download others invoice', function () {
 });
 
 test('user can resume a cancelled subscription', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->user->subscription()->update(['ends_at' => now()]);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/paddle-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
 
     $this->post(route('billing.resume'))
         ->assertRedirect(route('billing.index'));
@@ -105,7 +105,7 @@ test('user can resume a cancelled subscription', function () {
 });
 
 test('cannot resume if no subscription exists', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->user->subscriptions()->delete();
@@ -115,10 +115,10 @@ test('cannot resume if no subscription exists', function () {
 });
 
 test('user can change subscription plan', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
 
     $this
         ->from(route('billing.index'))
@@ -134,10 +134,10 @@ test('user can change subscription plan', function () {
 });
 
 test('swap fails plan not exist', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
 
     config()->set('billing.plans', []);
 
@@ -150,7 +150,7 @@ test('swap fails plan not exist', function () {
 });
 
 test('cannot swap if no subscription exists', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->user->subscriptions()->delete();
@@ -164,7 +164,7 @@ test('cannot swap if no subscription exists', function () {
 });
 
 test('user can change payment method', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     Cashier::fake()->response('subscriptions/sub_123456', [
@@ -178,7 +178,7 @@ test('user can change payment method', function () {
 });
 
 test('cannot update payment method if no subscription exists', function () {
-    $this->user = prepareUser();
+    $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
     $this->user->subscriptions()->delete();
@@ -187,7 +187,7 @@ test('cannot update payment method if no subscription exists', function () {
         ->assertNotFound();
 });
 
-function prepareUser(): User
+function preparePaddleUser(): User
 {
     config()->set('billing.plans', [
         [

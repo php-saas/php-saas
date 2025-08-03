@@ -29,7 +29,7 @@ class BillingTest extends TestCase
     {
         $this->prepare();
 
-        Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/Billing/paddle-response.json')), true));
+        Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
 
         $this->assertNull($this->user->fresh()->subscription()->ends_at);
 
@@ -103,7 +103,7 @@ class BillingTest extends TestCase
 
         $this->user->subscription()->update(['ends_at' => now()]);
 
-        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/paddle-response.json')), true));
+        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
 
         $this->post(route('billing.resume'))
             ->assertRedirect(route('billing.index'));
@@ -125,7 +125,7 @@ class BillingTest extends TestCase
     {
         $this->prepare();
 
-        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
+        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
 
         $this
             ->from(route('billing.index'))
@@ -144,7 +144,7 @@ class BillingTest extends TestCase
     {
         $this->prepare();
 
-        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
+        Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
 
         config()->set('billing.plans', []);
 
