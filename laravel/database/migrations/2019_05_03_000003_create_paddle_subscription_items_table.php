@@ -11,6 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // <php-saas:billing-setup>
+        if (config('php-saas.billing') !== 'paddle') {
+            return;
+        }
+        // </php-saas:billing-setup>
         Schema::create('subscription_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('subscription_id');

@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        // <php-saas:billing-setup>
+        if (config('php-saas.billing') !== 'paddle') {
+            return;
+        }
+        // </php-saas:billing-setup>
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->morphs('billable');
+            $table->string('type');
             $table->string('paddle_id')->unique();
-            $table->string('paddle_subscription_id')->nullable()->index();
-            $table->string('invoice_number')->nullable();
             $table->string('status');
-            $table->string('total');
-            $table->string('tax');
-            $table->string('currency', 3);
-            $table->timestamp('billed_at');
+            $table->timestamp('trial_ends_at')->nullable();
+            $table->timestamp('paused_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('subscriptions');
     }
 };

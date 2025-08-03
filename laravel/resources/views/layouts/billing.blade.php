@@ -11,7 +11,7 @@
             {{ isset($title) && $title ? $title . ' - ' . config('app.name') : 'Billing - ' . config('app.name') }}
         </title>
         @vite(['resources/css/app.css', 'resources/js-home/app.js'])
-        @paddleJS
+        @yield('head')
     </head>
     <body
         class="bg-background dark:selection:bg-primary/30 dark:selection:text-foreground selection:bg-primary/10 selection:text-primary min-h-svh font-sans antialiased"

@@ -14,6 +14,7 @@
                 ? "resources/js/pages/{$component}.vue"
                 : "resources/js/pages/{$component}.tsx";
         @endphp
+
         @vite(['resources/js/app.ts', $pageScript])
         <!--</php-saas:vite>-->
 

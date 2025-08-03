@@ -9,6 +9,8 @@
 /.vscode
 /.zed
 laravel/tests
+laravel/tests-phpunit/Feature/Billing
+laravel/tests-pest/Feature/Billing
 laravel/resources/js
 laravel/package.json
 laravel/package-lock.json
@@ -17,6 +19,11 @@ laravel/eslint.config.js
 laravel/vite.config.ts
 laravel/tsconfig.json
 laravel/components.json
+laravel/routes/billing.php
+laravel/app/Http/Controllers/Billing/
+laravel/app/Models/User.php
+laravel/app/Models/Subscription.php
+laravel/resources/views/billing/
 vendor/
 react/node_modules/
 react/package-lock.json

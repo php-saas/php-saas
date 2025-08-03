@@ -14,13 +14,15 @@ if (empty($framework)) {
 $feature = $arguments[2] ?? '';
 
 if (empty($feature)) {
-    echo "Usage: php use <framework> <react|vue|phpunit|pest>\n";
+    echo "Usage: php use <framework> <react|vue|phpunit|pest|paddle|stripe>\n";
     exit(1);
 }
 
 $links = [];
 
 if ($framework === 'laravel') {
+    exec('php laravel/artisan migrate:reset');
+
     if ($feature === 'react') {
         $links['laravel/resources/js'] = 'react/src';
         $links['laravel/eslint.config.js'] = 'react/eslint.config.js';
@@ -46,11 +48,46 @@ if ($framework === 'laravel') {
     if ($feature === 'pest') {
         $links['laravel/tests'] = 'laravel/tests-pest';
     }
+
+    $links['laravel/app/Models/User.php'] = 'laravel/app/Models/UserPaddle.php';
+
+    if ($feature === 'paddle') {
+        $links['laravel/app/Models/Subscription.php'] = 'laravel/app/Models/SubscriptionPaddle.php';
+        $links['laravel/app/Http/Controllers/Billing'] = 'laravel/app/Http/Controllers/BillingPaddle';
+        $links['laravel/routes/billing.php'] = 'laravel/routes/billing-paddle.php';
+        $links['laravel/resources/views/billing'] = 'laravel/resources/views/billing-paddle';
+        $links['laravel/tests-pest/Feature/Billing'] = 'laravel/tests-pest/Feature/BillingPaddle';
+        $links['laravel/tests-phpunit/Feature/Billing'] = 'laravel/tests-phpunit/Feature/BillingPaddle';
+
+        $envPath = __DIR__.'/laravel/.env';
+        if (file_exists($envPath)) {
+            $envContent = file_get_contents($envPath);
+            $envContent = preg_replace('/^PHP_SAAS_BILLING=.*/m', 'PHP_SAAS_BILLING=paddle', $envContent);
+            file_put_contents($envPath, $envContent);
+        }
+    }
+
+    if ($feature === 'stripe') {
+        $links['laravel/app/Models/User.php'] = 'laravel/app/Models/UserStripe.php';
+        $links['laravel/app/Models/Subscription.php'] = 'laravel/app/Models/SubscriptionStripe.php';
+        $links['laravel/app/Http/Controllers/Billing'] = 'laravel/app/Http/Controllers/BillingStripe';
+        $links['laravel/routes/billing.php'] = 'laravel/routes/billing-stripe.php';
+        $links['laravel/resources/views/billing'] = 'laravel/resources/views/billing-stripe';
+        $links['laravel/tests-pest/Feature/Billing'] = 'laravel/tests-pest/Feature/BillingStripe';
+        $links['laravel/tests-phpunit/Feature/Billing'] = 'laravel/tests-phpunit/Feature/BillingStripe';
+
+        $envPath = __DIR__.'/laravel/.env';
+        if (file_exists($envPath)) {
+            $envContent = file_get_contents($envPath);
+            $envContent = preg_replace('/^PHP_SAAS_BILLING=.*/m', 'PHP_SAAS_BILLING=stripe', $envContent);
+            file_put_contents($envPath, $envContent);
+        }
+    }
 }
 
 foreach ($links as $link => $target) {
-    $linkPath = __DIR__ . '/' . $link;
-    $targetPath = __DIR__ . '/' . $target;
+    $linkPath = __DIR__.'/'.$link;
+    $targetPath = __DIR__.'/'.$target;
 
     // Delete existing linkPath (symlink, file, or directory)
     if (is_link($linkPath)) {
@@ -68,15 +105,18 @@ foreach ($links as $link => $target) {
     }
 
     // Create symlink
-    if (!symlink($targetPath, $linkPath)) {
+    if (! symlink($targetPath, $linkPath)) {
         echo "❌ Failed to link: $linkPath → $targetPath\n";
     }
 }
 
+exec('php laravel/artisan migrate:refresh --seed');
+exec('php laravel/artisan optimize:clear');
+
 echo "✅ Now using $framework with $feature.\n";
 
 if (in_array($feature, ['react', 'vue'])) {
-  echo "Installing dependencies...\n";
+    echo "Installing dependencies...\n";
 
-  exec("npm install --prefix=" . __DIR__ . "/laravel");
+    exec('npm install --prefix='.__DIR__.'/laravel');
 }

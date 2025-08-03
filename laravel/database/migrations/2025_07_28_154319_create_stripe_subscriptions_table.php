@@ -11,16 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // <php-saas:billing-setup>
+        if (config('php-saas.billing') !== 'stripe') {
+            return;
+        }
+        // </php-saas:billing-setup>
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->morphs('billable');
+            $table->foreignId('user_id');
             $table->string('type');
-            $table->string('paddle_id')->unique();
-            $table->string('status');
+            $table->string('stripe_id')->unique();
+            $table->string('stripe_status');
+            $table->string('stripe_price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
-            $table->timestamp('paused_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();
+
+            $table->index(['user_id', 'stripe_status']);
         });
     }
 
