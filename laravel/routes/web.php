@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
-// <php-saas:billing
+// <php-saas:billing>
 require __DIR__.'/billing.php';
 // </php-saas:billing>
 
