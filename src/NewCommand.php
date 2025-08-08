@@ -36,31 +36,9 @@ class NewCommand extends Command
 
     protected Filesystem $fileSystem;
 
-    protected array $backendStacks = [
-        'laravel',
-    ];
-
-    protected array $frontendStacks = [
-        'react',
-        'vue',
-    ];
-
-    protected array $paymentStacks = [
-        'paddle',
-        'stripe',
-        'none',
-    ];
-
     protected array $testStacks = [
         'phpunit',
         'pest',
-    ];
-
-    protected array $projectsName = [
-        'projects',
-        'teams',
-        'organizations',
-        'none',
     ];
 
     protected string $backend = 'laravel';
@@ -87,9 +65,6 @@ class NewCommand extends Command
             ->addArgument('name', InputArgument::REQUIRED);
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->path = getcwd().'/'.$input->getArgument('name');
