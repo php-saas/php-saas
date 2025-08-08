@@ -21,11 +21,11 @@ trait Frontend
         }
 
         copy_directory(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
-        $this->fileSystem->copy('stacks/'.$this->frontend.'/components.json', $this->path.'/components.json');
-        $this->fileSystem->copy('stacks/'.$this->frontend.'/vite.config.ts', $this->path.'/vite.config.ts');
-        $this->fileSystem->copy('stacks/'.$this->frontend.'/eslint.config.js', $this->path.'/eslint.config.js');
-        $this->fileSystem->copy('stacks/'.$this->frontend.'/package.json', $this->path.'/package.json');
-        $this->fileSystem->copy('stacks/'.$this->frontend.'/tsconfig.json', $this->path.'/tsconfig.json');
+        $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/components.json', $this->path.'/components.json');
+        $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/vite.config.ts', $this->path.'/vite.config.ts');
+        $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/eslint.config.js', $this->path.'/eslint.config.js');
+        $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/package.json', $this->path.'/package.json');
+        $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/tsconfig.json', $this->path.'/tsconfig.json');
 
         $block = '@vite([\'resources/js/app.ts\', "resources/js/pages/{$page[\'component\']}.%s"])';
         $this->replaceBlocks(
