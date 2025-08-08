@@ -17,6 +17,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class NewCommand extends Command
 {
@@ -142,6 +143,9 @@ class NewCommand extends Command
             'custom' => 'I name it myself!',
             'none' => 'None',
         ], default: 'projects');
+        if ($this->projects === 'custom') {
+            $this->projects = text('What do you want to call it? (It should be one word, lowercase and plural like projects, folks, friends, ...)');
+        }
 
         $this->billing = select('Which payment provider do you want for Billing?', [
             'paddle' => 'Cashier Paddle',
