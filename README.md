@@ -5,7 +5,7 @@ The everything-included starter kit for your next idea
 ## Installation
 
 ```bash
-composer global require php-saas/cli
+composer global require php-saas/php-saas
 ```
 
 ## Usage

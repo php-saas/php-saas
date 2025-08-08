@@ -14,6 +14,18 @@ trait Tests
             }
         }
 
+        if ($this->test === 'pest') {
+            $this->runCommands([
+                composer_binary().' remove phpunit/phpunit --no-update --no-scripts --no-interaction',
+            ], $this->path);
+        }
+
+        if ($this->test === 'phpunit') {
+            $this->runCommands([
+                composer_binary().' remove pestphp/pest --no-update --no-scripts --no-interaction',
+            ], $this->path);
+        }
+
         if ($this->billing === 'paddle') {
             $this->fileSystem->deleteDirectory($this->path.'/tests/Feature/BillingStripe');
             $this->fileSystem->moveDirectory($this->path.'/tests/Feature/BillingPaddle', $this->path.'/tests/Feature/Billing');

@@ -28,10 +28,10 @@ trait Backend
     {
         $this->fileSystem->delete($this->path.'/database/database.sqlite');
         $this->runCommands([
-            'composer install',
-            'php artisan migrate --force',
-            'php artisan migrate:refresh --seed --force',
-            'php artisan key:generate',
+            composer_binary().' install',
+            php_binary().' artisan migrate --force',
+            php_binary().' artisan migrate:refresh --seed --force',
+            php_binary().' artisan key:generate',
             './vendor/bin/pint --parallel',
         ], $this->path);
     }

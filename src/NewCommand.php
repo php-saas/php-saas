@@ -144,7 +144,7 @@ class NewCommand extends Command
             'none' => 'None',
         ], default: 'projects');
         if ($this->projects === 'custom') {
-            $this->projects = text('What do you want to call it? (It should be one word, lowercase and plural like projects, folks, friends, ...)');
+            $this->projects = text('What do you want to call it? (One word, lowercase and plural like folks, friends, ...)');
         }
 
         $this->billing = select('Which payment provider do you want for Billing?', [
