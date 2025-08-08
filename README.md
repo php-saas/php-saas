@@ -1,5 +1,7 @@
 # PHP-SaaS
 
+⚠️ PHPSaaS is beta and under active development
+
 The everything-included starter kit for your next idea
 
 ## Installation
