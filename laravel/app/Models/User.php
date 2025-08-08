@@ -1,1 +1,0 @@
-/Users/saeed/Projects/php-saas/laravel/app/Models/UserStripe.php

@@ -1,0 +1,23 @@
+{
+  "name": "php-saas",
+  "version": "1.0.0",
+  "description": "The everything-included starter kit for your next idea",
+  "homepage": "https://github.com/php-saas/php-saas#readme",
+  "bugs": {
+    "url": "https://github.com/php-saas/php-saas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/php-saas/php-saas.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3"
+  }
+}
