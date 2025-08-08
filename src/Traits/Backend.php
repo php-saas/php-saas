@@ -15,7 +15,7 @@ trait Backend
             }
         }
 
-        copy_directory(SCRIPT_ROOT.'/stacks/'.$this->backend, $this->path);
+        copy_directory(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->backend, $this->path);
         $info['backend'] = $this->backend;
 
         $this->fileSystem->copy($this->path.'/.env.example', $this->path.'/.env');

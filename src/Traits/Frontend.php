@@ -20,7 +20,7 @@ trait Frontend
             $info['npm_build'] = false;
         }
 
-        copy_directory(SCRIPT_ROOT.'/stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
+        copy_directory(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/components.json', $this->path.'/components.json');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/vite.config.ts', $this->path.'/vite.config.ts');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/eslint.config.js', $this->path.'/eslint.config.js');

@@ -7,7 +7,9 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
     require __DIR__.'/vendor/autoload.php';
 }
 
-$app = new Symfony\Component\Console\Application('PHP-SaaS', '0.1.0');
+define('PHP_SAAS_SCRIPT_ROOT', dirname(realpath(__FILE__)));
+
+$app = new Symfony\Component\Console\Application('PHP-SaaS', '0.4.0');
 $app->add(new PHPSaaS\PHPSaaS\DevCommand);
 $app->add(new PHPSaaS\PHPSaaS\NewCommand);
 
