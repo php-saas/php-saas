@@ -14,17 +14,17 @@ trait Tests
             }
         }
 
-        if ($this->payment === 'paddle') {
+        if ($this->billing === 'paddle') {
             $this->fileSystem->deleteDirectory($this->path.'/tests/Feature/BillingStripe');
             $this->fileSystem->moveDirectory($this->path.'/tests/Feature/BillingPaddle', $this->path.'/tests/Feature/Billing');
         }
 
-        if ($this->payment === 'stripe') {
+        if ($this->billing === 'stripe') {
             $this->fileSystem->deleteDirectory($this->path.'/tests/Feature/BillingPaddle');
             $this->fileSystem->moveDirectory($this->path.'/tests/Feature/BillingStripe', $this->path.'/tests/Feature/Billing');
         }
 
-        if ($this->payment === 'none') {
+        if ($this->billing === 'none') {
             $this->fileSystem->deleteDirectory($this->path.'/tests/Feature/BillingPaddle');
             $this->fileSystem->deleteDirectory($this->path.'/tests/Feature/BillingStripe');
         }

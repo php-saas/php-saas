@@ -62,7 +62,7 @@ class NewCommand extends Command
         'none',
     ];
 
-    protected string $backend = '';
+    protected string $backend = 'laravel';
 
     protected string $frontend = '';
 
@@ -91,6 +91,17 @@ class NewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->path = getcwd().'/'.$input->getArgument('name');
+
+        $output->write('<fg=bright-magenta>
+  ██████╗ ██╗  ██╗██████╗       ███████╗ █████╗  █████╗ ███████╗
+  ██╔══██╗██║  ██║██╔══██╗      ██╔════╝██╔══██╗██╔══██╗██╔════╝
+  ██████╔╝███████║██████╔╝█████╗███████╗███████║███████║███████╗
+  ██╔═══╝ ██╔══██║██╔═══╝ ╚════╝╚════██║██╔══██║██╔══██║╚════██║
+  ██║     ██║  ██║██║           ███████║██║  ██║██║  ██║███████║
+  ╚═╝     ╚═╝  ╚═╝╚═╝           ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+        </>'.PHP_EOL);
+
         $this->collectInputs();
 
         $this->fileSystem = new Filesystem;
@@ -102,7 +113,6 @@ class NewCommand extends Command
 
     protected function setup(): void
     {
-        $this->path = $this->input->getArgument('name');
         $this->setupBackend();
         $this->setupFrontend();
         $this->setupBilling();
@@ -147,7 +157,7 @@ class NewCommand extends Command
         $this->npm = select('Do you want to run npm install?', [
             'yes' => 'Yes',
             'no' => 'No',
-        ], default: 'yes');
+        ], default: 'no');
     }
 
     protected function cleanup(): void

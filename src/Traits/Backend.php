@@ -10,12 +10,12 @@ trait Backend
         if ($this->fileSystem->isDirectory($this->path)) {
             $info = $this->fileSystem->get($this->path.'/info.json');
             $info = json_decode($info, true);
-            if ($info['backend'] !== $this->backend) {
+            if (! isset($info['backend']) || $info['backend'] !== $this->backend) {
                 $this->fileSystem->deleteDirectory($this->path);
             }
         }
 
-        copy_directory('stacks/'.$this->backend, $this->path);
+        copy_directory(SCRIPT_ROOT.'/stacks/'.$this->backend, $this->path);
         $info['backend'] = $this->backend;
 
         $this->fileSystem->copy($this->path.'/.env.example', $this->path.'/.env');

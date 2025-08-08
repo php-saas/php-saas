@@ -22,7 +22,7 @@ test('user can cancel subscription', function () {
     $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456/cancel', json_decode(file_get_contents(base_path('tests/Feature/Billing/response.json')), true));
 
     expect($this->user->fresh()->subscription()->ends_at)->toBeNull();
 
@@ -96,7 +96,7 @@ test('user can resume a cancelled subscription', function () {
 
     $this->user->subscription()->update(['ends_at' => now()]);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/response.json')), true));
 
     $this->post(route('billing.resume'))
         ->assertRedirect(route('billing.index'));
@@ -118,7 +118,7 @@ test('user can change subscription plan', function () {
     $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
 
     $this
         ->from(route('billing.index'))
@@ -137,7 +137,7 @@ test('swap fails plan not exist', function () {
     $this->user = preparePaddleUser();
     $this->actingAs($this->user);
 
-    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/BillingPaddle/swap-response.json')), true));
+    Cashier::fake()->response('subscriptions/sub_123456', json_decode(file_get_contents(base_path('tests/Feature/Billing/swap-response.json')), true));
 
     config()->set('billing.plans', []);
 

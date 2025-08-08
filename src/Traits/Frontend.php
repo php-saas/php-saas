@@ -20,7 +20,7 @@ trait Frontend
             $info['npm_build'] = false;
         }
 
-        copy_directory('stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
+        copy_directory(SCRIPT_ROOT.'/stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/components.json', $this->path.'/components.json');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/vite.config.ts', $this->path.'/vite.config.ts');
         $this->fileSystem->copy('stacks/'.$this->frontend.'/eslint.config.js', $this->path.'/eslint.config.js');
@@ -34,16 +34,18 @@ trait Frontend
             sprintf($block, $this->frontend === 'react' ? 'tsx' : 'vue'),
         );
 
-        $this->runCommands([
-            'npm install',
-        ], $this->path);
-        $info['npm_install'] = true;
-
-        if (! isset($info['npm_build'])) {
+        if ($this->npm === 'yes') {
             $this->runCommands([
-                'npm run build',
+                'npm install',
             ], $this->path);
-            $info['npm_build'] = true;
+            $info['npm_install'] = true;
+
+            if (! isset($info['npm_build'])) {
+                $this->runCommands([
+                    'npm run build',
+                ], $this->path);
+                $info['npm_build'] = true;
+            }
         }
 
         $info['frontend'] = $this->frontend;

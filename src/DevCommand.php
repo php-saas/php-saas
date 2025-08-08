@@ -74,6 +74,8 @@ class DevCommand extends Command
 
     protected string $tokens = 'yes';
 
+    protected string $npm = 'yes';
+
     protected string $path = 'dist';
 
     protected function configure(): void

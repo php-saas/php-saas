@@ -46,7 +46,7 @@ trait Tokens
         $this->fileSystem->put($this->path.'/app/Models/User.php', $userModel);
 
         $this->runCommands([
-            'composer remove laravel/sanctum --no-update',
+            'composer remove laravel/sanctum --no-update --no-scripts',
         ], $this->path);
     }
 }

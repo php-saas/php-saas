@@ -17,8 +17,8 @@ trait Billing
         if ($this->billing === 'paddle') {
             // composer
             $this->runCommands([
-                'composer require laravel/cashier-paddle --no-install',
-                'composer remove laravel/cashier --no-update',
+                'composer require laravel/cashier-paddle --no-install --no-scripts',
+                'composer remove laravel/cashier --no-update --no-scripts',
             ], $this->path);
             $info['billing'] = 'paddle';
 
@@ -69,8 +69,8 @@ trait Billing
         if ($this->billing === 'stripe') {
             // composer
             $this->runCommands([
-                'composer require laravel/cashier --no-install',
-                'composer remove laravel/cashier-paddle --no-update',
+                'composer require laravel/cashier --no-install --no-scripts',
+                'composer remove laravel/cashier-paddle --no-update --no-scripts',
             ], $this->path);
             $info['billing'] = 'stripe';
 
@@ -133,8 +133,8 @@ trait Billing
 
             // composer
             $this->runCommands([
-                'composer remove laravel/cashier --no-update',
-                'composer remove laravel/cashier-paddle --no-update',
+                'composer remove laravel/cashier --no-update --no-scripts',
+                'composer remove laravel/cashier-paddle --no-update --no-scripts',
             ], $this->path);
 
             // routes
