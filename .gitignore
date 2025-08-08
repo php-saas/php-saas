@@ -11,3 +11,5 @@
 dist/
 vendor/
 example/
+/node_modules
+composer.lock
