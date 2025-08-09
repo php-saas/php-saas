@@ -4,6 +4,10 @@
 
 The everything-included starter kit for your next idea
 
+## Demo Video
+
+https://youtu.be/VLD5b5uiEeY
+
 ## Installation
 
 ```bash
