@@ -6,7 +6,6 @@ trait Tests
 {
     protected function setupTests(): void
     {
-        $this->fileSystem->deleteDirectory($this->path.'/tests');
         $this->fileSystem->moveDirectory($this->path.'/tests-'.$this->test, $this->path.'/tests');
         foreach ($this->testStacks as $testStack) {
             if ($testStack !== $this->test) {

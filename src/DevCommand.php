@@ -3,9 +3,9 @@
 namespace PHPSaaS\PHPSaaS;
 
 use Illuminate\Filesystem\Filesystem;
-use InvalidArgumentException;
 use PHPSaaS\PHPSaaS\Traits\Backend;
 use PHPSaaS\PHPSaaS\Traits\Billing;
+use PHPSaaS\PHPSaaS\Traits\CollectInputs;
 use PHPSaaS\PHPSaaS\Traits\Frontend;
 use PHPSaaS\PHPSaaS\Traits\InteractWithBlocks;
 use PHPSaaS\PHPSaaS\Traits\Projects;
@@ -22,6 +22,7 @@ class DevCommand extends Command
 {
     use Backend;
     use Billing;
+    use CollectInputs;
     use Frontend;
     use InteractWithBlocks;
     use Projects;
@@ -63,7 +64,7 @@ class DevCommand extends Command
         'none',
     ];
 
-    protected string $backend = '';
+    protected string $backend = 'laravel';
 
     protected string $frontend = '';
 
@@ -84,12 +85,13 @@ class DevCommand extends Command
         $this
             ->setName('dev')
             ->setDescription('PHPSaaS Development')
-            ->addArgument('backend', InputArgument::REQUIRED)
-            ->addArgument('frontend', InputArgument::REQUIRED)
-            ->addArgument('billing', InputArgument::REQUIRED)
-            ->addArgument('test', InputArgument::REQUIRED)
-            ->addArgument('projects', InputArgument::OPTIONAL, 'Projects stack (projects, teams, organizations, none)', 'projects')
-            ->addArgument('tokens', InputArgument::OPTIONAL, 'Enable tokens (yes, no)', 'yes');
+            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use', 'laravel')
+            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use', '')
+            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use', '')
+            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use', '')
+            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use', '')
+            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens', '')
+            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup', '');
     }
 
     /**
@@ -97,9 +99,11 @@ class DevCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->validateInputs($input);
-
+        $this->input = $input;
+        $this->output = $output;
         $this->fileSystem = new Filesystem;
+
+        $this->collectInputs();
 
         $this->setup();
 
@@ -110,6 +114,7 @@ class DevCommand extends Command
 
     protected function setup(): void
     {
+        $this->fileSystem->deleteDirectory($this->path);
         $this->setupBackend();
         $this->setupFrontend();
         $this->setupBilling();
@@ -168,35 +173,5 @@ class DevCommand extends Command
                 echo $type.' '.$path.PHP_EOL;
             })
             ->start();
-    }
-
-    protected function validateInputs(InputInterface $input): void
-    {
-        $this->backend = $input->getArgument('backend');
-        $this->frontend = $input->getArgument('frontend');
-        $this->test = $input->getArgument('test');
-        $this->billing = $input->getArgument('billing');
-        $this->projects = $input->getArgument('projects');
-        $this->tokens = $input->getArgument('tokens') ?? 'yes';
-
-        if (! in_array($this->backend, $this->backendStacks)) {
-            throw new InvalidArgumentException("Invalid backend stack: {$this->backend}");
-        }
-
-        if (! in_array($this->frontend, $this->frontendStacks)) {
-            throw new InvalidArgumentException("Invalid frontend stack: {$this->frontend}");
-        }
-
-        if (! in_array($this->billing, $this->billingStacks)) {
-            throw new InvalidArgumentException("Invalid billing stack: {$this->billing}");
-        }
-
-        if (! in_array($this->test, $this->testStacks)) {
-            throw new InvalidArgumentException("Invalid test stack: {$this->test}");
-        }
-
-        if (! in_array($this->projects, $this->projectsName)) {
-            throw new InvalidArgumentException("Invalid projects stack: {$this->projects}");
-        }
     }
 }
