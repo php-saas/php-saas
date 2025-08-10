@@ -7,19 +7,16 @@ trait Tests
     protected function setupTests(): void
     {
         $this->fileSystem->moveDirectory($this->path.'/tests-'.$this->test, $this->path.'/tests');
-        foreach ($this->testStacks as $testStack) {
-            if ($testStack !== $this->test) {
-                $this->fileSystem->deleteDirectory($this->path.'/tests-'.$testStack);
-            }
-        }
 
         if ($this->test === 'pest') {
+            $this->fileSystem->deleteDirectory($this->path.'/tests-phpunit');
             $this->runCommands([
                 composer_binary().' remove phpunit/phpunit --no-update --no-scripts --no-interaction',
             ], $this->path);
         }
 
         if ($this->test === 'phpunit') {
+            $this->fileSystem->deleteDirectory($this->path.'/tests-pest');
             $this->runCommands([
                 composer_binary().' remove pestphp/pest --no-update --no-scripts --no-interaction',
             ], $this->path);

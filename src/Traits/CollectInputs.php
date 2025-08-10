@@ -50,8 +50,8 @@ trait CollectInputs
             ], default: 'paddle');
         }
 
-        $this->test = $this->input->getOption('test');
-        if (! in_array($this->test, $this->testStacks)) {
+        $this->tokens = $this->input->getOption('tokens');
+        if (! $this->tokens) {
             $this->tokens = select('Do you want to include API tokens?', [
                 'yes' => 'Yes',
                 'no' => 'No',
