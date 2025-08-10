@@ -1,0 +1,62 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.4]
+        node-version: ["22.x"]
+        frontend: [react, vue]
+        test: [pest, phpunit]
+        projects: [projects, teams, organizations, workspaces]
+        billing: [paddle, stripe]
+        npm: [yes]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Install NPM Dependencies
+        run: npm install --force
+
+      - name: Install Project
+        run: php php-saas new example \
+          --frontend ${{ matrix.frontend }} \
+          --test ${{ matrix.test }} \
+          --projects ${{ matrix.projects }} \
+          --billing ${{ matrix.billing }} \
+          --npm ${{ matrix.npm }}
+
+      - name: Run tests
+        run: cd example && php artisan test

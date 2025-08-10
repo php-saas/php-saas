@@ -6,22 +6,12 @@ trait Backend
 {
     protected function setupBackend(): void
     {
-        $info = [];
         if ($this->fileSystem->isDirectory($this->path)) {
-            $info = $this->fileSystem->get($this->path.'/info.json');
-            $info = json_decode($info, true);
-            if (! isset($info['backend']) || $info['backend'] !== $this->backend) {
-                $this->fileSystem->deleteDirectory($this->path);
-            }
+            delete_files($this->path, get_files_in_path($this->path));
+            delete_directories($this->path, get_directories_in_path($this->path));
         }
-
         copy_directory(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->backend, $this->path);
-        $info['backend'] = $this->backend;
-
         $this->fileSystem->copy($this->path.'/.env.example', $this->path.'/.env');
-
-        $this->fileSystem->put($this->path.'/info.json', json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
     }
 
     protected function boot(): void

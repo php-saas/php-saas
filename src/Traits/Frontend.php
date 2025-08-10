@@ -6,19 +6,13 @@ trait Frontend
 {
     protected function setupFrontend(): void
     {
-        $info = $this->fileSystem->get($this->path.'/info.json');
-        $info = json_decode($info, true);
-
-        if (! isset($info['frontend']) || $info['frontend'] !== $this->frontend) {
-            $this->fileSystem->deleteDirectory($this->path.'/resources/js');
-            $this->fileSystem->deleteDirectory($this->path.'/node_modules');
-            $this->fileSystem->delete($this->path.'/components.json');
-            $this->fileSystem->delete($this->path.'/vite.config.ts');
-            $this->fileSystem->delete($this->path.'/eslint.config.js');
-            $this->fileSystem->delete($this->path.'/package.json');
-            $this->fileSystem->delete($this->path.'/tsconfig.json');
-            $info['npm_build'] = false;
-        }
+        $this->fileSystem->deleteDirectory($this->path.'/resources/js');
+        $this->fileSystem->deleteDirectory($this->path.'/node_modules');
+        $this->fileSystem->delete($this->path.'/components.json');
+        $this->fileSystem->delete($this->path.'/vite.config.ts');
+        $this->fileSystem->delete($this->path.'/eslint.config.js');
+        $this->fileSystem->delete($this->path.'/package.json');
+        $this->fileSystem->delete($this->path.'/tsconfig.json');
 
         copy_directory(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/src', $this->path.'/resources/js');
         $this->fileSystem->copy(PHP_SAAS_SCRIPT_ROOT.'/stacks/'.$this->frontend.'/components.json', $this->path.'/components.json');
@@ -37,18 +31,8 @@ trait Frontend
         if ($this->npm === 'yes') {
             $this->runCommands([
                 'npm install',
+                'npm run build',
             ], $this->path);
-            $info['npm_install'] = true;
-
-            if (! isset($info['npm_build'])) {
-                $this->runCommands([
-                    'npm run build',
-                ], $this->path);
-                $info['npm_build'] = true;
-            }
         }
-
-        $info['frontend'] = $this->frontend;
-        $this->fileSystem->put($this->path.'/info.json', json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 }

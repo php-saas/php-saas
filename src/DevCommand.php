@@ -12,6 +12,7 @@ use PHPSaaS\PHPSaaS\Traits\Projects;
 use PHPSaaS\PHPSaaS\Traits\RunCommands;
 use PHPSaaS\PHPSaaS\Traits\Tests;
 use PHPSaaS\PHPSaaS\Traits\Tokens;
+use Spatie\Watcher\Watch;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -74,7 +75,7 @@ class DevCommand extends Command
 
     protected string $tokens = 'yes';
 
-    protected string $npm = 'yes';
+    protected string $npm = 'no';
 
     protected string $path = 'dist';
 
@@ -102,6 +103,8 @@ class DevCommand extends Command
 
         $this->setup();
 
+        $this->watch();
+
         return 0;
     }
 
@@ -114,6 +117,57 @@ class DevCommand extends Command
         $this->setupProjects();
         $this->setupTokens();
         $this->boot();
+    }
+
+    protected function watch(): void
+    {
+        $this->output->writeln('<info>Watching for changes in stacks...</info>');
+
+        Watch::path(PHP_SAAS_SCRIPT_ROOT.'/stacks')
+            ->onAnyChange(function (string $type, string $path) {
+                if ($type === 'fileUpdated' || $type === 'fileCreated') {
+                    if (str($path)->contains('stacks/'.$this->backend)) {
+                        $this->fileSystem->copy($path, $this->path.'/'.str($path)->after('stacks/'.$this->backend.'/'));
+                    }
+
+                    if (str($path)->contains('stacks/'.$this->frontend)) {
+                        $this->fileSystem->copy($path, $this->path.'/resources/js/'.str($path)->after('stacks/'.$this->frontend.'/src'));
+                    }
+                }
+
+                if ($type === 'fileDeleted') {
+                    if (str($path)->contains('stacks/'.$this->backend)) {
+                        $this->fileSystem->delete($this->path.'/'.str($path)->after('stacks/'.$this->backend.'/'));
+                    }
+
+                    if (str($path)->contains('stacks/'.$this->frontend)) {
+                        $this->fileSystem->delete($this->path.'/resources/js/'.str($path)->after('stacks/'.$this->frontend.'/src'));
+                    }
+                }
+
+                if ($type === 'directoryCreated') {
+                    if (str($path)->contains('stacks/'.$this->backend)) {
+                        copy_directory($path, $this->path.'/'.str($path)->after('stacks/'.$this->backend.'/'));
+                    }
+
+                    if (str($path)->contains('stacks/'.$this->frontend)) {
+                        copy_directory($path, $this->path.'/resources/js/'.str($path)->after('stacks/'.$this->frontend.'/src'));
+                    }
+                }
+
+                if ($type === 'directoryDeleted') {
+                    if (str($path)->contains('stacks/'.$this->backend)) {
+                        $this->fileSystem->deleteDirectory($this->path.'/'.str($path)->after('stacks/'.$this->backend.'/'));
+                    }
+
+                    if (str($path)->contains('stacks/'.$this->frontend)) {
+                        $this->fileSystem->deleteDirectory($this->path.'/resources/js/'.str($path)->after('stacks/'.$this->frontend.'/src'));
+                    }
+                }
+
+                echo $type.' '.$path.PHP_EOL;
+            })
+            ->start();
     }
 
     protected function validateInputs(InputInterface $input): void

@@ -11,16 +11,12 @@ trait Billing
      */
     protected function setupBilling(): void
     {
-        $info = $this->fileSystem->get($this->path.'/info.json');
-        $info = json_decode($info, true);
-
         if ($this->billing === 'paddle') {
             // composer
             $this->runCommands([
                 composer_binary().' require laravel/cashier-paddle --no-install --no-scripts',
                 composer_binary().' remove laravel/cashier --no-update --no-scripts',
             ], $this->path);
-            $info['billing'] = 'paddle';
 
             // routes
             $this->fileSystem->move($this->path.'/routes/billing-paddle.php', $this->path.'/routes/billing.php');
@@ -72,7 +68,6 @@ trait Billing
                 composer_binary().' require laravel/cashier --no-install --no-scripts',
                 composer_binary().' remove laravel/cashier-paddle --no-update --no-scripts',
             ], $this->path);
-            $info['billing'] = 'stripe';
 
             // routes
             $this->fileSystem->move($this->path.'/routes/billing-stripe.php', $this->path.'/routes/billing.php');
@@ -129,8 +124,6 @@ trait Billing
         }
 
         if ($this->billing === 'none') {
-            $info['billing'] = 'none';
-
             // composer
             $this->runCommands([
                 composer_binary().' remove laravel/cashier --no-update --no-scripts',

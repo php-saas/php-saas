@@ -4,7 +4,6 @@
 .phpunit.result.cache
 /.fleet
 /.idea
-/.nova
 /.phpunit.cache
 /.vscode
 /.zed

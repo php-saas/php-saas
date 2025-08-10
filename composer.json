@@ -45,6 +45,7 @@
         "php-saas"
     ],
     "require-dev": {
-        "laravel/pint": "^1.24"
+        "laravel/pint": "^1.24",
+        "spatie/file-system-watcher": "^1.2"
     }
 }

@@ -62,7 +62,14 @@ class NewCommand extends Command
         $this
             ->setName('new')
             ->setDescription('Create a new Laravel application')
-            ->addArgument('name', InputArgument::REQUIRED);
+            ->addArgument('name', InputArgument::REQUIRED)
+            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use', 'laravel')
+            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use', '')
+            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use', '')
+            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use', '')
+            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use', '')
+            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens', '')
+            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup', '');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -78,9 +85,15 @@ class NewCommand extends Command
   ╚═╝     ╚═╝  ╚═╝╚═╝           ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
         </>'.PHP_EOL);
 
-        $this->collectInputs();
+        $this->collectInputs($input);
 
         $this->fileSystem = new Filesystem;
+
+        if ($this->fileSystem->isDirectory($this->path)) {
+            $output->writeln('<error>Directory already exists: '.$this->path.'</error>');
+
+            return 1;
+        }
 
         $this->setup();
 
@@ -99,44 +112,64 @@ class NewCommand extends Command
         $this->boot();
     }
 
-    protected function collectInputs(): void
+    protected function collectInputs(InputInterface $input): void
     {
-        $this->frontend = select('Which frontend stack would you like to use?', [
-            'react' => 'React',
-            'vue' => 'Vue',
-        ], hint: 'The frontend stacks are integrated with Inertia.js');
+        $this->backend = $input->getOption('backend') ?? 'laravel';
 
-        $this->test = select('Which testing framework would you like to use?', [
-            'phpunit' => 'PHPUnit',
-            'pest' => 'Pest',
-        ]);
-
-        $this->projects = select('Do you want Projects, Organizations or Teams?', [
-            'projects' => 'Projects',
-            'organizations' => 'Organizations',
-            'teams' => 'Teams',
-            'custom' => 'I name it myself!',
-            'none' => 'None',
-        ], default: 'projects');
-        if ($this->projects === 'custom') {
-            $this->projects = text('What do you want to call it? (One word, lowercase and plural like folks, friends, ...)');
+        $this->frontend = $input->getOption('frontend');
+        if (! $this->frontend) {
+            $this->frontend = select('Which frontend stack would you like to use?', [
+                'react' => 'React',
+                'vue' => 'Vue',
+            ], hint: 'The frontend stacks are integrated with Inertia.js');
         }
 
-        $this->billing = select('Which payment provider do you want for Billing?', [
-            'paddle' => 'Cashier Paddle',
-            'stripe' => 'Cashier Stripe (coming soon)',
-            'none' => 'None',
-        ]);
+        $this->test = $input->getOption('test');
+        if (! $this->test) {
+            $this->test = select('Which testing framework would you like to use?', [
+                'phpunit' => 'PHPUnit',
+                'pest' => 'Pest',
+            ]);
+        }
 
-        $this->tokens = select('Do you want to include API tokens?', [
-            'yes' => 'Yes',
-            'no' => 'No',
-        ], default: 'yes');
+        $this->projects = $input->getOption('projects');
+        if (! $this->projects) {
+            $this->projects = select('Which projects stack would you like to use?', [
+                'projects' => 'Projects',
+                'organizations' => 'Organizations',
+                'teams' => 'Teams',
+                'custom' => 'I name it myself!',
+                'none' => 'None',
+            ], default: 'projects');
+            if ($this->projects === 'custom') {
+                $this->projects = text('What do you want to call it? (One word, lowercase and plural like folks, friends, ...)');
+            }
+        }
 
-        $this->npm = select('Do you want to run npm install?', [
-            'yes' => 'Yes',
-            'no' => 'No',
-        ], default: 'no');
+        $this->billing = $input->getOption('billing');
+        if (! $this->billing) {
+            $this->billing = select('Which billing stack would you like to use?', [
+                'paddle' => 'Cashier Paddle',
+                'stripe' => 'Cashier Stripe (coming soon)',
+                'none' => 'None',
+            ], default: 'paddle');
+        }
+
+        $this->test = $input->getOption('test');
+        if (! in_array($this->test, $this->testStacks)) {
+            $this->tokens = select('Do you want to include API tokens?', [
+                'yes' => 'Yes',
+                'no' => 'No',
+            ], default: 'yes');
+        }
+
+        $this->npm = $input->getOption('npm');
+        if (! $this->npm) {
+            $this->npm = select('Do you want to run npm install?', [
+                'yes' => 'Yes',
+                'no' => 'No',
+            ], default: 'yes');
+        }
     }
 
     protected function cleanup(): void
