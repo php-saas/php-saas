@@ -20,6 +20,7 @@ jobs:
         test: [pest, phpunit]
         projects: [projects, teams, organizations, workspaces]
         billing: [paddle, stripe]
+        tokens: [yes, no]
         npm: [yes]
 
     steps:
@@ -52,7 +53,7 @@ jobs:
         run: npm install --force
 
       - name: Install Project
-        run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --npm ${{ matrix.npm }}
+        run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --tokens ${{ matrix.tokens }} --npm ${{ matrix.npm }}
 
       - name: Run tests
         run: cd example && php artisan test

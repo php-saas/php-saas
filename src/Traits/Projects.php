@@ -23,6 +23,7 @@ trait Projects
         'resources/js/types/project.d.ts',
         'resources/js/types/project-user.d.ts',
         'resources/emails/project-invitation.blade.php',
+        'tests/Unit/Mail/ProjectInvitationTest.php',
     ];
 
     protected array $projectsDirectoriesToDelete = [
