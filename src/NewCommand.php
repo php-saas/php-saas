@@ -74,6 +74,9 @@ class NewCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->input = $input;
+        $this->output = $output;
+
         $this->path = getcwd().'/'.$input->getArgument('name');
 
         $output->write('<fg=bright-magenta>
@@ -85,7 +88,7 @@ class NewCommand extends Command
   ╚═╝     ╚═╝  ╚═╝╚═╝           ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
         </>'.PHP_EOL);
 
-        $this->collectInputs($input);
+        $this->collectInputs();
 
         $this->fileSystem = new Filesystem;
 
@@ -112,11 +115,11 @@ class NewCommand extends Command
         $this->boot();
     }
 
-    protected function collectInputs(InputInterface $input): void
+    protected function collectInputs(): void
     {
-        $this->backend = $input->getOption('backend') ?? 'laravel';
+        $this->backend = $this->input->getOption('backend') ?? 'laravel';
 
-        $this->frontend = $input->getOption('frontend');
+        $this->frontend = $this->input->getOption('frontend');
         if (! $this->frontend) {
             $this->frontend = select('Which frontend stack would you like to use?', [
                 'react' => 'React',
@@ -124,7 +127,7 @@ class NewCommand extends Command
             ], hint: 'The frontend stacks are integrated with Inertia.js');
         }
 
-        $this->test = $input->getOption('test');
+        $this->test = $this->input->getOption('test');
         if (! $this->test) {
             $this->test = select('Which testing framework would you like to use?', [
                 'phpunit' => 'PHPUnit',
@@ -132,7 +135,7 @@ class NewCommand extends Command
             ]);
         }
 
-        $this->projects = $input->getOption('projects');
+        $this->projects = $this->input->getOption('projects');
         if (! $this->projects) {
             $this->projects = select('Which projects stack would you like to use?', [
                 'projects' => 'Projects',
@@ -146,7 +149,7 @@ class NewCommand extends Command
             }
         }
 
-        $this->billing = $input->getOption('billing');
+        $this->billing = $this->input->getOption('billing');
         if (! $this->billing) {
             $this->billing = select('Which billing stack would you like to use?', [
                 'paddle' => 'Cashier Paddle',
@@ -155,7 +158,7 @@ class NewCommand extends Command
             ], default: 'paddle');
         }
 
-        $this->test = $input->getOption('test');
+        $this->test = $this->input->getOption('test');
         if (! in_array($this->test, $this->testStacks)) {
             $this->tokens = select('Do you want to include API tokens?', [
                 'yes' => 'Yes',
@@ -163,7 +166,7 @@ class NewCommand extends Command
             ], default: 'yes');
         }
 
-        $this->npm = $input->getOption('npm');
+        $this->npm = $this->input->getOption('npm');
         if (! $this->npm) {
             $this->npm = select('Do you want to run npm install?', [
                 'yes' => 'Yes',
