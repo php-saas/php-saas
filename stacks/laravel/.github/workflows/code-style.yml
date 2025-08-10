@@ -1,4 +1,4 @@
-name: tests
+name: code-style
 
 on:
   push:
@@ -7,20 +7,14 @@ on:
   pull_request:
 
 jobs:
-  tests:
+  code-style:
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: true
       matrix:
-        php: [8.4]
-        node-version: ["22.x"]
-        backend: [laravel]
-        frontend: [react, vue]
-        test: [pest, phpunit]
-        projects: [projects, teams, organizations, workspaces]
-        billing: [paddle, stripe]
-        npm: [yes]
+        php: [ 8.4 ]
+        node-version: [ "22.x" ]
 
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +37,9 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Run pint
+        run: ./vendor/bin/pint --test --parallel
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -51,8 +48,5 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install --force
 
-      - name: Install Project
-        run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --npm ${{ matrix.npm }}
-
-      - name: Run tests
-        run: cd example && php artisan test
+      - name: Run lint
+        run: npm run lint

@@ -30,7 +30,7 @@ trait Frontend
 
         if ($this->npm === 'yes') {
             $this->runCommands([
-                'npm install',
+                'npm install --force',
                 'npm run build',
             ], $this->path);
         }

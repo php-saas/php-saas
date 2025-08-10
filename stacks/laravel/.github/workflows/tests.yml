@@ -1,3 +1,4 @@
+
 name: tests
 
 on:
@@ -15,12 +16,6 @@ jobs:
       matrix:
         php: [8.4]
         node-version: ["22.x"]
-        backend: [laravel]
-        frontend: [react, vue]
-        test: [pest, phpunit]
-        projects: [projects, teams, organizations, workspaces]
-        billing: [paddle, stripe]
-        npm: [yes]
 
     steps:
       - uses: actions/checkout@v4
@@ -43,16 +38,25 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Create sqlite database
+        run: touch storage/database-test.sqlite
+
+      - name: Set up the .env file
+        run: cp .env.example .env
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
 
       - name: Install NPM Dependencies
-        run: npm install --force
+        run: npm install
 
-      - name: Install Project
-        run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --npm ${{ matrix.npm }}
+      - name: Build NPM
+        run: npm run build
 
       - name: Run tests
-        run: cd example && php artisan test
+        run: php artisan test
