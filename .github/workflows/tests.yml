@@ -15,9 +15,9 @@ jobs:
       matrix:
         php: [8.4]
         node-version: ["22.x"]
-        frontend: [vue]
-        test: [pest]
-        projects: [workspaces]
+        frontend: [react, vue]
+        test: [pest, phpunit]
+        projects: [projects, teams, organizations, workspaces]
         billing: [paddle, stripe]
         npm: [yes]
 
