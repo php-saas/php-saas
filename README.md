@@ -22,7 +22,7 @@ php-saas new <project-name>
 
 ## Stack
 
-- PHP and Laravel
+- Laravel as Backend
 - Web app with Inertia.js with React and Vue
 - Home pages with Blade and Alpine.js
 - Tailwind CSS
