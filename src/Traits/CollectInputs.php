@@ -2,6 +2,7 @@
 
 namespace PHPSaaS\PHPSaaS\Traits;
 
+use Symfony\Component\Console\Helper\Helper;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -88,13 +89,13 @@ trait CollectInputs
     }
 
     private function getOptionOrPrompt(
-        string $option,
-        string $question,
-        array  $choices,
-        string $default,
-        bool   $isWindows,
-               $helper,
-        string $hint = null
+        string  $option,
+        string  $question,
+        array   $choices,
+        string  $default,
+        bool    $isWindows,
+        ?Helper $helper,
+        string  $hint = null
     )
     {
         $value = $this->input->getOption($option);
@@ -105,14 +106,14 @@ trait CollectInputs
         if ($isWindows) {
             $choiceQuestion = new ChoiceQuestion($question, $choices, $default);
             $choiceQuestion->setErrorMessage("$option %s is invalid.");
-            $selected = $helper->ask($this->input, $this->output, $choiceQuestion);
-            return array_search($selected, $choices);
+            return $helper->ask($this->input, $this->output, $choiceQuestion);
         }
 
         return select($question, $choices, default: $default, hint: $hint);
     }
 
-    private function askTextWindows(string $question, $helper)
+    private
+    function askTextWindows(string $question, $helper)
     {
         $textQuestion = new Question($question);
         return $helper->ask($this->input, $this->output, $textQuestion);
