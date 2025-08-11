@@ -63,6 +63,11 @@ class NewCommand extends Command
         'none',
     ];
 
+    protected array $yesNoOptions = [
+        'yes',
+        'no',
+    ];
+
     protected string $backend = 'laravel';
 
     protected string $frontend = '';
@@ -85,13 +90,13 @@ class NewCommand extends Command
             ->setName('new')
             ->setDescription('Create a new Laravel application')
             ->addArgument('name', InputArgument::REQUIRED)
-            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use', 'laravel')
-            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use', '')
-            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use', '')
-            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use', '')
-            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use', '')
-            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens', '')
-            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup', '');
+            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use. Options (' . formatted_options($this->backendStacks) . ')', 'laravel')
+            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use. Options (' . formatted_options($this->frontendStacks) . ')', '', suggestedValues: $this->frontendStacks)
+            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use. Options (' . formatted_options($this->billingStacks) . ')', '', suggestedValues: $this->billingStacks)
+            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use. Options (' . formatted_options($this->testStacks) . ')', '', suggestedValues: $this->testStacks)
+            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use. Options (' . formatted_options($this->projectsName) . ')', '', suggestedValues: $this->projectsName)
+            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens. Options (' . formatted_options($this->yesNoOptions) . ')', 'yes', suggestedValues: $this->yesNoOptions)
+            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup. Options (' . formatted_options($this->yesNoOptions) . ')', 'yes', suggestedValues: $this->yesNoOptions);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

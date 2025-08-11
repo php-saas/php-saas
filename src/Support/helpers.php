@@ -195,3 +195,24 @@ function replace_in_file_contents(string $basePath, array $relativePaths, string
         }
     }
 }
+
+function formatted_options(array $options): string
+{
+    $green = "\033[32m";
+    $reset = "\033[0m";
+    $formatted = [];
+    foreach ($options as $key => $value) {
+        if (is_array($value)) {
+            $formatted[] = sprintf(
+                '%s%s%s',
+                $green, implode(', ', $value), $reset
+            );
+        } else {
+            $formatted[] = sprintf(
+                '%s%s%s',
+                $green, $value, $reset
+            );
+        }
+    }
+    return implode(", ", $formatted);
+}
