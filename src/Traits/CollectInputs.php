@@ -112,8 +112,7 @@ trait CollectInputs
         return select($question, $choices, default: $default, hint: $hint);
     }
 
-    private
-    function askTextWindows(string $question, $helper)
+    private function askTextWindows(string $question, $helper)
     {
         $textQuestion = new Question($question);
         return $helper->ask($this->input, $this->output, $textQuestion);
