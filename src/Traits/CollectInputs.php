@@ -4,66 +4,117 @@ namespace PHPSaaS\PHPSaaS\Traits;
 
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\Question;
 
 trait CollectInputs
 {
     protected function collectInputs(): void
     {
+        $isWindows = windows_os();
+        $helper = $isWindows ? $this->getHelper('question') : null;
+
         $this->backend = $this->input->getOption('backend') ?? 'laravel';
 
-        $this->frontend = $this->input->getOption('frontend');
-        if (! $this->frontend) {
-            $this->frontend = select('Which frontend stack would you like to use?', [
-                'react' => 'React',
-                'vue' => 'Vue',
-            ], hint: 'The frontend stacks are integrated with Inertia.js');
-        }
+        $this->frontend = $this->getOptionOrPrompt(
+            'frontend',
+            'Which frontend stack would you like to use?',
+            ['react' => 'React', 'vue' => 'Vue'],
+            'react',
+            $isWindows,
+            $helper,
+            hint: 'The frontend stacks are integrated with Inertia.js'
+        );
 
-        $this->test = $this->input->getOption('test');
-        if (! $this->test) {
-            $this->test = select('Which testing framework would you like to use?', [
-                'phpunit' => 'PHPUnit',
-                'pest' => 'Pest',
-            ]);
-        }
+        $this->test = $this->getOptionOrPrompt(
+            'test',
+            'Which testing framework would you like to use?',
+            ['phpunit' => 'PHPUnit', 'pest' => 'Pest'],
+            'phpunit',
+            $isWindows,
+            $helper
+        );
 
-        $this->projects = $this->input->getOption('projects');
-        if (! $this->projects) {
-            $this->projects = select('Which projects stack would you like to use?', [
+        $this->projects = $this->getOptionOrPrompt(
+            'projects',
+            'Which projects stack would you like to use?',
+            [
                 'projects' => 'Projects',
                 'organizations' => 'Organizations',
                 'teams' => 'Teams',
                 'custom' => 'I name it myself!',
                 'none' => 'None',
-            ], default: 'projects');
-            if ($this->projects === 'custom') {
-                $this->projects = text('What do you want to call it? (One word, lowercase and plural like folks, friends, ...)');
-            }
+            ],
+            'projects',
+            $isWindows,
+            $helper
+        );
+        if ($this->projects === 'custom') {
+            $this->projects = $isWindows
+                ? $this->askTextWindows('What do you want to call it? (One word, lowercase and plural like folks, friends, ...): ', $helper)
+                : text('What do you want to call it? (One word, lowercase and plural like folks, friends, ...)');
         }
 
-        $this->billing = $this->input->getOption('billing');
-        if (! $this->billing) {
-            $this->billing = select('Which billing stack would you like to use?', [
+        $this->billing = $this->getOptionOrPrompt(
+            'billing',
+            'Which billing stack would you like to use?',
+            [
                 'paddle' => 'Cashier Paddle',
                 'stripe' => 'Cashier Stripe (coming soon)',
                 'none' => 'None',
-            ], default: 'paddle');
+            ],
+            'paddle',
+            $isWindows,
+            $helper
+        );
+
+        $this->tokens = $this->getOptionOrPrompt(
+            'tokens',
+            'Do you want to include API tokens?',
+            ['yes' => 'Yes', 'no' => 'No'],
+            'yes',
+            $isWindows,
+            $helper
+        );
+
+        $this->npm = $this->getOptionOrPrompt(
+            'npm',
+            'Do you want to run npm install?',
+            ['yes' => 'Yes', 'no' => 'No'],
+            'yes',
+            $isWindows,
+            $helper
+        );
+    }
+
+    private function getOptionOrPrompt(
+        string $option,
+        string $question,
+        array  $choices,
+        string $default,
+        bool   $isWindows,
+               $helper,
+        string $hint = null
+    )
+    {
+        $value = $this->input->getOption($option);
+        if ($value) {
+            return $value;
         }
 
-        $this->tokens = $this->input->getOption('tokens');
-        if (! $this->tokens) {
-            $this->tokens = select('Do you want to include API tokens?', [
-                'yes' => 'Yes',
-                'no' => 'No',
-            ], default: 'yes');
+        if ($isWindows) {
+            $choiceQuestion = new ChoiceQuestion($question, $choices, $default);
+            $choiceQuestion->setErrorMessage("$option %s is invalid.");
+            $selected = $helper->ask($this->input, $this->output, $choiceQuestion);
+            return array_search($selected, $choices);
         }
 
-        $this->npm = $this->input->getOption('npm');
-        if (! $this->npm) {
-            $this->npm = select('Do you want to run npm install?', [
-                'yes' => 'Yes',
-                'no' => 'No',
-            ], default: 'yes');
-        }
+        return select($question, $choices, default: $default, hint: $hint);
+    }
+
+    private function askTextWindows(string $question, $helper)
+    {
+        $textQuestion = new Question($question);
+        return $helper->ask($this->input, $this->output, $textQuestion);
     }
 }
