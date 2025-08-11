@@ -9,7 +9,7 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
 
 define('PHP_SAAS_SCRIPT_ROOT', dirname(realpath(__FILE__)));
 
-$app = new Symfony\Component\Console\Application('PHP-SaaS', '0.5.0');
+$app = new Symfony\Component\Console\Application('PHP-SaaS', '0.7.0');
 $app->add(new PHPSaaS\PHPSaaS\DevCommand);
 $app->add(new PHPSaaS\PHPSaaS\NewCommand);
 
