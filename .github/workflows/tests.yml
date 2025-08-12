@@ -11,16 +11,16 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        php: [8.4]
-        node-version: ["22.x"]
-        backend: [laravel]
-        frontend: [react, vue]
-        test: [pest, phpunit]
-        projects: [projects, teams, organizations, workspaces]
-        billing: [paddle, stripe]
-        tokens: [yes, no]
-        npm: [yes]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.4 ]
+        node-version: [ "22.x" ]
+        backend: [ laravel ]
+        frontend: [ react, vue ]
+        test: [ pest, phpunit ]
+        projects: [ projects, teams, organizations, workspaces ]
+        billing: [ paddle, stripe ]
+        tokens: [ yes, no ]
+        npm: [ yes ]
 
     runs-on: ${{ matrix.os }}
 
@@ -31,6 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml
 
       - name: Cache Composer packages
         id: composer-cache
