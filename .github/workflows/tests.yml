@@ -8,20 +8,21 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-
     strategy:
       fail-fast: true
       matrix:
-        php: [8.4]
-        node-version: ["22.x"]
-        backend: [laravel]
-        frontend: [react, vue]
-        test: [pest, phpunit]
-        projects: [projects, teams, organizations, workspaces]
-        billing: [paddle, stripe]
-        tokens: [yes, no]
-        npm: [yes]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.4 ]
+        node-version: [ "22.x" ]
+        backend: [ laravel ]
+        frontend: [ react, vue ]
+        test: [ pest, phpunit ]
+        projects: [ projects, teams, organizations, workspaces ]
+        billing: [ paddle, stripe ]
+        tokens: [ yes, no ]
+        npm: [ yes ]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, pdo_sqlite, session, tokenizer, xml, sqlite3, zip, bcmath, json, exif, intl
 
       - name: Cache Composer packages
         id: composer-cache
@@ -57,3 +59,10 @@ jobs:
 
       - name: Run tests
         run: cd example && php artisan test
+
+      - name: Get Logs
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Laravel-Failure-Logs
+          path: example/storage/logs/laravel.log
