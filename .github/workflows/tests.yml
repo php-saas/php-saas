@@ -31,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, sqlite3, zip, bcmath, json, pcntl, exif, intl
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, sqlite3, zip, bcmath, json, exif, intl
 
       - name: Cache Composer packages
         id: composer-cache
@@ -56,6 +56,13 @@ jobs:
 
       - name: Install Project
         run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --tokens ${{ matrix.tokens }} --npm ${{ matrix.npm }}
+
+      - name: Ensure SQLite database exists (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          if not exist example\database\database.sqlite (
+            type nul > example\database\database.sqlite
+          )
 
       - name: Run tests
         run: cd example && php artisan test
