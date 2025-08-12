@@ -57,17 +57,6 @@ jobs:
       - name: Install Project
         run: php php-saas new example --backend ${{ matrix.backend }} --frontend ${{ matrix.frontend }} --test ${{ matrix.test }} --projects ${{ matrix.projects }} --billing ${{ matrix.billing }} --tokens ${{ matrix.tokens }} --npm ${{ matrix.npm }}
 
-      - name: Ensure SQLite database exists (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          if (!(Test-Path "example\database")) {
-            New-Item -ItemType Directory -Path "example\database"
-          }
-          if (!(Test-Path "example\database\database.sqlite")) {
-            New-Item -ItemType File -Path "example\database\database.sqlite"
-          }
-        shell: pwsh
-
       - name: Run tests
         run: cd example && php artisan test
 
