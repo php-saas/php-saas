@@ -95,7 +95,7 @@ trait CollectInputs
         string  $default,
         bool    $isWindows,
         ?Helper $helper,
-        string  $hint = null
+        ?string  $hint = null
     )
     {
         $value = $this->input->getOption($option);
