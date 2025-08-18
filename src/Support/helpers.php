@@ -214,5 +214,6 @@ function formatted_options(array $options): string
             );
         }
     }
-    return implode(", ", $formatted);
+
+    return implode(', ', $formatted);
 }

@@ -90,13 +90,13 @@ class DevCommand extends Command
         $this
             ->setName('dev')
             ->setDescription('PHPSaaS Development')
-            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use. Options (' . formatted_options($this->backendStacks) . ')', 'laravel')
-            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use. Options (' . formatted_options($this->frontendStacks) . ')', '', suggestedValues: $this->frontendStacks)
-            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use. Options (' . formatted_options($this->billingStacks) . ')', '', suggestedValues: $this->billingStacks)
-            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use. Options (' . formatted_options($this->testStacks) . ')', '', suggestedValues: $this->testStacks)
-            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use. Options (' . formatted_options($this->projectsName) . ')', '', suggestedValues: $this->projectsName)
-            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens. Options (' . formatted_options($this->yesNoOptions) . ')', 'yes', suggestedValues: $this->yesNoOptions)
-            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup. Options (' . formatted_options($this->yesNoOptions) . ')', 'no', suggestedValues: $this->yesNoOptions);
+            ->addOption('backend', null, InputArgument::OPTIONAL, 'The backend stack to use. Options ('.formatted_options($this->backendStacks).')', 'laravel')
+            ->addOption('frontend', null, InputArgument::OPTIONAL, 'The frontend stack to use. Options ('.formatted_options($this->frontendStacks).')', '', suggestedValues: $this->frontendStacks)
+            ->addOption('billing', null, InputArgument::OPTIONAL, 'The billing stack to use. Options ('.formatted_options($this->billingStacks).')', '', suggestedValues: $this->billingStacks)
+            ->addOption('test', null, InputArgument::OPTIONAL, 'The testing framework to use. Options ('.formatted_options($this->testStacks).')', '', suggestedValues: $this->testStacks)
+            ->addOption('projects', null, InputArgument::OPTIONAL, 'The projects stack to use. Options ('.formatted_options($this->projectsName).')', '', suggestedValues: $this->projectsName)
+            ->addOption('tokens', null, InputArgument::OPTIONAL, 'Include API tokens. Options ('.formatted_options($this->yesNoOptions).')', 'yes', suggestedValues: $this->yesNoOptions)
+            ->addOption('npm', null, InputArgument::OPTIONAL, 'Run npm install after setup. Options ('.formatted_options($this->yesNoOptions).')', 'no', suggestedValues: $this->yesNoOptions);
     }
 
     /**
