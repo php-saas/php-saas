@@ -1,0 +1,9 @@
+{
+  "preset": "laravel",
+  "exclude": [
+    "stacks",
+    "dist",
+    "example",
+    "vendor"
+  ]
+}
