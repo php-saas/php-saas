@@ -12,6 +12,9 @@ trait Billing
     protected function setupBilling(): void
     {
         if ($this->billing === 'paddle') {
+            // env
+            $this->removeBlocks($this->path, 'stripe');
+
             // composer
             $this->runCommands([
                 composer_binary().' require laravel/cashier-paddle --no-install --no-scripts',
@@ -63,6 +66,9 @@ trait Billing
         }
 
         if ($this->billing === 'stripe') {
+            // env
+            $this->removeBlocks($this->path, 'paddle');
+
             // composer
             $this->runCommands([
                 composer_binary().' require laravel/cashier --no-install --no-scripts',

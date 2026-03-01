@@ -145,6 +145,8 @@ class NewCommand extends Command
     protected function cleanup(): void
     {
         $this->removeBlockTags($this->path, 'billing');
+        $this->removeBlockTags($this->path, 'paddle');
+        $this->removeBlockTags($this->path, 'stripe');
         $this->removeBlockTags($this->path, 'projects');
         if ($this->projects !== 'none') {
             $this->removeBlockTags($this->path, $this->projects);

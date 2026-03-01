@@ -126,7 +126,22 @@ class DevCommand extends Command
         $this->setupTests();
         $this->setupProjects();
         $this->setupTokens();
+        $this->cleanup();
         $this->boot();
+    }
+
+    protected function cleanup(): void
+    {
+        $this->removeBlockTags($this->path, 'billing');
+        $this->removeBlockTags($this->path, 'paddle');
+        $this->removeBlockTags($this->path, 'stripe');
+        $this->removeBlockTags($this->path, 'projects');
+        if ($this->projects !== 'none') {
+            $this->removeBlockTags($this->path, $this->projects);
+        }
+        $this->removeBlockTags($this->path, 'tokens');
+        $this->removeBlockTags($this->path, 'vite');
+        $this->fileSystem->delete($this->path.'/info.json');
     }
 
     protected function watch(): void
