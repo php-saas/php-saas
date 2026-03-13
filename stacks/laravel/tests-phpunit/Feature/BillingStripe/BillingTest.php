@@ -4,7 +4,7 @@ namespace Tests\Feature\Billing;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Paddle\Subscription;
+use Laravel\Cashier\Subscription;
 use Tests\TestCase;
 
 class BillingTest extends TestCase

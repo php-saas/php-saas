@@ -58,7 +58,7 @@
                     <x-ui.button as="a" href="{{ route('register') }}" class="w-full">Get started</x-ui.button>
                 @else
                     @if (isset($subscription))
-                        @if ($subscription->items()->first()?->price_id === $plan->priceId)
+                        @if ($subscription->items()->first()?->stripe_price === $plan->priceId)
                             <x-ui.button class="w-full" disabled>{{ __('Current Plan') }}</x-ui.button>
                         @else
                             @include('billing.partials.change-plan-confirmation', ['newPlan' => $plan])

@@ -37,7 +37,7 @@ trait Billing
             $this->fileSystem->delete($this->path.'/app/Models/SubscriptionPaddle');
 
             // migrations
-            $this->fileSystem->delete($this->path.'/database/migrations/2019_05_03_000001_create_stripe_customers_table.php');
+            $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154318_create_stripe_customer_columns.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154319_create_stripe_subscriptions_table.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154320_create_stripe_subscription_items_table.php');
 
@@ -165,7 +165,7 @@ trait Billing
             $this->fileSystem->delete($this->path.'/database/migrations/2019_05_03_000002_create_paddle_subscriptions_table.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2019_05_03_000003_create_paddle_subscription_items_table.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2019_05_03_000004_create_paddle_transactions_table.php');
-            $this->fileSystem->delete($this->path.'/database/migrations/2019_05_03_000001_create_stripe_customers_table.php');
+            $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154318_create_stripe_customer_columns.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154319_create_stripe_subscriptions_table.php');
             $this->fileSystem->delete($this->path.'/database/migrations/2025_07_28_154320_create_stripe_subscription_items_table.php');
 

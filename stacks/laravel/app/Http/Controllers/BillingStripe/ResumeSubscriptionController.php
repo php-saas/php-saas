@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Billing;
 
 use Illuminate\Http\RedirectResponse;
-use Laravel\Paddle\Subscription;
+use Laravel\Cashier\Subscription;
 
 class ResumeSubscriptionController
 {

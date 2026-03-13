@@ -12,8 +12,8 @@ use Laravel\Cashier\Subscription as CashierSubscription;
  * @property int $billable_id
  * @property string $billable_type
  * @property string $type
- * @property string $paddle_id
- * @property string $status
+ * @property string $stripe_id
+ * @property string $stripe_status
  * @property ?Carbon $trial_ends_at
  * @property ?Carbon $paused_at
  * @property ?Carbon $ends_at

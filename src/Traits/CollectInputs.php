@@ -62,7 +62,7 @@ trait CollectInputs
             'Which billing stack would you like to use?',
             [
                 'paddle' => 'Cashier Paddle',
-                'stripe' => 'Cashier Stripe (coming soon)',
+                'stripe' => 'Cashier Stripe',
                 'none' => 'None',
             ],
             'paddle',

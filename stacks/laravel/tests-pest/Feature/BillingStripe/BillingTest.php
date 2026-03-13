@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Paddle\Subscription;
+use Laravel\Cashier\Subscription;
 
 uses(RefreshDatabase::class);
 
